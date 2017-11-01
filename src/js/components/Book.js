@@ -9,7 +9,7 @@ import { fetchBooks } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
     console.log('state', state);
-    let keyWord = ownProps.match ? ownProps.match.params.category : 'cats';
+    let keyWord = ownProps.match ? ownProps.match.params.category : 'cats`';
     return {books: state.books,
               keyWord: keyWord}
 }
