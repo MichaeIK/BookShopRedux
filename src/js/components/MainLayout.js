@@ -10,28 +10,9 @@ import { PATH } from '../config';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-import {fetchBooks} from '../actions';
 
-
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({fetchBooks}, dispatch);
-}
-@connect(null, mapDispatchToProps)
 export default class MainLayout extends React.Component {
 
-    componentWillMount() {
-        this.renderBooks();
-    }
-    renderBooks = () => {
-        fetch(`https://www.googleapis.com/books/v1/volumes?q='books for developer'`)
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
-                this.props.fetchBooks(res.items);
-            })
-            .catch(err => console.log(err))
-    }
 
     render() {
         // console.log(`${PATH}heart.png`)
@@ -47,7 +28,7 @@ export default class MainLayout extends React.Component {
                     <Footer />
                 </div>
 
-                <div style={{ backgroundImage: 'url(./assets/img/heart.png)', height: '300px' }}></div>
+               
 
 
             </div>

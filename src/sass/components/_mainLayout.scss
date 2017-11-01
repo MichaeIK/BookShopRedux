@@ -3,3 +3,24 @@
 body {
     background-color: $main-dark;
 }
+
+.wrapper-for-books {
+    display: flex;
+    flex-wrap: wrap;
+}
+.book-wrapper {
+    width: 180px;
+    height: 250px;
+    .row {
+
+        .book-image {
+            float: left;
+            width: 130px;
+            height: 180px; 
+        }
+        
+    }
+    .book-title {
+        font-size: 30px;
+    } 
+}
