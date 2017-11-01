@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes';
 
 
 
-export default function categories(state = initialState.books, action) {
+export default function categories(state = initialState.categories, action) {
     let { type, payload } = action;
 
     switch (type) {
@@ -15,4 +15,3 @@ export default function categories(state = initialState.books, action) {
             return state;
     }
 };
-
