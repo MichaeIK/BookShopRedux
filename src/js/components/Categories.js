@@ -19,9 +19,10 @@ export default class Categories extends React.Component {
     render() {
         console.log(this.props.categories)
         return (
-            <div className="wrapper">
-                {this.props.categories.map((item,i) => {return  <div key={i} onClick={() => this.props.history.push(`/${item}`)}>{item}</div>})}
-            </div>
+            
+            <ul>
+                {this.props.categories.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/${item}`)}>{item}</li>})}
+            </ul>
         )
     }
 }
