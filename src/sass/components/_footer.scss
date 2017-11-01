@@ -1,0 +1,34 @@
+.footer {
+	p {
+		color: white;
+	}
+	min-height: 120px;
+	width: 100%;
+	background-color: #5C5C5C;
+	.contact {
+		color: white;
+		margin-top: 45px;
+	}
+	.contacts {
+		color: white;
+		margin-top: 30px;
+	}
+	.social {
+		padding-top: 40px;
+		img {
+			width: 35px;
+			height: 35px;
+			margin-right: 5px;
+			vertical-align: middle;
+		}
+	}
+	@media screen and (max-width: 750px) {
+		.contact, .contacts {
+			margin-top: 15px;
+			margin-left: 35%;
+		}
+		.social {
+			margin-left: 25%;
+		}
+	}
+}
