@@ -1,5 +1,5 @@
 .header {
-	height: 120px;
+	min-height: 120px;
 	width: 100%;
 	background-color: #5C5C5C;
 	.logo {
@@ -15,6 +15,7 @@
 		padding-top: 35px;
 
 		input {
+			width: 90%;
 			font-size: 30px;
 			background-color: lightgrey;
 			border-radius: 12px;
@@ -33,6 +34,9 @@
 			background-repeat: no-repeat;
 			transition: 0.3s;
 		}
+		.account {
+			position: relative;
+		}
 		.cart:hover {
 			width: 50px;
 			height: 50px;
@@ -44,9 +48,23 @@
 			transition: 0.3s;
 		}
 		.accountStatus {
+			position: absolute;
 			text-align: center;
+			left: 5px;
 		}
 	}
-	
-	
+	@media screen and (max-width: 750px) {
+		.logo {
+			width: 50px;
+			height: 50px;
+			margin-left: 35%;
+		}
+		input {
+			margin-left: 5%;
+		}
+		.accoundBlock {
+			margin-left: 35%;
+		}
+	}
+
 }
