@@ -20,6 +20,7 @@ export default class App extends React.Component {
                     <Switch>
                         <Route exact path={ENV_HREF} component={Catalog} />
                         <Route path={`${ENV_HREF}book:id`} component={Book} />
+                        <Route path={`${ENV_HREF}:category`} component={Book } />
                         <Route path={`${ENV_HREF}cart`} component={Cart} />
                         <Route path={`${ENV_HREF}favourites`} component={Favourites} />
                     </Switch>

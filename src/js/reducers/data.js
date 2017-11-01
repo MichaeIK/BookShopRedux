@@ -26,8 +26,9 @@ export default function data(state = initialState.books, action) {
     let {type, payload} = action;
 
     switch(type) {
-        case types.SOME_ACTION:
-            return state;
+        case types.FETCH_BOOKS:
+  
+            return [...payload];
         default: 
             return state;
     }
