@@ -22,7 +22,7 @@ import * as types from '../constants/actionTypes';
 *
 */
 
-export default function data(state = initialState.data, action) {
+export default function data(state = initialState.books, action) {
     let {type, payload} = action;
 
     switch(type) {

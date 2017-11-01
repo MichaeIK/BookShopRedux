@@ -6,6 +6,8 @@
 // Но на самом деле это лишь относительное соглашение, и javascript нас ни в чем не ограничивает. 
 
 export default ({
-    data : [{title: 'aaa'}],
-    users: [{name: 'bbb'}]
+    books : [{title: 'aaa'}],
+    users: [{name: 'bbb'}],
+    categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
+    'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!']
 });
