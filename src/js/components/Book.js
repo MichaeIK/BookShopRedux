@@ -7,14 +7,11 @@ import { fetchBooks } from '../actions';
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 
-
+import { ORIGIN, ENV_HREF } from '../config';
 
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log('state', state);
-    // let keyWord = ownProps.match ? ownProps.match.params.category : 'books for developer';
-    // console.log('keyWord', keyWord);
-    return { books: state.data }
+   return { books: state.data }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -24,37 +21,39 @@ const mapDispatchToProps = (dispatch) => {
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Book extends React.Component {
-
-    fetchData = () => {
-        // console.log('init', this.props.match.params.category);
-        let keyword = this.props.match.params.category ? this.props.match.params.category : 'books for developer';
+   
+    fetchData = (keyword) => {
+        console.log(this.props)
+        keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
         console.log(this.props.match.params.category);
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}`)
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
             .then(res => res.json())
             .then(res => {
-                // console.log(res);
                 this.props.fetchBooks(res.items);
             })
             .catch(err => console.log(err))
     }
-    componentDidUpdate() {
-        this.fetchData();
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.match.params.category !== nextProps.match.params.category) {
+            this.fetchData(nextProps.match.params.category)
+        }
     }
+
     componentDidMount() {
         this.fetchData();
     }
 
     handleClick = (id) => {
-        console.log('click', id, 'this.props.history', this.props.history)
-        this.props.history.push(`book/${id}`);
+        console.log(this.props.history)
+        this.props.history.push(`/book/${id}`);
     }
 
     renderBooks = (item, index) => {
-        console.log('item.id', item.id);
         let url = {
             backgroundImage: `url(${item.volumeInfo.imageLinks.smallThumbnail})`
         }
-        // console.log(item.volumeInfo)
+       
         return (
             <div key={index} className="col-sm-6 col-md-3 book-wrapper" onClick={this.handleClick.bind(null, item.id)}>
                 <div className="book-card-top">
@@ -70,7 +69,7 @@ export default class Book extends React.Component {
     }
 
     render() {
-        console.log("Books render: ", this.props);
+        
         return (
             <div className="">
 
