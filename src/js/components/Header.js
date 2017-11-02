@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom';
 
 const logo = {
 	backgroundImage: 'url(./assets/img/logo.png)'
@@ -12,14 +14,14 @@ const cartWithGoods = {
 const user = {
 	backgroundImage: 'url(./assets/img/user.png)'
 }
-
+@withRouter
 export default class Header extends React.Component {
 
 	handleInputChange =(e)=>{
 		if(e.key === 'Enter'){
 			console.log(this.refs.search.value)
 
-      this.refs.search.value='';
+      this.refs.search.value = '';
 		}
 	}
 
@@ -31,11 +33,16 @@ export default class Header extends React.Component {
 		console.log('Click on user')
 	}
 
+  handleonClickLogo =()=>{
+    this.props.history.push(`/`);
+  }
+
+
     render() {
         return (
             <div className="header">
             	<div className="col-md-2 col-sm-12">
-             		<a href="#"><div className="logo" style={logo}></div></a>
+             		<div className="logo" style={logo} onClick={this.handleonClickLogo}></div>
              	</div>
               	<div className="col-md-8 col-sm-12 search">
               		<input type ="text" ref="search" onKeyPress={this.handleInputChange} placeholder="Search..." />
