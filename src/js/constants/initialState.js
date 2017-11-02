@@ -7,7 +7,17 @@
 
 export default ({
     books : [],
-    users: [{name: 'bbb'}],
+    users: [
+    	{name: 'Michael', 
+		password: '123',
+		email: 'Michael@com'},
+		{name: 'Bella',
+		password: '123',
+		email: 'Bella@com'},
+		{name: 'Sasha',
+		password: '123',
+		email: 'Sasha@com'}
+	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
     'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!'],
     history: []
