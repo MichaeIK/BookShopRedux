@@ -28,7 +28,7 @@ export default function data(state = initialState.books, action) {
     switch(type) {
         case types.FETCH_BOOKS:
   
-            return [...payload];
+            return [...state, ...payload];
         default: 
             return state;
     }

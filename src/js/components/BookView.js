@@ -7,7 +7,13 @@ export default class BookView extends React.Component {
         return (
             <div className="wrapper">
                 <div className='col-md-3 col-sm-12'><Categories /></div>
-                BookView
+                <div className='col-md-9 col-sm-12 wrapper-for-books'>
+                    {console.log(this.props.match.params)}
+                    
+
+
+                </div>
+                
             </div>
         )
     }
