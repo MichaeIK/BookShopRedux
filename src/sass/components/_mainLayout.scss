@@ -7,11 +7,12 @@ body {
 .wrapper-for-books {
     display: flex;
     flex-wrap: wrap;
+    background-color: #C4C4C4;  
 }
 .book-wrapper {
     width: 180px;
     height: 250px;
-    .row {
+    .book-card-top {
 
         .book-image {
             float: left;

@@ -8,8 +8,7 @@ export default class Catalog extends React.Component {
     render() {
         return (
             <div className="wrapper">
-                <div className='col-md-3 col-sm-12'><Categories /></div>
-                <div className='col-md-9 col-sm-12'><Slider /></div>
+                {/* <div className='col-md-9 col-sm-12'><Slider /></div> */}
                 
                 <Book />
             </div>
