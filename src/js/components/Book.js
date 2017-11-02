@@ -23,9 +23,9 @@ const mapDispatchToProps = (dispatch) => {
 export default class Book extends React.Component {
    
     fetchData = (keyword) => {
-        console.log(this.props)
+        // console.log(this.props)
         keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
-        console.log(this.props.match.params.category);
+        // console.log(this.props.match.params.category);
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
             .then(res => res.json())
             .then(res => {
@@ -69,7 +69,7 @@ export default class Book extends React.Component {
     }
 
     render() {
-        
+        console.log(this.props)
         return (
             <div className="">
 

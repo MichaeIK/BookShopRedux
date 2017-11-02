@@ -26,7 +26,7 @@ export default class App extends React.Component {
                         <Route path={`${ENV_HREF}book/:id`} component={BookView} />
                         <Route path={`${ENV_HREF}cart`} component={Cart} />
                         <Route path={`${ENV_HREF}favourites`} component={Favourites} />
-                        <Route path={`${ENV_HREF}search`} component={Search} />
+                        <Route path={`${ENV_HREF}search/:category/`} component={Book } />
                         <Route path={`${ENV_HREF}registration`} component={Registration} />
                         <Route path="*" component={() => <div>Page Not Found</div>}/>
                     </Switch>
