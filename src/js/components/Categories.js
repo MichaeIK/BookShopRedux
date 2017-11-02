@@ -21,7 +21,7 @@ export default class Categories extends React.Component {
         return (
             
             <ul>
-                {this.props.categories.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/${item}`)}>{item}</li>})}
+                {this.props.categories.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/category/${item}`)}>{item}</li>})}
             </ul>
         )
     }
