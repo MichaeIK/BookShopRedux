@@ -6,19 +6,14 @@ import { bindActionCreators } from 'redux';
 import { fetchBooks } from '../actions';
 import { withRouter } from 'react-router';
 import Slider from './Slider';
-
 import { ORIGIN, ENV_HREF } from '../config';
-
-
 const mapStateToProps = (state, ownProps) => {
    return { books: state.data }
 }
-
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ fetchBooks }, dispatch);
 }
-
-
+@withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Book extends React.Component {
    
@@ -33,22 +28,18 @@ export default class Book extends React.Component {
             })
             .catch(err => console.log(err))
     }
-
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.category !== nextProps.match.params.category) {
             this.fetchData(nextProps.match.params.category)
         }
     }
-
     componentDidMount() {
         this.fetchData();
     }
-
     handleClick = (id) => {
         console.log(this.props.history)
         this.props.history.push(`/book/${id}`);
     }
-
     renderBooks = (item, index) => {
         let url = {
             backgroundImage: `url(${item.volumeInfo.imageLinks.smallThumbnail})`
@@ -67,21 +58,17 @@ export default class Book extends React.Component {
             </div>
         )
     }
-
     render() {
         console.log(this.props)
         return (
             <div className="">
-
                 <div className='col-md-3 col-sm-12'><Categories /></div>
                 {this.props.match ? <div className='col-md-9 col-sm-12'><Slider /></div>
                     : null}
-
                 <div className=" col-sm-12 col-md-9 row wrapper-for-books"  >
                     {this.props.books.map((item, index) =>
                         this.renderBooks(item, index))}
                 </div>
-
             </div>
         )
     }
