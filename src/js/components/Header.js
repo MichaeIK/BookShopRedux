@@ -3,16 +3,16 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
 const logo = {
-	backgroundImage: 'url(./assets/img/logo.png)'
+	backgroundImage: 'url(../../assets/img/logo.png)'
 }
 const cartEmptyCart = {
-	backgroundImage: 'url(./assets/img/shopping_cart_empty.png)'
+	backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
 }
 const cartWithGoods = {
-	backgroundImage: 'url(./assets/img/shopping_cart.png)'
+	backgroundImage: 'url(../../assets/img/shopping_cart.png)'
 }
 const user = {
-	backgroundImage: 'url(./assets/img/user.png)'
+	backgroundImage: 'url(../../assets/img/user.png)'
 }
 @withRouter
 export default class Header extends React.Component {
@@ -20,6 +20,7 @@ export default class Header extends React.Component {
 	handleInputChange =(e)=>{
 		if(e.key === 'Enter'){
 			console.log(this.refs.search.value)
+      this.props.history.push(`/search/${this.refs.search.value}`);
 
       this.refs.search.value = '';
 		}
