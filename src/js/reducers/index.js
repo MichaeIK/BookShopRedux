@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import data from './data';
 import categories from './categories';
+import history from './history';
 
 // Reducer - это обработчик события, мы можем создавать под определенные логически cвязаные
 // действия свой редьюсер, например в случае с нашим репозиторием, я создал
@@ -11,7 +12,8 @@ import categories from './categories';
 
 const reducers = combineReducers({
     data,
-    categories
+    categories,
+    history
 });
 
 export default reducers;

@@ -10,5 +10,6 @@ export default ({
     users: [{name: 'bbb'}],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
     'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!'],
+    history: []
     
 });
