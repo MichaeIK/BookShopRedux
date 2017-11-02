@@ -1,11 +1,18 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import {PATH} from '../config';
+import { PATH } from '../config';
 // import pict from ''
 // console.log(PATH)
 // const x = `.${PATH}heart.png`;
+
+
+import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import {bindActionCreators} from 'redux';
+
 export default class MainLayout extends React.Component {
+
 
     render() {
         // console.log(`${PATH}heart.png`)
@@ -21,7 +28,7 @@ export default class MainLayout extends React.Component {
                     <Footer />
                 </div>
 
-                <div style={{backgroundImage: 'url(./assets/img/heart.png)',height:'300px'}}></div>
+               
 
 
             </div>
