@@ -18,6 +18,8 @@ export default class Header extends React.Component {
 	handleInputChange =(e)=>{
 		if(e.key === 'Enter'){
 			console.log(this.refs.search.value)
+
+      this.refs.search.value='';
 		}
 	}
 
