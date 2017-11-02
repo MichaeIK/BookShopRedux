@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import Login from '../components/Login';
 
 const logo = {
 	backgroundImage: 'url(../../assets/img/logo.png)'
@@ -16,6 +17,9 @@ const user = {
 }
 @withRouter
 export default class Header extends React.Component {
+  state = {
+    visible: false
+  }
 
 	handleInputChange =(e)=>{
 		if(e.key === 'Enter'){
@@ -32,6 +36,7 @@ export default class Header extends React.Component {
 
 	handleOnClickUser =()=>{
 		console.log('Click on user')
+    this.setState({visible: !this.state.visible})
 	}
 
   handleonClickLogo =()=>{
@@ -54,9 +59,10 @@ export default class Header extends React.Component {
                 </div>
                 <div className="col-md-1 col-sm-12 accoundBlock">
                   <div className="account" onClick={this.handleOnClickUser} style={user}></div>
+                  {this.state.visible? <Login /> :null}
               		<div className="accountStatus" onClick={this.handleOnClickUser}><p>User name</p></div>
               	</div>
-
+                
             </div>
         )
     }
