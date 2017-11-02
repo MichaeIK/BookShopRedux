@@ -4,3 +4,4 @@
 export const FETCH_BOOKS = "FETCH_BOOKS";
 export const FILTER = "FILTER";
 export const SORT = "SORT";
+export const ADD_TO_HISTORY = "ADD_TO_HISTORY";
