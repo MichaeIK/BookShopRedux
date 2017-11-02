@@ -3,25 +3,3 @@
 body {
     background-color: $main-dark;
 }
-
-.wrapper-for-books {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #C4C4C4;  
-}
-.book-wrapper {
-    width: 180px;
-    height: 250px;
-    .book-card-top {
-
-        .book-image {
-            float: left;
-            width: 130px;
-            height: 180px; 
-        }
-        
-    }
-    .book-title {
-        font-size: 30px;
-    } 
-}
