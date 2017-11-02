@@ -1,0 +1,28 @@
+.book-view-wrapper {
+    .book-image {
+        width: 340px;
+        height: 495px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%; 
+
+    }
+    .desc {
+        float: left;
+        border: 1px solid black;
+    }
+    
+    background-color: #C4C4C4;  
+    
+    .cost{
+        button, p {
+            display: inline-block;
+        }
+
+    }
+    .star {
+        // background-image: url('../assets/img/book1.jpg');
+        height: 50px;
+        width: 50px;
+    }
+    
+}
