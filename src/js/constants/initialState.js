@@ -7,7 +7,7 @@
 
 export default ({
 	books : [],
-	authorized: 'Bella', 
+	authorized: 'User name', 
     users: [
     	{name: 'Michael', 
 		password: '123',
