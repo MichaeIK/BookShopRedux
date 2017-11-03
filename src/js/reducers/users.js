@@ -36,7 +36,6 @@ export default function users(state = initialState.users, action) {
 
         case types.ADD_USER:
         let isExist = state.findIndex(person => (person.name == payload.name || person.email == payload.email));
-        // let isExist = state.findIndex(person => person.name == payload.name);
         console.log('check', isExist);
         if (isExist == -1){
             return [...state, payload];
@@ -44,18 +43,6 @@ export default function users(state = initialState.users, action) {
             return state;
         }
 
-            // state.map((person, i)=>{
-            //     console.log('ok')
-            //     if (person.name != payload.name){
-            //         console.log('Name OK')
-            //         return [...state, payload];
-                        
-            //     } else {
-            //          console.log('Change_name')
-            //          return state;
-            //     }
-            // })
-            
             
         default: 
             return state;
