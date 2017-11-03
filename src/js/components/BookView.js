@@ -5,8 +5,7 @@ import { addToCart } from '../actions';
 import { bindActionCreators } from 'redux';
 
 const mapStateToProps = (state, ownProps) => {
-    return { book: state.data.find((item)=> item.id == ownProps.match.params.id),
-             user: state.authorization}
+    return { book: state.data.find((item)=> item.id == ownProps.match.params.id)}
  }
 
  const mapDispatchToProps = (dispatch)=> {
@@ -17,8 +16,8 @@ const mapStateToProps = (state, ownProps) => {
 export default class BookView extends React.Component {
 
     handleBuy = () => {
-        console.log()
-        this.props.addToCart(this.book)
+        // console.log(this.props.book)
+        this.props.addToCart(this.props.book)
     }
     
     render() {
