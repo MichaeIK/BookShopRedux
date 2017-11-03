@@ -25,6 +25,7 @@
 	}
 	.accoundBlock {
 		padding-top: 10px;
+
 		.cart, .account {
 			width: 45px;
 			height: 45px;
@@ -51,6 +52,24 @@
 			position: absolute;
 			text-align: center;
 			left: 5px;
+		}
+		.menuUser{
+			display: none;
+			position: absolute;
+			top: 81px;
+			left: -42px;
+			width: 140px;
+			z-index: 1;
+		}
+		.pUserName {
+			margin: 5px 0 0 -15px;
+			width: 100px;
+		}
+		.pUserName:hover + .menuUser {
+    		display: block;
+		}
+		.menuUser:hover {
+			display: block;
 		}
 	}
 	@media screen and (max-width: 750px) {

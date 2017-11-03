@@ -25,6 +25,9 @@ export default class Registration extends React.Component {
 		}
 		this.props.closeReg();
 	}
+	handleOnClickClose =()=>{
+		this.props.closeReg();
+	}
 
     render() {
         return (
@@ -34,6 +37,7 @@ export default class Registration extends React.Component {
                 <input type="password" ref="passwordConfirm" placeholder="Confirm Password" />
                 <input type="email" ref="email" placeholder="E-mail" />
                 <button className="btn-success" onClick={this.handleOnClickLogin}>Sign in</button>
+                <button className="btn-success" onClick={this.handleOnClickClose}>Close</button>
             </div>
         )
     }
