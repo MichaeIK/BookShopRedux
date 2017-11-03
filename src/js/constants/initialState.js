@@ -6,20 +6,36 @@
 // Но на самом деле это лишь относительное соглашение, и javascript нас ни в чем не ограничивает. 
 
 export default ({
-    books : [],
+	books : [],
+	authorized: 'Bella', 
     users: [
     	{name: 'Michael', 
 		password: '123',
-		email: 'Michael@com'},
+		email: 'Michael@com',
+		cart: [],
+		wishList: [],
+		orderHistory: [],
+		viewHistory: []
+	},
 		{name: 'Bella',
 		password: '123',
-		email: 'Bella@com'},
+		email: 'Bella@com',
+		cart: [],
+		wishList: [],
+		orderHistory: [],
+		viewHistory: []
+	},
 		{name: 'Sasha',
 		password: '123',
-		email: 'Sasha@com'}
+		email: 'Sasha@com',
+		cart: [],
+		wishList: [],
+		orderHistory: [],
+		viewHistory: []
+	}
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
-    'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!'],
-    history: []
+	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!'],
+	
     
 });

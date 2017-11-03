@@ -21,7 +21,7 @@ export default class Book extends React.Component {
         // console.log(this.props)
         keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
         // console.log(this.props.match.params.category);
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=40&startIndex=1&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
             .then(res => res.json())
             .then(res => {
                 this.props.fetchBooks(res.items);
@@ -62,7 +62,7 @@ export default class Book extends React.Component {
                 <div className="book-info">
                     <div className="book-title toggle-info">{item.volumeInfo.title}</div>
                     <div className="book-pages toggle-info">Pages: {item.volumeInfo.pageCount}</div>
-                    <div className="book-category toggle-info">Category: {item.volumeInfo.categories[0]}</div>
+                    <div className="book-category toggle-info">Category: {item.volumeInfo.categories}</div>
                     <div className="col-sm-2 book-stars toggle-info"></div>
                     <div className="book-card-footer toggle-info">
                         <div className="price-block">

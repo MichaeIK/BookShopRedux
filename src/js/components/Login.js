@@ -22,7 +22,6 @@ export default class Login extends React.Component {
 	}
 
 	handleOnClickSingin = ()=> {
-		console.log('Aaaaaaaaaa');
 		this.props.closeLogin();
 		this.props.closeReg();
 
