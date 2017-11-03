@@ -31,7 +31,7 @@ export default class BookView extends React.Component {
         
 
         return (
-            <div className="book-view-wrapper">
+            <div className="book-view-wrapper row">
                 <div className='col-md-3 col-sm-12'><Categories /></div>
                 <div className='col-md-9 col-sm-12 desc'>
                     <div className="wrapper-for-books">
