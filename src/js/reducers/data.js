@@ -23,13 +23,29 @@ import * as types from '../constants/actionTypes';
 */
 
 export default function data(state = initialState.books, action) {
-    let {type, payload} = action;
+    let { type, payload, category } = action;
 
-    switch(type) {
+    switch (type) {
         case types.FETCH_BOOKS:
-  
-            return [...state, ...payload];
-        default: 
+            return state.map((item, index) => {
+                // for (var key in item) {
+                    console.log("DATA REDUCER: ", item)
+                    if (Object.keys(item)[0] === category) {
+                        return {[ Object.keys(item)[0] ]: [...payload]};                        
+                    }
+                    return item;
+                    // }
+                // }
+            })
+            // return [...state, ...payload];
+
+        case types.ADD_CATEGORIES_TO_BOOK_ARRAY:
+            console.log('add', payload);
+            return [...payload.map((item, i) => {
+                return { [item]: [] };
+            })]
+           
+        default:
             return state;
     }
 };

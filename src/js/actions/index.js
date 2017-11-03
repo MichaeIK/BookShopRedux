@@ -2,7 +2,8 @@ import * as types from '../constants/actionTypes';
 
 // Actions here
 
-export const fetchBooks = (payload) => ({type: types.FETCH_BOOKS, payload});
+export const addCategoriesToBookArray = (payload) => ({type: types.ADD_CATEGORIES_TO_BOOK_ARRAY, payload});
+export const fetchBooks = (payload, category) => ({type: types.FETCH_BOOKS, payload, category});
 export const filter = (payload) => ({type: types.FILTER, payload});
 export const sort = (payload) => ({type: types.SORT, payload});
 

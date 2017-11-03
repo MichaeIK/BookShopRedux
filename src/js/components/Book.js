@@ -18,20 +18,24 @@ const mapDispatchToProps = (dispatch) => {
 export default class Book extends React.Component {
 
     fetchData = (keyword) => {
-        // console.log(this.props)
+        console.log(this.props)
         keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
-        // console.log(this.props.match.params.category);
+        console.log(this.props.match.params.category);
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=10&startIndex=1&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
             .then(res => res.json())
             .then(res => {
-                this.props.fetchBooks(res.items);
+                this.props.fetchBooks(res.items, keyword);
             })
             .catch(err => console.log(err))
     }
     componentWillReceiveProps(nextProps) {
+        console.log("NP: ",nextProps)
         if (this.props.match.params.category !== nextProps.match.params.category) {
             this.fetchData(nextProps.match.params.category)
         }
+    }
+    componentWillUpdate() {
+        console.log("UPDATE?")
     }
     componentDidMount() {
         this.fetchData();
@@ -79,21 +83,30 @@ export default class Book extends React.Component {
             </div>
         )
     }
+    constructor(props) {
+        super(props)
+        this.handleChangeCategory = this.handleChangeCategory.bind(this);
+    }
+    handleChangeCategory(cat) {
+        console.log('Change category?', cat, this.props)
+        this.props.history.push(`/category/${cat}`);
+    }
     render() {
-        console.log(this.props)
+        console.log("Book.js History: >> ", this.props.history)
         return (
             <div className="row">
 
 
-
-                <div className=""  >
-                    {this.props.match.params.category ? <div className='col-md-3 col-sm-12'><Categories /></div>
+ 
+                 <div className=""  >
+                    {this.props.match.params.category ? <div className='col-md-3 col-sm-12'>
+                        <Categories _push={this.handleChangeCategory} /></div>
                         : null}
-                    <div className="wrapper-for-books">
+                    {/* <div className="wrapper-for-books">
                         {this.props.books.map((item, index) =>
                             this.renderBooks(item, index))}
-                    </div>
-                </div>
+                    </div> */}
+                </div> 
             </div>
         )
     }

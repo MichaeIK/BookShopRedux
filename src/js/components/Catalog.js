@@ -4,7 +4,14 @@ import Book from './Book';
 import Slider from './Slider';
 
 export default class Catalog extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.handleChangeCategory = this.handleChangeCategory.bind(this);
+    }
+    handleChangeCategory(cat) {
+        console.log('Change category?', cat, this.props)
+        this.props.history.push(`/category/${cat}`);
+    }
 
     render() {
 
@@ -21,7 +28,7 @@ export default class Catalog extends React.Component {
         ];
         return (
             <div className="row">
-                 <div className='col-md-3 col-sm-12 categories'><Categories /></div>
+                 <div className='col-md-3 col-sm-12 categories'><Categories _push={this.handleChangeCategory} /></div>
                     <div className='col-md-9 col-sm-12 left-part-wrapper'>
                     <Slider>
                         <div className="slide" style={urls[0]}></div>
