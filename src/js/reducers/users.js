@@ -43,7 +43,44 @@ export default function users(state = initialState.users, action) {
             return state;
         }
 
+        case types.ADD_TO_CART:
+            return [...state ]
+            console.log(state)
+
+        default: 
+            return state;
+    }
+};
+
+
+export default function users(state = {users: initialState.users, authorized: initialState.authorized}, action) {
+    let {type, payload} = action;
+    let userName = '';
+    switch(type) {
+        case types.CHECK_USERS:
+            {[...state, state.users.map((person, i)=>{
+               if (payload.name == person.name && payload.password == person.password){
+                   console.log('Welcome', payload.name);
+                   userName = person.name;
+                }
+            })]}
+            if (userName != ''){  
+                return {...state, authorized: userName}
+            }
+        return state;
+
+        case types.ADD_USER:
+            let isExist = state.users.findIndex(person => (person.name == payload.name || person.email == payload.email));
             
+            if (isExist == -1){
+                return {users: {...state.users, payload}, authorized: state.authorized};
+            } else {
+                return state;
+            }
+            
+    
+        
+
         default: 
             return state;
     }

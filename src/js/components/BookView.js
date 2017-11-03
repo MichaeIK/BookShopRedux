@@ -1,25 +1,33 @@
 import React from 'react';
 import Categories from './Categories';
 import { connect } from 'react-redux';
+import { addToCart } from '../actions';
+import { bindActionCreators } from 'redux';
 
 const mapStateToProps = (state, ownProps) => {
-    return { book: state.data.find((item)=> item.id == ownProps.match.params.id ) }
+    return { book: state.data.find((item)=> item.id == ownProps.match.params.id),
+             user: state.authorization}
+ }
 
- } 
+ const mapDispatchToProps = (dispatch)=> {
+	return bindActionCreators({addToCart}, dispatch);
+}
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class BookView extends React.Component {
 
-
-
-
+    handleBuy = () => {
+        console.log()
+        this.props.addToCart(this.book)
+    }
+    
     render() {
         let book = this.props.book
         const url = {backgroundImage: `url(${ this.props.book.volumeInfo.imageLinks.thumbnail})`}
         const star = {backgroundImage: 'url(../../assets/img/icons8-star-filled.png)'}
         const heart = {backgroundImage: 'url(../../assets/img/icons8-heart.png)'}
 
-
+        
         
 
         return (
@@ -39,7 +47,7 @@ export default class BookView extends React.Component {
                             <div>{book.volumeInfo.pageCount}</div>
                             <div className='cost'>
                                 <p>3000 ГРН</p>
-                                <button className='btn-success' >Buy</button>
+                                <button className='btn-success' onClick={this.handleBuy}>Buy</button>
                             </div>
                             <div className='inline' >
                                 <div className="star" style={star}></div>
