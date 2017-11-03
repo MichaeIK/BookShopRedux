@@ -38,6 +38,7 @@ export default ({
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
 	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!'],
+	userMenu: ['Wish list', 'Order history', 'View history', 'Exit'],
 	
     
 });

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import Login from '../components/Login';
 import Registration from '../components/Registration';
+import initialState from '../constants/initialState';
 
 const logo = {
 	backgroundImage: 'url(../../assets/img/logo.png)'
@@ -20,6 +21,10 @@ const user = {
 const mapStateToProps = (state) => {
   return ({User: state.users.authorized})
 }
+
+// console.log(initialState.userMenu)
+// const userMenu = ['Wish list', 'Order history', 'View history', 'Exit'];
+
 @withRouter
 @connect(mapStateToProps)
 export default class Header extends React.Component {
@@ -84,11 +89,8 @@ export default class Header extends React.Component {
                   <p className="pUserName">{this.props.User}</p>
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
-                    <a><li>{this.props.User}</li></a>
-                    <a><li>Wish list</li></a>
-                    <a><li>Order history</li></a>
-                    <a><li>View history</li></a>
-                    <a><li>Exit</li></a>
+
+                  {initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/Account/${item}`)}>{item}</li>})}
                   </ul>
               	</div>
                 
