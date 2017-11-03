@@ -4,7 +4,7 @@ import React, { Children } from 'react';
 export default class Slider extends React.Component {
 
     changeSlide = () => {
-        if (this.state.index < 3) {
+        if (this.state.index < 2) {
             this.setState({index: this.state.index + 1 });
            
             // console.log('state', this.state);

@@ -25,9 +25,9 @@ export default class MainLayout extends React.Component {
                 <div className="row">
                     <Header />
                 </div>
-                <div className="row">
+                {/* <div className="row"> */}
                     {this.props.children}
-                </div>
+                {/* </div> */}
                 <div className="row">
                     <Footer />
                 </div>

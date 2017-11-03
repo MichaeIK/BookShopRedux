@@ -21,7 +21,7 @@ export default class Book extends React.Component {
         // console.log(this.props)
         keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
         // console.log(this.props.match.params.category);
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=40&startIndex=1&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=10&startIndex=1&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
             .then(res => res.json())
             .then(res => {
                 this.props.fetchBooks(res.items);
@@ -82,13 +82,17 @@ export default class Book extends React.Component {
     render() {
         console.log(this.props)
         return (
-            <div className="">
-                <div className='col-md-3 col-sm-12'><Categories /></div>
-                {this.props.match ? <div className='col-md-9 col-sm-12'><Slider /></div>
-                    : null}
-                <div className=" col-sm-12 col-md-9 row wrapper-for-books"  >
-                    {this.props.books.map((item, index) =>
-                        this.renderBooks(item, index))}
+            <div className="row">
+
+
+
+                <div className=""  >
+                    {this.props.match.params.category ? <div className='col-md-3 col-sm-12'><Categories /></div>
+                        : null}
+                    <div className="wrapper-for-books">
+                        {this.props.books.map((item, index) =>
+                            this.renderBooks(item, index))}
+                    </div>
                 </div>
             </div>
         )

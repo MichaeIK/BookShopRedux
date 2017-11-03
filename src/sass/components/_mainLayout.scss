@@ -3,7 +3,14 @@
 body {
     background-color: $main-dark;
 }
-* {
-    margin: 0;
-    padding: 0;
+[class*="col-"] {
+    margin: 0!important;
+    padding: 0!important;
+}
+.categories {
+    height: 100%;
+}
+.row {
+    margin-right: 0px!important;
+    margin-left: 0px!important;
 }

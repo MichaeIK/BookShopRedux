@@ -20,18 +20,19 @@ export default class Catalog extends React.Component {
             }
         ];
         return (
-            <div className="wrapper">
-
-                <div className='col-md-9 col-sm-12 slider-wrapper'>
+            <div className="row">
+                 <div className='col-md-3 col-sm-12 categories'><Categories /></div>
+                    <div className='col-md-9 col-sm-12 left-part-wrapper'>
                     <Slider>
                         <div className="slide" style={urls[0]}></div>
                         <div className="slide" style={urls[1]}></div>
                         <div className="slide" style={urls[2]}></div>
 
                     </Slider>
+                    <Book />
                 </div>
 
-                <Book />
+                
             </div>
         )
     }
