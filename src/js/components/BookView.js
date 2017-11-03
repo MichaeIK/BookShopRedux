@@ -10,21 +10,26 @@ const mapStateToProps = (state, ownProps) => {
 @connect(mapStateToProps)
 export default class BookView extends React.Component {
 
+
+
+
     render() {
         let book = this.props.book
-        let url = {
-            backgroundImage: `url(${ this.props.book.volumeInfo.imageLinks.thumbnail})`
-        }
-        console.log(url)
-        const logo = {
-            backgroundImage: 'url(../../assets/img/logo.png)'
-        }
+        const url = {backgroundImage: `url(${ this.props.book.volumeInfo.imageLinks.thumbnail})`}
+        const star = {backgroundImage: 'url(../../assets/img/icons8-star-filled.png)'}
+        const heart = {backgroundImage: 'url(../../assets/img/icons8-heart.png)'}
+
+
+        
+
         return (
             <div className="book-view-wrapper">
                 <div className='col-md-3 col-sm-12'><Categories /></div>
                 <div className='col-md-9 col-sm-12 desc'>
                     <div className="wrapper-for-books">
-                        <div className="col-md-6 col-sm-12 book-image" style={url}></div>
+                        <div className="col-md-6 col-sm-12 book-image" style={url}>
+                        <div className="star" style={heart}></div>
+                        </div>
                         <div className="col-md-6 col-sm-12">
                             <button>Read fragment</button>
                             <div>{book.volumeInfo.title}</div>
@@ -34,13 +39,16 @@ export default class BookView extends React.Component {
                             <div>{book.volumeInfo.pageCount}</div>
                             <div className='cost'>
                                 <p>3000 ГРН</p>
-                                <div className="star" style={logo}></div>
-                                <button className='btn-success'>Regbnm</button>
+                                <button className='btn-success' >Buy</button>
+                            </div>
+                            <div className='inline' >
+                                <div className="star" style={star}></div>
+                                <div className="star" style={star}></div>
+                                <div className="star" style={star}></div>
+                                <div className="star" style={star}></div>
+                                <div className="star" style={star}></div>
                             </div>
                             
-                            {/* <div> */}
-                            
-                            {/* </div> */}
                         </div>
                     </div>
                 </div>

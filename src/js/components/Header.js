@@ -38,7 +38,13 @@ export default class Header extends React.Component {
 
 	handleOnClickUser =()=>{
 		console.log('Click on user')
-    this.setState({visibleLogin: !this.state.visibleLogin})
+      if (this.state.visibleReg == true){
+        this.setState({visibleLogin: false})
+        console.log('hello')
+      } else {
+        this.setState({visibleLogin: !this.state.visibleLogin})
+      }
+      
 	}
 
   handleonClickLogo =()=>{
@@ -46,7 +52,6 @@ export default class Header extends React.Component {
   }
   closeLogin = ()=>{
     this.setState({visibleLogin:false})
-    console.log(111)
   }
   closeReg = ()=>{
     this.setState({visibleReg: !this.state.visibleReg});
@@ -69,8 +74,16 @@ export default class Header extends React.Component {
                 <div className="col-md-1 col-sm-12 accoundBlock">
                   <div className="account" onClick={this.handleOnClickUser} style={user}></div>
                   {this.state.visibleLogin? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> :null}
-              		<div className="accountStatus" onClick={this.handleOnClickUser}><p>User name</p></div>
+              		<div className="accountStatus" onClick={this.handleOnClickUser}></div>
+                  <p className="pUserName">User name</p>
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
+                  <ul className="menuUser">
+                    <a><li>User Name</li></a>
+                    <a><li>Wish list</li></a>
+                    <a><li>Order history</li></a>
+                    <a><li>View history</li></a>
+                    <a><li>Exit</li></a>
+                  </ul>
               	</div>
                 
             </div>
