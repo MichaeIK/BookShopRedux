@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import Login from '../components/Login';
 import Registration from '../components/Registration';
@@ -16,7 +16,12 @@ const cartWithGoods = {
 const user = {
 	backgroundImage: 'url(../../assets/img/user.png)'
 }
+
+const mapStateToProps = (state) => {
+  return ({User: state.users.authorized})
+}
 @withRouter
+@connect(mapStateToProps)
 export default class Header extends React.Component {
   state = {
     visibleLogin: false,
@@ -34,6 +39,7 @@ export default class Header extends React.Component {
 
 	handleOnClickCart =()=>{
 		console.log('Click on cart')
+    console.log(this.props.User);
 	}
 
 	handleOnClickUser =()=>{
@@ -75,10 +81,10 @@ export default class Header extends React.Component {
                   <div className="account" onClick={this.handleOnClickUser} style={user}></div>
                   {this.state.visibleLogin? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> :null}
               		<div className="accountStatus" onClick={this.handleOnClickUser}></div>
-                  <p className="pUserName">User name</p>
+                  <p className="pUserName">{this.props.User}</p>
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
-                    <a><li>User Name</li></a>
+                    <a><li>{this.props.User}</li></a>
                     <a><li>Wish list</li></a>
                     <a><li>Order history</li></a>
                     <a><li>View history</li></a>

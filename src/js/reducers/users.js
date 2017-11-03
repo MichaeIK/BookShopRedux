@@ -22,23 +22,28 @@ import * as types from '../constants/actionTypes';
 *
 */
 
-export default function users(state = initialState.users, action) {
+export default function users(state = {users: initialState.users, authorized: initialState.authorized}, action) {
     let {type, payload} = action;
+    let userName = '';
 
     switch(type) {
         case types.CHECK_USERS:
-        state.map((person, i)=>{
-        	if (payload.name == person.name && payload.password == person.password){
-        		console.log('Welcome', payload.name)
-        	}
-        })
+            {[...state, state.users.map((person, i)=>{
+        	   if (payload.name == person.name && payload.password == person.password){
+        	       console.log('Welcome', payload.name);
+                   userName = person.name;
+                }
+            })]}
+            if (userName != ''){  
+                return {...state, authorized: userName}
+            }
         return state;
 
         case types.ADD_USER:
-        let isExist = state.findIndex(person => (person.name == payload.name || person.email == payload.email));
+        let isExist = state.users.findIndex(person => (person.name == payload.name || person.email == payload.email));
         console.log('check', isExist);
         if (isExist == -1){
-            return [...state, payload];
+            return {users: [...state.users, payload], authorized: payload.name};
         } else {
             return state;
         }
