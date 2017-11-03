@@ -1,6 +1,5 @@
 import initialState from '../constants/initialState';
 import * as types from '../constants/actionTypes';
-
 /*
 *
 * Это reducer, он обрабатывает наши actions. Можно создать несколько редьюсеров для разных
@@ -21,35 +20,46 @@ import * as types from '../constants/actionTypes';
 * возвращает одни и те же значения и не имеет видимых побочных эффектов.
 *
 */
-
-export default function users(state = {users: initialState.users, authorized: initialState.authorized}, action) {
-    let {type, payload} = action;
+export default function users(state = { users: initialState.users, authorized: initialState.authorized }, action) {
+    let { type, payload } = action;
     let userName = '';
-
-    switch(type) {
+    switch (type) {
         case types.CHECK_USERS:
-            {[...state, state.users.map((person, i)=>{
-        	   if (payload.name == person.name && payload.password == person.password){
-        	       console.log('Welcome', payload.name);
-                   userName = person.name;
-                }
-            })]}
-            if (userName != ''){  
-                return {...state, authorized: userName}
+            {
+                [...state, state.users.map((person, i) => {
+                    if (payload.name == person.name && payload.password == person.password) {
+                        console.log('Welcome', payload.name);
+                        userName = person.name;
+                    }
+                })]
             }
-        return state;
+            if (userName != '') {
+                return { ...state, authorized: userName }
+            }
+            return state;
 
         case types.ADD_USER:
-        let isExist = state.users.findIndex(person => (person.name == payload.name || person.email == payload.email));
-        console.log('check', isExist);
-        if (isExist == -1){
-            return {users: [...state.users, payload], authorized: payload.name};
-        } else {
-            return state;
-        }
+            let isExist = state.users.findIndex(person => (person.name == payload.name || person.email == payload.email));
+            console.log('check', isExist);
+            if (isExist == -1) {
+                return { users: [...state.users, payload], authorized: payload.name };
+            } else {
+                return state;
+            }
 
-            
-        default: 
+        case types.ADD_TO_CART:
+            console.log(payload)
+            return { users: state.users.map((item,index)=> { 
+
+                if( item.name == state.authorized) {                    
+                    return {...item,  cart: [...item.cart, payload] }
+                }
+                else return item
+            }), authorized: state.authorized }
+
+
+
+        default:
             return state;
     }
 };
