@@ -15,13 +15,21 @@ export default class Categories extends React.Component {
         super(props)
         
     }
-
+    handleChangeCategory = (cat) => {
+        console.log('````', this);
+        
+        this.props._push(cat);
+        this.props.fetch(cat);
+        this.forceUpdate();
+    }
     render() {
         // console.log(this.props.categories)
         return (
             
             <ul>
-                {this.props.categories.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/category/${item}`)}>{item}</li>})}
+                {this.props.categories.map((item,i) => 
+                    {return  <li key={i} 
+                    onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>})}
             </ul>
         )
     }
