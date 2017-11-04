@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import initialState from '../constants/initialState';
 import WishList from './WishList'
 import OrderHistory from './OrderHistory'
-import ViewHistory from './ViewHistory'
+import ViewHistory from './ViewHistory';
+import { withRouter } from 'react-router';
 
 
+@withRouter
 export default class Account extends React.Component {
  	state = {
     	WishList: false,

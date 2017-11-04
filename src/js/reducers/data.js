@@ -21,30 +21,51 @@ import * as types from '../constants/actionTypes';
 * возвращает одни и те же значения и не имеет видимых побочных эффектов.
 *
 */
-
-export default function data(state = initialState.books, action) {
+const initial = JSON.parse(localStorage.getItem('books')) || initialState.books;
+console.log("JSON.parse(localStorage.getItem('books'))", JSON.parse(localStorage.getItem('books')));
+export default function data(state = initial, action) {
+    console.log('state', state);
     let { type, payload, category } = action;
 
     switch (type) {
         case types.FETCH_BOOKS:
-            return state.map((item, index) => {
-                // for (var key in item) {
-                    console.log("DATA REDUCER: ", item)
-                    if (Object.keys(item)[0] === category) {
-                        return {[ Object.keys(item)[0] ]: [...payload]};                        
-                    }
-                    return item;
-                    // }
-                // }
+            let check = 0;
+            state.map((item) => {
+                if (Object.keys(item)[0] === category) {
+                    check = 1;
+                }
             })
-            // return [...state, ...payload];
+            if (check) {
+                return state.map((item, index) => {
+                    // console.log("DATA REDUCER: ", item)
+                    if (Object.keys(item)[0] === category) {
+                        return { [Object.keys(item)[0]]: [...payload] };
+
+                    } else return item;
+                })
+            } else {
+                return state.map((item, index) => {
+                    // console.log("DATA REDUCER: ", item)
+                    if (Object.keys(item)[0] === 'temporary') {
+                        return { [Object.keys(item)[0]]: [...payload] };
+
+                    } else return item;
+                })
+            }
+
+        // return [...state, ...payload];
 
         case types.ADD_CATEGORIES_TO_BOOK_ARRAY:
-            console.log('add', payload);
-            return [...payload.map((item, i) => {
-                return { [item]: [] };
-            })]
+            // console.log('add', payload);
+            if (JSON.parse(localStorage.getItem('books'))) {
+                return state;
+            } else {
+                return [...payload.map((item, i) => {
+                    return { [item]: [] };
+                })]
+            }
            
+
         default:
             return state;
     }

@@ -15,5 +15,7 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 
 export const AUTHORIZED = "AUTHORIZED";
 
+export const CHANGE_ACTIVE_CATEGORY = "CHANGE_ACTIVE_CATEGORY";
+
 
 

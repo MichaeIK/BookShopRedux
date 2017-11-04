@@ -5,6 +5,17 @@ import Login from '../components/Login';
 import Registration from '../components/Registration';
 import initialState from '../constants/initialState';
 
+import { fetchBooks, changeActiveCategory } from '../actions';
+
+
+import { bindActionCreators } from 'redux';
+
+
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchBooks, changeActiveCategory }, dispatch);
+}
+
 const logo = {
 	backgroundImage: 'url(../../assets/img/logo.png)'
 }
@@ -26,18 +37,34 @@ const mapStateToProps = (state) => {
 // const userMenu = ['Wish list', 'Order history', 'View history', 'Exit'];
 
 @withRouter
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Header extends React.Component {
   state = {
     visibleLogin: false,
     visibleReg: false,
   }
 
+  fetchData = (keyword) => {
+    console.log(this.props)
+    keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
+    console.log('keyword from fetch data', keyword);
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=10&startIndex=1&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
+        .then(res => res.json())
+        .then(res => {
+            console.log('res.items from fetchbooks', res.items)
+            this.props.fetchBooks(res.items, keyword);
+            this.props.changeActiveCategory(keyword);
+        })
+        .catch(err => console.log(err))
+  }
+  
 	handleInputChange =(e)=>{
 		if(e.key === 'Enter'){
-			console.log(this.refs.search.value)
+      console.log(this.refs.search.value);
+      this.props.changeActiveCategory(this.refs.search.value);
       this.props.history.push(`/search/${this.refs.search.value}`);
-
+      this.forceUpdate();
+      this.fetchData(this.refs.search.value);
       this.refs.search.value = '';
 		}
 	}
@@ -59,7 +86,10 @@ export default class Header extends React.Component {
 	}
 
   handleonClickLogo =()=>{
+    this.fetchData('books for developers');
     this.props.history.push(`/`);
+    this.forceUpdate();
+    
   }
   closeLogin = ()=>{
     this.setState({visibleLogin:false})
