@@ -22,7 +22,7 @@ import * as types from '../constants/actionTypes';
 *
 */
 const initial = JSON.parse(localStorage.getItem('books')) || initialState.books;
-console.log("JSON.parse(localStorage.getItem('books'))", JSON.parse(localStorage.getItem('books')));
+
 export default function data(state = initial, action) {
     console.log('state', state);
     let { type, payload, category } = action;
@@ -38,16 +38,17 @@ export default function data(state = initial, action) {
             if (check) {
                 return state.map((item, index) => {
                     // console.log("DATA REDUCER: ", item)
-                    if (Object.keys(item)[0] === category) {
-                        return { [Object.keys(item)[0]]: [...payload] };
+                    let key = Object.keys(item)[0];
+                    if (key === category) {
+                        return { [key]: [...item[key], ...payload] };
 
                     } else return item;
                 })
             } else {
                 return state.map((item, index) => {
-                    // console.log("DATA REDUCER: ", item)
-                    if (Object.keys(item)[0] === 'temporary') {
-                        return { [Object.keys(item)[0]]: [...payload] };
+                    let key = Object.keys(item)[0];
+                    if ( key === 'temporary') {
+                        return { [ key]: [...item[key],...payload] };
 
                     } else return item;
                 })
@@ -64,7 +65,7 @@ export default function data(state = initial, action) {
                     return { [item]: [] };
                 })]
             }
-           
+
 
         default:
             return state;
