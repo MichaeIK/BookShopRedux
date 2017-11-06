@@ -32,6 +32,7 @@ export default class Catalog extends React.Component {
 
     render() {
 
+        let urlssdfsd
         let urls = [
             {
                 backgroundImage: 'url(../../assets/img/slider1.JPG)'

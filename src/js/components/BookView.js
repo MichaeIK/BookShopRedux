@@ -1,13 +1,21 @@
 import React from 'react';
 import Categories from './Categories';
 import { connect } from 'react-redux';
-import { addToCart, fetchBooks, changeActiveCategory } from '../actions';
+
+
+import { addToWishlist,  addToHistory, addToCart, fetchBooks, changeActiveCategory } from '../actions';
+
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import {fetchData} from '../functions/fetchData';
 
 
 const mapStateToProps = (state, ownProps) => {
+
+
+
+const mapDispatchToProps = (dispatch)=> {
+	return bindActionCreators({addToCart, addToWishlist, addToHistory}, dispatch);
 
     let isInclude = '';
     for (let i = 0; i < state.data.length; i++) {
@@ -27,7 +35,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
     return { book: isInclude }
-    // return { book: state.data.find((item)=> item.id == ownProps.match.params.id)}
+
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -55,17 +63,23 @@ export default class BookView extends React.Component {
 
 
     handleBuy = () => {
-        // console.log(this.props.book)
         this.props.addToCart(this.props.book)
     }
 
+    handleWish = () => {
+        this.props.addToWishlist(this.props.book)
+    }
+
+    componentWillMount() {
+        this.props.addToHistory(this.props.book)
+    }
+    
+    
     render() {
         let book = this.props.book
-        const url = { backgroundImage: `url(${this.props.book.volumeInfo.imageLinks.thumbnail})` }
-        const star = { backgroundImage: 'url(../../assets/img/icons8-star-filled.png)' }
-        const heart = { backgroundImage: 'url(../../assets/img/icons8-heart.png)' }
-
-
+        const url = {backgroundImage: `url(${ this.props.book.volumeInfo.imageLinks.thumbnail})`}
+        const star = {backgroundImage: 'url(../../assets/img/icons8-star-filled.png)'}
+        const heart = {backgroundImage: 'url(../../assets/img/icons8-heart.png)'}       
 
 
         return (
@@ -75,7 +89,9 @@ export default class BookView extends React.Component {
                     <div className="wrapper-for-books">
 
                         <div className="col-md-6 col-sm-12 book-image" style={url}>
-                            <div className="star" style={heart}></div>
+
+                        <div className="star" style={heart} onClick={this.handleWish}></div>
+
                         </div>
                         <div className="col-md-6 col-sm-12">
                             <button>Read fragment</button>

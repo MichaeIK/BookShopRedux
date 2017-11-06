@@ -6,10 +6,10 @@
 // Но на самом деле это лишь относительное соглашение, и javascript нас ни в чем не ограничивает. 
 
 export default ({
-	books : [
-		
-	],
-	authorized: 'Bella', 
+
+	books : [],
+	authorized: 'User name', 
+
     users: [
     	{name: 'Michael', 
 		password: '123',

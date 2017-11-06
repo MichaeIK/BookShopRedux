@@ -3,7 +3,9 @@ import Categories from './Categories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+
 import { fetchBooks, addToHistory, changeActiveCategory } from '../actions';
+
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
@@ -17,7 +19,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+
     return bindActionCreators({ fetchBooks, addToHistory, changeActiveCategory }, dispatch);
+
 }
 
 @withRouter
@@ -44,9 +48,11 @@ export default class Book extends React.Component {
         this.fetchData();
 
     }
+
     handleClick = (id, item) => {
         console.log('click')
-        this.props.addToHistory(item);
+//         this.props.addToHistory(item);
+
         this.props.history.push(`/book/${id}`);
         this.forceUpdate();
     }

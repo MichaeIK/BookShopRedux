@@ -41,24 +41,52 @@ export default function users(state = { users: initialState.users,
 
         case types.ADD_USER:
             let isExist = state.users.findIndex(person => (person.name == payload.name || person.email == payload.email));
-            console.log('check', isExist);
             if (isExist == -1) {
                 return { users: [...state.users, payload], authorized: payload.name };
             } else {
                 return state;
             }
 
-        case types.ADD_TO_CART:
-            console.log(payload)
+        case types.ADD_TO_HISTORY:
             return { users: state.users.map((item,index)=> { 
-
-                if( item.name == state.authorized) {                    
-                    return {...item,  cart: [...item.cart, payload] }
+                if( item.name == state.authorized) {
+                    let viewList = item.viewHistory.findIndex(x => (x.id == payload.id))
+                    if (viewList == -1) {
+                        return {...item,  viewHistory: [...item.viewHistory, payload] }
+                    } else {
+                        return item;
+                    }
                 }
                 else return item
             }), authorized: state.authorized }
 
+        case types.ADD_TO_CART:
+            return { users: state.users.map((item,index)=> {
+                if( item.name == state.authorized) {
+                    let viewList = item.cart.findIndex(x => (x.id == payload.id))
+                    if (viewList == -1) {                   
+                        return {...item,  cart: [...item.cart, payload] }
+                    } else {
+                        return item;
+                    }
+                }
+                else return item
+            }), authorized: state.authorized }
 
+        case types.ADD_TO_WISHLIST:
+            return { users: state.users.map((item,index)=> { 
+                if( item.name == state.authorized) {   
+                    let viewList = item.wishList.findIndex(x => (x.id == payload.id)) 
+                    if (viewList == -1) { 
+                        return {...item,  wishList: [...item.wishList, payload] }
+                    } else {
+                        return item;
+                    }
+                }
+                else return item
+            }), authorized: state.authorized }
+
+            
 
         default:
             return state;

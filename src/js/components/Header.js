@@ -31,11 +31,12 @@ const user = {
 }
 
 const mapStateToProps = (state) => {
-  return ({ User: state.users.authorized })
+
+  return ({User: state.users.authorized, 
+          users: state.users})
+
 }
 
-// console.log(initialState.userMenu)
-// const userMenu = ['Wish list', 'Order history', 'View history', 'Exit'];
 
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
@@ -63,21 +64,23 @@ export default class Header extends React.Component {
     }
   }
 
-  handleOnClickCart = () => {
-    console.log('Click on cart')
-    console.log(this.props.User);
-  }
+	handleOnClickCart =()=>{
+		console.log('Click on cart')
+    // console.log(this.props.User);
+    console.log(initialState.users.map((item)=> item.cart))
+	}
 
-  handleOnClickUser = () => {
-    console.log('Click on user')
-    if (this.state.visibleReg == true) {
-      this.setState({ visibleLogin: false })
-      console.log('hello')
-    } else {
-      this.setState({ visibleLogin: !this.state.visibleLogin })
-    }
+	handleOnClickUser =()=>{
+		console.log('Click on user')
+      if (this.state.visibleReg == true){
+        this.setState({visibleLogin: false})
+        console.log('hello')
+      } else {
+        this.setState({visibleLogin: !this.state.visibleLogin})
+      }
+      
+	}
 
-  }
 
   handleonClickLogo = () => {
     this.fetchData('books for developers');
@@ -93,32 +96,33 @@ export default class Header extends React.Component {
   }
 
 
-  render() {
-    return (
-      <div className="header">
-        <div className="col-md-2 col-sm-12">
-          <div className="logo" style={logo} onClick={this.handleonClickLogo}></div>
-        </div>
-        <div className="col-md-8 col-sm-12 search">
-          <input type="text" ref="search" onKeyPress={this.handleInputChange} placeholder="Search..." />
-        </div>
-        <div className="col-md-1 col-sm-12 accoundBlock">
-          <div className="cart" onClick={this.handleOnClickCart} style={cartEmptyCart}>
-          </div>
-        </div>
-        <div className="col-md-1 col-sm-12 accoundBlock">
-          <div className="account" onClick={this.handleOnClickUser} style={user}></div>
-          {this.state.visibleLogin ? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> : null}
-          <div className="accountStatus" onClick={this.handleOnClickUser}></div>
-          <p className="pUserName">{this.props.User}</p>
-          {this.state.visibleReg ? <Registration closeReg={this.closeReg} /> : null}
-          <ul className="menuUser">
 
-            {initialState.userMenu.map((item, i) => { return <li key={i} onClick={() => this.props.history.push(`/Account/${item}`)}>{item}</li> })}
-          </ul>
-        </div>
+    render() {
+        return (
+            <div className="header">
+            	<div className="col-md-2 col-sm-12">
+             		<div className="logo" style={logo} onClick={this.handleonClickLogo}></div>
+             	</div>
+              	<div className="col-md-8 col-sm-12 search">
+              		<input type ="text" ref="search" onKeyPress={this.handleInputChange} placeholder="Search..." />
+              	</div>
+              	<div className="col-md-1 col-sm-12 accoundBlock">
+                  <div className="cart" onClick={this.handleOnClickCart} style={cartEmptyCart}>
+                  </div>
+                </div>
+                <div className="col-md-1 col-sm-12 accoundBlock">
+                  <div className="account" onClick={this.handleOnClickUser} style={user}></div>
+                  {this.state.visibleLogin? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> :null}
+              		<div className="accountStatus" onClick={this.handleOnClickUser}></div>
+                  <p className="pUserName">{this.props.User}</p>
+                  {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
+                  <ul className="menuUser">
 
-      </div>
-    )
-  }
+                  {initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/Account/${item}`)}>{item}</li>})}
+                  </ul>
+              	</div>
+            </div>
+        )
+    }
+
 }
