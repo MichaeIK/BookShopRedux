@@ -22,8 +22,6 @@ const mapStateToProps = (state) => {
   return ({User: state.users.authorized})
 }
 
-// console.log(initialState.userMenu)
-// const userMenu = ['Wish list', 'Order history', 'View history', 'Exit'];
 
 @withRouter
 @connect(mapStateToProps)

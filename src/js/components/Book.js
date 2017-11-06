@@ -3,7 +3,8 @@ import Categories from './Categories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { fetchBooks, addToHistory } from '../actions';
+// import { fetchBooks, addToHistory } from '../actions';
+import { fetchBooks } from '../actions'; // pravka ot Michel
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
@@ -11,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
     return { books: state.data }
 }
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchBooks, addToHistory }, dispatch);
+    // return bindActionCreators({ fetchBooks, addToHistory }, dispatch); // pravka ot Michel
+    return bindActionCreators({ fetchBooks }, dispatch);
 }
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
@@ -39,7 +41,7 @@ export default class Book extends React.Component {
     }
     handleClick = (id) => {
         // console.log(this.props.history);
-        this.props.addToHistory(id);
+        // this.props.addToHistory(id); // pravka ot Michael
         this.props.history.push(`/book/${id}`);
 
 

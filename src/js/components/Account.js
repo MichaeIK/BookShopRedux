@@ -37,7 +37,7 @@ export default class Account extends React.Component {
 						{initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/Account/${item}`)}>{item}</li>})}
 					</ul>
 				</div>
-				<div className="col-md-2 col-sm-12">
+				<div className="col-md-10 col-sm-12">
 					{this.state.WishList? <WishList /> :null}
 					{this.state.OrderHistory? <OrderHistory /> :null}
 					{this.state.ViewHistory? <ViewHistory /> :null}
