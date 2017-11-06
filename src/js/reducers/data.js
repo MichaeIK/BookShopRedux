@@ -24,7 +24,7 @@ import * as types from '../constants/actionTypes';
 const initial = JSON.parse(localStorage.getItem('books')) || initialState.books;
 
 export default function data(state = initial, action) {
-    console.log('state', state);
+    // console.log('state', state);
     let { type, payload, category } = action;
 
     switch (type) {
@@ -48,7 +48,7 @@ export default function data(state = initial, action) {
                 return state.map((item, index) => {
                     let key = Object.keys(item)[0];
                     if ( key === 'temporary') {
-                        return { [ key]: [...item[key],...payload] };
+                        return { [ key]: [...payload] };
 
                     } else return item;
                 })

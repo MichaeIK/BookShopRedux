@@ -30,27 +30,27 @@ export default class Book extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        console.log("NP: ", nextProps, "TP", this.props)
+        // console.log("NP: ", nextProps, "TP", this.props)
 
         if (this.props.match.params.category !== nextProps.match.params.category) {
-            console.log('!!!!!!!!')
+            // console.log('!!!!!!!!')
             this.fetchData(nextProps.match.params.category)
         }
     }
 
     componentWillUpdate() {
-        console.log("UPDATE?")
+        // console.log("UPDATE?")
 
     }
 
     componentWillMount() {
-        console.log('this.props.match.params.category from didMount', this.props.match.params.category)
+        // console.log('this.props.match.params.category from didMount', this.props.match.params.category)
         this.fetchData();
 
     }
 
     handleClick = (id, item) => {
-        console.log('click', id)
+        // console.log('click', id)
 //         this.props.addToHistory(item);
 
         this.props.history.push(`/book/${id}`);
@@ -112,15 +112,15 @@ export default class Book extends React.Component {
     }
     handleChangeCategory(cat) {
         this.forceUpdate();
-        console.log('Change category?', cat, this.props);
+        // console.log('Change category?', cat, this.props);
         this.props.changeActiveCategory(cat);
         this.props.history.push(`/category/${cat}`);
     }
     render() {
-        console.log("Book.js History: >> ", this.props.history);
+        // console.log("Book.js History: >> ", this.props.history);
         let cat = this.props.category;
         let books = this.props.books[0];
-        console.log('books.cat', books, cat);
+        // console.log('books.cat', books, cat);
         return (
             <div className="row">
                 <div className=""  >

@@ -63,6 +63,7 @@ export default class WishList extends React.Component {
         return (
             <div className="row">
                     <div className="wrapper-for-books">
+						test!!!!!!!!!!
                         {list.map((item, index) =>
                             this.renderBooks(item, index))}
                     </div>
