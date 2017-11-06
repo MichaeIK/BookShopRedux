@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { addCategoriesToBookArray } from '../actions';
-
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ENV_HREF } from '../config';
 
 
@@ -34,8 +34,10 @@ export default class App extends React.Component {
     }
 
     render() {
+        // console.log(`${ENV_HREF}book/:id`);
         return (
-            <div className="wrapper">
+
+            <Router>
                 <MainLayout>
                     <Switch>
                         <Route exact path={ENV_HREF} component={Catalog} />
@@ -46,13 +48,15 @@ export default class App extends React.Component {
                         <Route path={`${ENV_HREF}search/:category/`} component={Book} />
                         <Route path={`${ENV_HREF}registration`} component={Registration} />
                         <Route path={`${ENV_HREF}account/:category/`} component={Account} />
-                        <Route path="*" component={() => <div>Page Not Found</div>} />
+                        {/* <Route path="*" component={() => <div>Page Not Found</div>} /> */}
                     </Switch>
                 </MainLayout>
+                {/* <App /> */}
+            </Router>
 
 
 
-            </div>
+
         )
     }
 }

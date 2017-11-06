@@ -25,9 +25,14 @@ export default class Account extends React.Component {
 
 	}
 
-	componentDidUpdate() {
+	componentWillMount() {
+		console.log('will');
 		this.menuDisplay();
 	}
+	// componentDidUpdate() {
+	// 	console.log('did');
+	// 	this.menuDisplay();
+	// }
 
 
 	render() {

@@ -85,7 +85,7 @@ export default class Header extends React.Component {
   handleonClickLogo = () => {
     this.fetchData('books for developers');
     this.props.history.push(`/`);
-    this.forceUpdate();
+    // this.forceUpdate();
 
   }
   closeLogin = () => {
@@ -118,7 +118,7 @@ export default class Header extends React.Component {
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
 
-                  {initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/Account/${item}`)}>{item}</li>})}
+                  {initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/account/${item}`)}>{item}</li>})}
                   </ul>
               	</div>
             </div>

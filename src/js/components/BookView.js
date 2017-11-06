@@ -9,44 +9,41 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import {fetchData} from '../functions/fetchData';
 
-
 const mapStateToProps = (state, ownProps) => {
-
+    
+        let isInclude = '';
+        for (let i = 0; i < state.data.length; i++) {
+            if (!isInclude) {
+                for (let key in state.data[i]) {
+    
+                    console.log('state.data[i][key]', state.data[i][key], key);
+                    isInclude = state.data[i][key].find((item) => { return item.id == ownProps.match.params.id })
+                    console.log('i', i, isInclude);
+                }
+            }
+    
+            // if (isInclude) return;
+    
+        }
+        console.log(isInclude);
+    
+    
+        return { book: isInclude }
+        // return { book: state.data.find((item)=> item.id == ownProps.match.params.id)}
+    }
 
 
 const mapDispatchToProps = (dispatch)=> {
-	return bindActionCreators({addToCart, addToWishlist, addToHistory}, dispatch);
-
-    let isInclude = '';
-    for (let i = 0; i < state.data.length; i++) {
-        if (!isInclude) {
-            for (let key in state.data[i]) {
-
-                console.log('state.data[i][key]', state.data[i][key], key);
-                isInclude = state.data[i][key].find((item) => { return item.id == ownProps.match.params.id })
-                console.log('i', i, isInclude);
-            }
-        }
-
-        // if (isInclude) return;
-
-    }
-    console.log(isInclude);
-
-
-    return { book: isInclude }
-
+	return bindActionCreators({addToCart, addToWishlist, addToHistory, fetchBooks, changeActiveCategory}, dispatch);
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addToCart, fetchBooks, changeActiveCategory }, dispatch);
-}
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export default class BookView extends React.Component {
 
 
     constructor(props) {
+        console.log(1111111111111);
         super(props)
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
@@ -70,9 +67,9 @@ export default class BookView extends React.Component {
         this.props.addToWishlist(this.props.book)
     }
 
-    componentWillMount() {
-        this.props.addToHistory(this.props.book)
-    }
+    // componentWillMount() {
+    //     this.props.addToHistory(this.props.book)
+    // }
     
     
     render() {

@@ -50,11 +50,11 @@ export default class Book extends React.Component {
     }
 
     handleClick = (id, item) => {
-        console.log('click')
+        console.log('click', id)
 //         this.props.addToHistory(item);
 
         this.props.history.push(`/book/${id}`);
-        this.forceUpdate();
+        // this.forceUpdate();
     }
 
 
@@ -80,8 +80,8 @@ export default class Book extends React.Component {
         let urlCart = {
             backgroundImage: 'url(../../assets/img/icons8-buy.png)'
         }
-
-        return (
+        // console.log('item', item);
+        return (  
             <div key={index} className="col-sm-6 col-md-3 book-wrapper" onClick={this.handleClick.bind(null, item.id, item)}>
                 <div className="book-image" style={url}></div>
                 <div className="middle-layer"></div>

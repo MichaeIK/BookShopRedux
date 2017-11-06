@@ -20,6 +20,8 @@ import * as types from '../constants/actionTypes';
 * возвращает одни и те же значения и не имеет видимых побочных эффектов.
 *
 */
+
+
 export default function users(state = { users: initialState.users, 
                             authorized: initialState.authorized }, action) {
     let { type, payload } = action;
