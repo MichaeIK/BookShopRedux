@@ -38,7 +38,7 @@ export default ({
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
 	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary'],
-	userMenu: ['Wish list', 'Order history', 'View history', 'Exit'],
+	userMenu: ['Cart', 'Wish list', 'Order history', 'View history', 'Exit'],
 	activeCategory: 'temporary'
 	
     

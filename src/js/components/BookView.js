@@ -21,15 +21,8 @@ const mapStateToProps = (state, ownProps) => {
                     console.log('i', i, isInclude);
                 }
             }
-    
-            // if (isInclude) return;
-    
         }
-        console.log(isInclude);
-    
-    
         return { book: isInclude }
-        // return { book: state.data.find((item)=> item.id == ownProps.match.params.id)}
     }
 
 
@@ -84,22 +77,18 @@ export default class BookView extends React.Component {
                 <div className='col-md-3 col-sm-12'><Categories  _push={this.handleChangeCategory} fetch={this.fetchData}/></div>
                 <div className='col-md-9 col-sm-12 desc'>
                     <div className="wrapper-for-books">
-
                         <div className="col-md-6 col-sm-12 book-image" style={url}>
-
                         <div className="star" style={heart} onClick={this.handleWish}></div>
-
                         </div>
                         <div className="col-md-6 col-sm-12">
-                            <button>Read fragment</button>
-                            <div>{book.volumeInfo.title}</div>
-                            <div>{book.volumeInfo.title}</div>
-                            <div>{book.volumeInfo.author}</div>
-                            <div>{book.volumeInfo.publishedDate}</div>
-                            <div>{book.volumeInfo.pageCount}</div>
+                            <div><p>Title: {book.volumeInfo.title}</p></div>
+                            <div><p>Author: {book.volumeInfo.author}</p></div>
+                            <div><p>Publishing date: {book.volumeInfo.publishedDate}</p></div>
+                            <div><p>Number of pages: {book.volumeInfo.pageCount}</p></div>
                             <div className='cost'>
-                                <p>3000 ГРН</p>
+                                <p>Price: 3000 ГРН</p>
                                 <button className='btn-success' onClick={this.handleBuy}>Buy</button>
+                                <button className='btn-success' onClick={this.handleRead}>Read pasage</button>
                             </div>
                             <div className='inline' >
                                 <div className="star" style={star}></div>
@@ -108,11 +97,9 @@ export default class BookView extends React.Component {
                                 <div className="star" style={star}></div>
                                 <div className="star" style={star}></div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }

@@ -1,29 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 const mapStateToProps = (state, ownProps) => {
-    return {user: state.users }
+    console.log(state.users)
+    console.log(state.users.authorized)
+    return {user: state.users.users.find((item,i)=> (item.name == state.users.authorized))} 
  }
-
  @connect(mapStateToProps)
 export default class Cart extends React.Component {
-
-
-    books = () =>{
-        let viewList;
-        this.props.user.users.map((item,i)=> {
-            if (item.name == this.props.user.authorized){
-                viewList = item.viewHistory;    
-            }   
-        })
-        return viewList;
+    componentWillMount(){
+        this.props.cart;
     }
-
+    componentDidUpdate() {
+        this.props.cart;
+    }
+ 
     render() {
+    
         return (
-            <div className="wrapper">
-              {}
+            <div>
+                <ul>
+                    {this.props.user.cart.map((item,i) => {return <li key={i}><p>{item.volumeInfo.title}</p></li>})}
+                </ul>
             </div>
-        )
+        );
     }
 }
