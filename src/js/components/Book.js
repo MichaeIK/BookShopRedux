@@ -3,49 +3,73 @@ import Categories from './Categories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-// import { fetchBooks, addToHistory } from '../actions';
-import { fetchBooks } from '../actions'; // pravka ot Michel
+
+import { fetchBooks, addToHistory, changeActiveCategory } from '../actions';
+
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
+import { fetchData } from '../functions/fetchData';
+
 const mapStateToProps = (state, ownProps) => {
-    return { books: state.data }
+    return {
+        category: state.activeCategory.active,
+        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active })
+    }
 }
+
 const mapDispatchToProps = (dispatch) => {
-    // return bindActionCreators({ fetchBooks, addToHistory }, dispatch); // pravka ot Michel
-    return bindActionCreators({ fetchBooks }, dispatch);
+
+    return bindActionCreators({ fetchBooks, addToHistory, changeActiveCategory }, dispatch);
+
 }
+
 @withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Book extends React.Component {
 
-    fetchData = (keyword) => {
-        // console.log(this.props)
-        keyword = keyword ? keyword : this.props.match.params.category ? this.props.match.params.category : 'books for developer';
-        // console.log(this.props.match.params.category);
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=10&startIndex=1&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU`)
-            .then(res => res.json())
-            .then(res => {
-                this.props.fetchBooks(res.items);
-            })
-            .catch(err => console.log(err))
-    }
+
     componentWillReceiveProps(nextProps) {
+        console.log("NP: ", nextProps, "TP", this.props)
+
         if (this.props.match.params.category !== nextProps.match.params.category) {
+            console.log('!!!!!!!!')
             this.fetchData(nextProps.match.params.category)
         }
     }
-    componentDidMount() {
+
+    componentWillUpdate() {
+        console.log("UPDATE?")
+
+    }
+
+    componentWillMount() {
+        console.log('this.props.match.params.category from didMount', this.props.match.params.category)
         this.fetchData();
 
     }
-    handleClick = (id) => {
-        // console.log(this.props.history);
-        // this.props.addToHistory(id); // pravka ot Michael
+
+    handleClick = (id, item) => {
+        console.log('click')
+//         this.props.addToHistory(item);
+
         this.props.history.push(`/book/${id}`);
-
-
+        this.forceUpdate();
     }
+
+
+    cat = this.props.category;
+    books = this.props.books[0];
+    bookArray = this.books[this.cat];
+
+
+    showMore = () => {
+        let startingIndex = this.props.books[0][this.props.category].length;
+        console.log('startingIndex', startingIndex, 'this.cat', this.props.category);
+        this.fetchData(this.props.category, startingIndex);
+    }
+
+
     renderBooks = (item, index) => {
         let url = {
             backgroundImage: `url(${item.volumeInfo.imageLinks.smallThumbnail})`
@@ -58,7 +82,7 @@ export default class Book extends React.Component {
         }
 
         return (
-            <div key={index} className="col-sm-6 col-md-3 book-wrapper" onClick={this.handleClick.bind(null, item.id)}>
+            <div key={index} className="col-sm-6 col-md-3 book-wrapper" onClick={this.handleClick.bind(null, item.id, item)}>
                 <div className="book-image" style={url}></div>
                 <div className="middle-layer"></div>
                 <div className="book-info">
@@ -81,20 +105,38 @@ export default class Book extends React.Component {
             </div>
         )
     }
+    constructor(props) {
+        super(props)
+        this.handleChangeCategory = this.handleChangeCategory.bind(this);
+        this.fetchData = fetchData.bind(this);
+    }
+    handleChangeCategory(cat) {
+        this.forceUpdate();
+        console.log('Change category?', cat, this.props);
+        this.props.changeActiveCategory(cat);
+        this.props.history.push(`/category/${cat}`);
+    }
     render() {
-        console.log(this.props)
+        console.log("Book.js History: >> ", this.props.history);
+        let cat = this.props.category;
+        let books = this.props.books[0];
+        console.log('books.cat', books, cat);
         return (
             <div className="row">
-
-
-
                 <div className=""  >
-                    {this.props.match.params.category ? <div className='col-md-3 col-sm-12'><Categories /></div>
+                    {this.props.match.params.category ? <div className='col-md-3 col-sm-12'>
+                        <Categories _push={this.handleChangeCategory} fetch={this.fetchData} /></div>
                         : null}
                     <div className="wrapper-for-books">
-                        {this.props.books.map((item, index) =>
+                        {books[cat].map((item, index) =>
                             this.renderBooks(item, index))}
+
+                        <button  onClick={this.showMore} type="button" className="col-sm-12 btn btn-default btn-lg">
+                            <span className="glyphicon glyphicon-repeat" aria-hidden="true"></span> Show more
+                        </button>
+                        {/* <button onClick={this.showMore} >Show more</button> */}
                     </div>
+
                 </div>
             </div>
         )

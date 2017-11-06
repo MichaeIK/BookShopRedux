@@ -5,41 +5,64 @@ import Login from '../components/Login';
 import Registration from '../components/Registration';
 import initialState from '../constants/initialState';
 
+import { fetchBooks, changeActiveCategory } from '../actions';
+
+
+import { bindActionCreators } from 'redux';
+import { fetchData } from '../functions/fetchData';
+
+
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ fetchBooks, changeActiveCategory }, dispatch);
+}
+
 const logo = {
-	backgroundImage: 'url(../../assets/img/logo.png)'
+  backgroundImage: 'url(../../assets/img/logo.png)'
 }
 const cartEmptyCart = {
-	backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+  backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
 }
 const cartWithGoods = {
-	backgroundImage: 'url(../../assets/img/shopping_cart.png)'
+  backgroundImage: 'url(../../assets/img/shopping_cart.png)'
 }
 const user = {
-	backgroundImage: 'url(../../assets/img/user.png)'
+  backgroundImage: 'url(../../assets/img/user.png)'
 }
 
 const mapStateToProps = (state) => {
+
   return ({User: state.users.authorized, 
           users: state.users})
+
 }
 
 
 @withRouter
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Header extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.fetchData = fetchData.bind(this);
+  }
+
   state = {
     visibleLogin: false,
     visibleReg: false,
   }
 
-	handleInputChange =(e)=>{
-		if(e.key === 'Enter'){
-			console.log(this.refs.search.value)
+  handleInputChange = (e) => {
+    if (e.key === 'Enter') {
+      console.log(this.refs.search.value);
+      this.props.changeActiveCategory(this.refs.search.value);
+      this.forceUpdate();
+      this.fetchData(this.refs.search.value);
       this.props.history.push(`/search/${this.refs.search.value}`);
-
+      
       this.refs.search.value = '';
-		}
-	}
+    }
+  }
 
 	handleOnClickCart =()=>{
 		console.log('Click on cart')
@@ -58,15 +81,20 @@ export default class Header extends React.Component {
       
 	}
 
-  handleonClickLogo =()=>{
+
+  handleonClickLogo = () => {
+    this.fetchData('books for developers');
     this.props.history.push(`/`);
+    this.forceUpdate();
+
   }
-  closeLogin = ()=>{
-    this.setState({visibleLogin:false})
+  closeLogin = () => {
+    this.setState({ visibleLogin: false })
   }
-  closeReg = ()=>{
-    this.setState({visibleReg: !this.state.visibleReg});
+  closeReg = () => {
+    this.setState({ visibleReg: !this.state.visibleReg });
   }
+
 
 
     render() {
@@ -96,4 +124,5 @@ export default class Header extends React.Component {
             </div>
         )
     }
+
 }

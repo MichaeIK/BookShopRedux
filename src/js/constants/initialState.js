@@ -6,8 +6,10 @@
 // Но на самом деле это лишь относительное соглашение, и javascript нас ни в чем не ограничивает. 
 
 export default ({
+
 	books : [],
 	authorized: 'User name', 
+
     users: [
     	{name: 'Michael', 
 		password: '123',
@@ -35,8 +37,9 @@ export default ({
 	}
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
-	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!'],
+	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary'],
 	userMenu: ['Wish list', 'Order history', 'View history', 'Exit'],
+	activeCategory: 'temporary'
 	
     
 });
