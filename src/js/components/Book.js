@@ -68,7 +68,7 @@ export default class Book extends React.Component {
         let books = this.props.books[0];
         return (
             <div className="row">
-                <div className=""  >
+                <div className="central-wrapper">
                     {this.props.match.params.category ?
                         <div className='col-md-3 col-sm-12'>
                             <Categories _push={this.handleChangeCategory}

@@ -1,11 +1,13 @@
 
 .wrapper-for-books {
     display: flex;
-    padding-top: 15px;
-    padding-left: 15px;
+    padding: 15px;
     flex-wrap: wrap;
     justify-content: space-around  ;
     background-color: #C4C4C4;  
+}
+.central-wrapper {
+    background-color: white;
 }
 .class {
     height: 100%;

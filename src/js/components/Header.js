@@ -129,7 +129,7 @@ export default class Header extends React.Component {
                   <div className="account" onClick={this.handleOnClickUser} style={user}></div>
                   {this.state.visibleLogin? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> :null}
               		<div className="accountStatus"></div>
-                  <p className="pUserName" onClick={this.handleOnClickUser}>{this.props.User}</p>
+                  <p className="pUserName">{this.props.User}</p>
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
 

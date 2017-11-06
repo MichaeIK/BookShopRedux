@@ -1,10 +1,11 @@
 .footer {
 	p {
-		color: white;
+		color: black;
 	}
 	min-height: 120px;
 	width: 100%;
-	background-color: #5C5C5C;
+	background:linear-gradient(to bottom,#cfd1cf 1%,#fff 100%);	
+	/*background-color: #5C5C5C;*/
 	.contact {
 		color: white;
 		margin-top: 45px;
@@ -14,7 +15,7 @@
 		margin-top: 27px;
 	}
 	.social {
-		padding-top: 40px;
+		margin-top: 40px;
 		img {
 			width: 35px;
 			height: 35px;
