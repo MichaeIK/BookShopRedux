@@ -20,7 +20,7 @@ export default class MainLayout extends React.Component {
         // console.log(`${PATH}heart.png`)
         let url = 'assets/img/logo.png';
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <Favicon url={[url]}/>
                 <div className="row">
                     <Header />

@@ -44,9 +44,7 @@ export default class Slider extends React.Component {
         // setTimeout(this.changeSlide, 2000);
         return (
             <div className="slider-container">
-                <div className="slider-content">
                     {this.state.currentSlide}
-                </div>
             </div>
         )
     }
