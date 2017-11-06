@@ -74,6 +74,19 @@ export default function users(state = { users: initialState.users,
                 }
                 else return item
             }), authorized: state.authorized }
+        
+        case types.DEL_FROM_CART: 
+        
+            return { 
+                users: state.users.map((item,index)=> {
+                    if( item.name == state.authorized) {
+                        let new_cart = item.cart.filter((itemm)=> (itemm.id!=payload))
+                        return {...item,  cart: new_cart}
+                    }
+                    else return item;
+                }), authorized: state.authorized }
+            
+
 
         case types.ADD_TO_WISHLIST:
             return { users: state.users.map((item,index)=> { 
