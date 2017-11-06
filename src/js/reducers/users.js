@@ -57,7 +57,7 @@ export default function users(state = { users: initialState.users, authorized: i
                 else return item
             }), authorized: state.authorized }
 
-
+            
 
         default:
             return state;

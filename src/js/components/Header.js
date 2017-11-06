@@ -19,10 +19,10 @@ const user = {
 }
 
 const mapStateToProps = (state) => {
-  return ({User: state.users.authorized})
+  return ({User: state.users.authorized, 
+          users: state.users})
 }
 
-// console.log(initialState.userMenu)
 // const userMenu = ['Wish list', 'Order history', 'View history', 'Exit'];
 
 @withRouter
@@ -44,7 +44,8 @@ export default class Header extends React.Component {
 
 	handleOnClickCart =()=>{
 		console.log('Click on cart')
-    console.log(this.props.User);
+    // console.log(this.props.User);
+    console.log(initialState.users.map((item)=> item.cart))
 	}
 
 	handleOnClickUser =()=>{
@@ -93,7 +94,6 @@ export default class Header extends React.Component {
                   {initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/Account/${item}`)}>{item}</li>})}
                   </ul>
               	</div>
-                
             </div>
         )
     }
