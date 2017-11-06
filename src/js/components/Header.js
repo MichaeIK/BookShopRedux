@@ -7,10 +7,8 @@ import initialState from '../constants/initialState';
 
 import { fetchBooks, changeActiveCategory } from '../actions';
 
-
 import { bindActionCreators } from 'redux';
 import { fetchData } from '../functions/fetchData';
-
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -20,7 +18,9 @@ const mapDispatchToProps = (dispatch) => {
 const logo = {
   backgroundImage: 'url(../../assets/img/logo.png)'
 }
-const cartEmptyCart = {
+
+
+let cartEmptyCart = {
   backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
 }
 const cartWithGoods = {
@@ -31,9 +31,9 @@ const user = {
 }
 
 const mapStateToProps = (state) => {
-
+  console.log("map state to props in HEADER.JS: ", state)
   return ({User: state.users.authorized, 
-          users: state.users})
+          users: state.users.users})
 
 }
 
@@ -71,6 +71,18 @@ export default class Header extends React.Component {
     console.log(initialState.users.map((item)=> item.cart))
 	}
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.users.map((item) => {
+      if(item.name === nextProps.User){
+        if (item.cart.length > 0){
+          cartEmptyCart = {
+            backgroundImage: 'url(../../assets/img/shopping_cart.png)'
+          }
+        }
+      }
+    })
+  }
+
 	handleOnClickUser =()=>{
 		console.log('Click on user')
       if (this.state.visibleReg == true){
@@ -85,6 +97,7 @@ export default class Header extends React.Component {
 
   handleonClickLogo = () => {
     this.fetchData('books for developers');
+    this.props.changeActiveCategory('temporary');
     this.props.history.push(`/`);
     // this.forceUpdate();
 
@@ -119,7 +132,12 @@ export default class Header extends React.Component {
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
 
-                  {initialState.userMenu.map((item,i) => {return  <li key={i} onClick={() => this.props.history.push(`/account/${item}`)}>{item}</li>})}
+                  {initialState.userMenu.map((item,i) =>  
+                    <li key={i} 
+                     onClick={() => this.props.history.push(`/account/${item}`)}>
+                      {item}
+                    </li>
+                  )}
                   </ul>
               	</div>
             </div>

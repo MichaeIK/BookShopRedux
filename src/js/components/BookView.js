@@ -15,10 +15,7 @@ const mapStateToProps = (state, ownProps) => {
         for (let i = 0; i < state.data.length; i++) {
             if (!isInclude) {
                 for (let key in state.data[i]) {
-    
-                    console.log('state.data[i][key]', state.data[i][key], key);
                     isInclude = state.data[i][key].find((item) => { return item.id == ownProps.match.params.id })
-                    console.log('i', i, isInclude);
                 }
             }
         }
@@ -36,7 +33,7 @@ export default class BookView extends React.Component {
 
 
     constructor(props) {
-        console.log(1111111111111);
+        // console.log(1111111111111);
         super(props)
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
@@ -44,7 +41,7 @@ export default class BookView extends React.Component {
 
     handleChangeCategory(cat) {
        
-        console.log('Change category?', cat, this.props);
+        // console.log('Change category?', cat, this.props);
         this.props.changeActiveCategory(cat);
         this.props.history.push(`/category/${cat}`);
         this.forceUpdate();
@@ -88,7 +85,7 @@ export default class BookView extends React.Component {
                             <div className='cost'>
                                 <p>Price: 3000 ГРН</p>
                                 <button className='btn-success' onClick={this.handleBuy}>Buy</button>
-                                <button className='btn-success' onClick={this.handleRead}>Read pasage</button>
+                                <button className='btn-success' onClick={this.handleRead}><a href="{http://www.google.com}" target="_blank">Read pasage</a></button>
                             </div>
                             <div className='inline' >
                                 <div className="star" style={star}></div>
