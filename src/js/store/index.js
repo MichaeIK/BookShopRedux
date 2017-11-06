@@ -14,7 +14,7 @@ import {FETCH_BOOKS} from '../constants/actionTypes';
 
 const postsMiddleware = store => next => action => {
     if(action.type === FETCH_BOOKS) {
-        console.log('to localStorage');
+        // console.log('to localStorage');
         // action = {...action, payload: {...action.payload, contentToggle: false}}    
         next(action);
         localStorage.setItem('books', JSON.stringify(store.getState().data));

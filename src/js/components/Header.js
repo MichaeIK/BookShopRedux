@@ -31,7 +31,7 @@ const user = {
 }
 
 const mapStateToProps = (state) => {
-  console.log("map state to props in HEADER.JS: ", state)
+  // console.log("map state to props in HEADER.JS: ", state)
   return ({User: state.users.authorized, 
           users: state.users.users})
 
@@ -54,7 +54,7 @@ export default class Header extends React.Component {
 
   handleInputChange = (e) => {
     if (e.key === 'Enter') {
-      console.log(this.refs.search.value);
+      // console.log(this.refs.search.value);
       this.props.changeActiveCategory(this.refs.search.value);
       this.forceUpdate();
       this.fetchData(this.refs.search.value);
@@ -65,7 +65,7 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickCart =()=>{
-		console.log('Click on cart') 
+		// console.log('Click on cart') 
 	}
 
   componentWillReceiveProps(nextProps) {
@@ -81,10 +81,10 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickUser =()=>{
-		console.log('Click on user')
+		// console.log('Click on user')
       if (this.state.visibleReg == true){
         this.setState({visibleLogin: false})
-        console.log('hello')
+        // console.log('hello')
       } else {
         this.setState({visibleLogin: !this.state.visibleLogin})
       }
