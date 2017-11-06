@@ -18,6 +18,7 @@ export default class Cart extends React.Component {
     
         return (
             <div>
+                cart test!!!!!
                 <ul>
                     {this.props.user.cart.map((item,i) => {return <li key={i}><p>{item.volumeInfo.title}</p></li>})}
                 </ul>
