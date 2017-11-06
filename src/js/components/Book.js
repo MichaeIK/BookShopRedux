@@ -60,7 +60,8 @@ export default class Book extends React.Component {
 
     cat = this.props.category;
     books = this.props.books[0];
-    bookArray = this.books[this.cat];
+ 
+    // bookArray = this.props.books[0][this.props.categoryt];
 
 
     showMore = () => {

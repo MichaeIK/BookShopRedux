@@ -67,6 +67,7 @@ export default class Header extends React.Component {
 	handleOnClickCart =()=>{
 		console.log('Click on cart')
     // console.log(this.props.User);
+    this.props.history.push(`/account/Cart`);
     console.log(initialState.users.map((item)=> item.cart))
 	}
 
