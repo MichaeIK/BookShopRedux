@@ -16,9 +16,9 @@ const mapStateToProps = (state, ownProps) => {
             if (!isInclude) {
                 for (let key in state.data[i]) {
     
-                    console.log('state.data[i][key]', state.data[i][key], key);
+                    // console.log('state.data[i][key]', state.data[i][key], key);
                     isInclude = state.data[i][key].find((item) => { return item.id == ownProps.match.params.id })
-                    console.log('i', i, isInclude);
+                    // console.log('i', i, isInclude);
                 }
             }
         }
@@ -36,7 +36,7 @@ export default class BookView extends React.Component {
 
 
     constructor(props) {
-        console.log(1111111111111);
+        // console.log(1111111111111);
         super(props)
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
@@ -44,7 +44,7 @@ export default class BookView extends React.Component {
 
     handleChangeCategory(cat) {
        
-        console.log('Change category?', cat, this.props);
+        // console.log('Change category?', cat, this.props);
         this.props.changeActiveCategory(cat);
         this.props.history.push(`/category/${cat}`);
         this.forceUpdate();
