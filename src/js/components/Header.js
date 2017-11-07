@@ -8,8 +8,9 @@ import initialState from '../constants/initialState';
 import { fetchBooks, changeActiveCategory } from '../actions';
 
 import { bindActionCreators } from 'redux';
-import { fetchData } from '../functions/fetchData';
+import fetchData from '../functions/fetchData';
 
+import PropTypes from 'prop-types';
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchBooks, changeActiveCategory }, dispatch);
@@ -54,14 +55,19 @@ export default class Header extends React.Component {
 
   handleInputChange = (e) => {
     if (e.key === 'Enter') {
-      // console.log(this.refs.search.value);
-      this.props.changeActiveCategory(this.refs.search.value);
-      this.forceUpdate();
-      this.fetchData(this.refs.search.value);
-      this.props.history.push(`/search/${this.refs.search.value}`);
+      this.context.changeCategory(this.refs.search.value, true);
+      // // console.log(this.refs.search.value);
+      // this.props.changeActiveCategory(this.refs.search.value);
+      // // this.forceUpdate();
+      // this.fetchData(this.refs.search.value);
+      // this.props.history.push(`/search/${this.refs.search.value}`);
       
-      this.refs.search.value = '';
+      // this.refs.search.value = '';
     }
+  }
+
+  static contextTypes = {
+      changeCategory: PropTypes.func.isRequired
   }
 
 	handleOnClickCart =()=>{

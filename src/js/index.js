@@ -37,7 +37,9 @@ import store from './store';
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <Router>
+            <App/>
+        </Router>
     </Provider>
     , document.getElementById('app'));
 

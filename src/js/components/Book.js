@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import { fetchBooks, addToHistory, addToCart, changeActiveCategory } from '../actions';
+import { fetchBooks, addToHistory, addToCart } from '../actions';
 
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
-import { fetchData } from '../functions/fetchData';
+import fetchData from '../functions/fetchData';
 import { renderBooks } from '../functions/renderBooks';
 
 const mapStateToProps = (state, ownProps) => {
@@ -21,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 
-    return bindActionCreators({ fetchBooks, addToHistory, addToCart, changeActiveCategory }, dispatch);
+    return bindActionCreators({ fetchBooks, addToHistory, addToCart }, dispatch);
 
 }
 
@@ -31,7 +31,7 @@ export default class Book extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleChangeCategory = this.handleChangeCategory.bind(this);
+        // this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
         this.renderBooks = renderBooks.bind(this);
         this.state = {
@@ -40,10 +40,10 @@ export default class Book extends React.Component {
         }
     }
 
-    componentWillMount() {
-        this.fetchData();
-    }
-
+    // componentWillMount() {
+    //     this.fetchData();
+    // }
+    
     handleClick = (id, item) => {
         this.props.addToHistory(item);
         this.props.history.push(`/book/${id}`);
@@ -67,12 +67,7 @@ export default class Book extends React.Component {
         this.fetchData(this.props.category, startingIndex);
     }
 
-    handleChangeCategory(cat) {
-        this.forceUpdate();
-        this.props.changeActiveCategory(cat);
-        this.props.history.push(`/category/${cat}`);
-    }
-
+    
     showDropdown = () => {
         this.setState({ dropdown: !this.state.dropdown })
         console.log(this.state.dropdown)
@@ -107,8 +102,7 @@ export default class Book extends React.Component {
                 <div className="central-wrapper">
                     {this.props.match.params.category ?
                         <div className='col-md-3 col-sm-12'>
-                            <Categories _push={this.handleChangeCategory}
-                                fetch={this.fetchData} />
+                            <Categories/>
 
                         </div>
                         : null}

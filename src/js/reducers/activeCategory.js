@@ -12,8 +12,8 @@ export default function activeCategory(state = {active: initialState.activeCateg
 
             if (state.categories.includes(payload)) {
                 return {...state, active: payload};
-            } 
-            return state;    
+            }
+            return {...state, active: "temporary"};    
         
         default:
             return state;
