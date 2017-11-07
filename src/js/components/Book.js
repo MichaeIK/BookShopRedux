@@ -34,6 +34,10 @@ export default class Book extends React.Component {
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
         this.renderBooks = renderBooks.bind(this);
+        this.state = {
+            dropdown: false,
+            sortType: 'popularity'
+        }
     }
 
     componentWillMount() {
@@ -48,7 +52,7 @@ export default class Book extends React.Component {
 
     cat = this.props.category;
     books = this.props.books[0];
- 
+
     // bookArray = this.props.books[0][this.props.categoryt];
 
 
@@ -63,6 +67,33 @@ export default class Book extends React.Component {
         this.props.changeActiveCategory(cat);
         this.props.history.push(`/category/${cat}`);
     }
+
+    showDropdown = () => {
+        this.setState({ dropdown: !this.state.dropdown })
+        console.log(this.state.dropdown)
+    }
+
+    handleSort = (e) => {
+        console.log(e.target.getAttribute('data-sort'));
+        this.setState({sortType: e.target.getAttribute('data-sort')});
+    }
+    sortBooks = (a, b) => {
+        console.log('sort');
+        let priceA = a.saleInfo.retailPrice ? a.saleInfo.retailPrice.amount : 0;
+        let priceB = b.saleInfo.retailPrice ? b.saleInfo.retailPrice.amount : 0;
+        let starsA = a.volumeInfo.averageRating ? a.volumeInfo.averageRating : 0;
+        let starsB = b.volumeInfo.averageRating ? b.volumeInfo.averageRating : 0;
+        switch (this.state.sortType) {
+            case 'upPrice':
+                return priceB - priceA;
+            case 'downPrice':
+                return priceA - priceB;
+            case 'popularity':
+                return starsB - starsA;
+            default: return 0;
+        }
+
+    }
     render() {
         let cat = this.props.category;
         let books = this.props.books[0];
@@ -73,19 +104,27 @@ export default class Book extends React.Component {
                         <div className='col-md-3 col-sm-12'>
                             <Categories _push={this.handleChangeCategory}
                                 fetch={this.fetchData} />
-                            <div className="btn-group" data-toggle="buttons">
-                                <label className="btn btn-primary active">
-                                    <input type="radio" name="options" id="option1" autoComplete="off"/>
-                                    Filter by price  </label>
-                                <label className="btn btn-primary">
-                                    <input type="radio" name="options" id="option2" autoComplete="off" />
-                                    Filter by popularity  </label>
-                            </div>
+
                         </div>
                         : null}
 
                     <div className="wrapper-for-books">
-                        {books[cat].map((item, index) =>
+
+                        <div className="dropdown">
+                            <button onClick={this.showDropdown}
+                                className='dropbtn'>
+                                Сортировка
+                            </button>
+                            <div id="myDropdown"
+                                className={!this.state.dropdown ? 'dropdown-content' : 'dropdown-content show'}>
+                                <div data-sort="upPrice" onClick={this.handleSort}>от дорогих к дешевым</div>
+                                <div data-sort="downPrice" onClick={this.handleSort}>от дешевых к дорогим</div>
+                                <div data-sort="popularity" onClick={this.handleSort}>по популярности</div>
+
+                            </div>
+                        </div>
+
+                        {books[cat].sort(this.sortBooks).map((item, index) =>
                             this.renderBooks(item, index))}
 
                         <button onClick={this.showMore} type="button" className="col-sm-12 btn btn-default btn-lg">
