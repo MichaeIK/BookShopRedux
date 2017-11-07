@@ -4,7 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 
 const mapStateToProps = (state) => {
-    return ({ categories: state.categories })
+    return ({ categories: state.categories,
+        category: state.activeCategory.active,
+        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active }) })
 };
 
 @withRouter 
@@ -15,11 +17,15 @@ export default class Categories extends React.Component {
         super(props)
         
     }
-    handleChangeCategory = (cat) => {
-        console.log('````', this);
-        
+    handleChangeCategory = (cat) => {      
         this.props._push(cat);
         this.props.fetch(cat);
+        // console.log('books length', this.props.books[0][this.props.category])
+        // if (!this.props.books[0][this.props.category].length) {
+        //     console.log('111')
+        //     this.props.fetch(cat);
+        // }
+       
         this.forceUpdate();
     }
     render() {
