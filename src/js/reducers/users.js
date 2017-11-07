@@ -44,7 +44,7 @@ export default function users(state = { users: initialState.users,
         case types.ADD_USER:
             let isExist = state.users.findIndex(person => (person.name == payload.name || person.email == payload.email));
             if (isExist == -1) {
-                return { users: [...state.users, payload], authorized: payload.name };
+                return { users: [...state.users, {...payload, cart:[], wishList: [], orderHistory: [], viewHistory: []}], authorized: payload.name };
             } else {
                 return state;
             }

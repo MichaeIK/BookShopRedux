@@ -36,8 +36,8 @@ export default class Registration extends React.Component {
                 <input type="password" ref="password" placeholder="Password" />
                 <input type="password" ref="passwordConfirm" placeholder="Confirm Password" />
                 <input type="email" ref="email" placeholder="E-mail" />
-                <button className="btn-success" onClick={this.handleOnClickLogin}>Sign in</button>
-                <button className="btn-success" onClick={this.handleOnClickClose}>Close</button>
+                <button className="btn-default" type="submit" onClick={this.handleOnClickLogin}>Sign in</button>
+                <button className="btn-default" type="submit" onClick={this.handleOnClickClose}>Close</button>
             </div>
         )
     }

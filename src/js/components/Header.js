@@ -65,10 +65,7 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickCart =()=>{
-		console.log('Click on cart')
-    // console.log(this.props.User);
     this.props.history.push(`/account/Cart`);
-    console.log(initialState.users.map((item)=> item.cart))
 	}
 
   componentWillReceiveProps(nextProps) {
@@ -84,10 +81,8 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickUser =()=>{
-		// console.log('Click on user')
       if (this.state.visibleReg == true){
         this.setState({visibleLogin: false})
-        // console.log('hello')
       } else {
         this.setState({visibleLogin: !this.state.visibleLogin})
       }
