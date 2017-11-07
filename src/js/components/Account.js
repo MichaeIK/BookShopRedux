@@ -45,7 +45,6 @@ export default class Account extends React.Component {
         this.menuDisplay();
     }
     componentDidUpdate() {
-		console.log('did');
 		this.menuDisplay(null);
     }
     render() {
