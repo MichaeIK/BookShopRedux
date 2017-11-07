@@ -31,7 +31,6 @@ const user = {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("map state to props in HEADER.JS: ", state)
   return ({User: state.users.authorized, 
           users: state.users.users})
 
@@ -73,11 +72,16 @@ export default class Header extends React.Component {
       if(item.name === nextProps.User){
         if (item.cart.length > 0){
           cartEmptyCart = {
-            backgroundImage: 'url(../../assets/img/shopping_cart.png)'
+            backgroundImage: 'url(../../assets/img/shopping_cart.png)' 
+          }
+        } else {
+            cartEmptyCart = {
+                backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+            }
           }
         }
       }
-    })
+    )
   }
 
 	handleOnClickUser =()=>{

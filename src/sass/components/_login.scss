@@ -10,13 +10,15 @@
 	border-radius: 5px;
 
 	input {
+		width: 95%;
 		background-color: #d3d3d3;
 		margin-bottom: 1px;
 		border: 1px solid #5c5c5c;
 	}
 
 	.btn-default{
-		background-color: #5c5c5c;
+		background-color: #d3d3d3;
+		border: 1px solid #5c5c5c;
 		color: #202027;
 		margin: 2px 3px 0 5px;
 		padding: 3px;
