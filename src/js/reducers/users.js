@@ -24,7 +24,7 @@ import * as types from '../constants/actionTypes';
 
 export default function users(state = { users: initialState.users, 
                             authorized: initialState.authorized }, action) {
-    let { type, payload } = action;
+    let { type, payload, book} = action;
     let userName = '';
     switch (type) {
         case types.CHECK_USERS:
@@ -65,9 +65,11 @@ export default function users(state = { users: initialState.users,
         case types.ADD_TO_CART:
             return { users: state.users.map((item,index)=> {
                 if( item.name == state.authorized) {
-                    let viewList = item.cart.findIndex(x => (x.id == payload.id))
+                    
+                    let viewList = item.cart.findIndex(x => (x.book.id == payload.id))
+                    console.log(payload)
                     if (viewList == -1) {                   
-                        return {...item,  cart: [...item.cart, payload] }
+                        return {...item,  cart: [...item.cart, {book:payload, quantity:1 }] }
                     } else {
                         return item;
                     }
@@ -76,11 +78,11 @@ export default function users(state = { users: initialState.users,
             }), authorized: state.authorized }
         
         case types.DEL_FROM_CART: 
-        
+
             return { 
                 users: state.users.map((item,index)=> {
                     if( item.name == state.authorized) {
-                        let new_cart = item.cart.filter((itemm)=> (itemm.id!=payload))
+                        let new_cart = item.cart.filter((itemm)=> (itemm.book.id!=payload))
                         return {...item,  cart: new_cart}
                     }
                     else return item;
@@ -101,7 +103,26 @@ export default function users(state = { users: initialState.users,
                 else return item
             }), authorized: state.authorized }
 
-            
+        case types.CHANGE_QUANTITY:
+
+            return { ...state, users: state.users.map((item, index) => {
+                if(item.name === state.authorized) {
+                    return { ...item, cart: item.cart.map((item, i) => {
+                        console.log(book);
+                        if(item.book.id === book.book.id) {
+                            return {...item, quantity: payload === "+" ? item.quantity + 1 : (item.quantity==0 ? item.quantity=0 : item.quantity- 1) }
+                            // if (payload === '+'){
+                            //     return {...item, quantity: item.quantity+1 }
+                            // }
+                            // else if (payload === '+') {
+                            //     return {...item, quantity: (item.quantity==0 ? item.quantity=0 : item.quantity- 1) }
+                            // }
+                            
+                        } else return item;
+                    }) }
+                }
+                return item;                 
+            }) }
 
         default:
             return state;

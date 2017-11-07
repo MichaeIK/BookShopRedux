@@ -57,6 +57,7 @@ export default class BookView extends React.Component {
     }
 
     handleWish = () => {
+        console.log(this.props.book)
         this.props.addToWishlist(this.props.book)
     }
 

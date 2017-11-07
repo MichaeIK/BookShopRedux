@@ -9,7 +9,7 @@ export default ({
 
 	books : [],
 	
-	authorized: 'Please login', 
+	authorized: 'Bella', 
 
     users: [
     	{name: 'Michael', 
