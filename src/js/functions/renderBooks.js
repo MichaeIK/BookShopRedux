@@ -5,40 +5,34 @@ export function renderBooks(item, index) {
     let src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail ? 
                 item.volumeInfo.imageLinks.smallThumbnail : 
                 '../../assets/img/book_default.jpg';
-    console.log('src', src);
-    let url = {
-        backgroundImage: `url(${src})`
-    };
-    let urlPrice = {
-        backgroundImage: 'url(../../assets/img/price.png)'
-    }
-    let urlCart = {
-        backgroundImage: 'url(../../assets/img/icons8-buy.png)'
-    }
+
     let price = item.saleInfo.retailPrice ? 
     `${item.saleInfo.retailPrice.amount} UAH` : 
     'FREE';
-    
+
+    let author = item.volumeInfo.authors  ? item.volumeInfo.authors.length >1 ? item.volumeInfo.authors[0]+' ...' : item.volumeInfo.authors[0] : "-";
+   
+    let authorDisplay = author.substring(0,15);
+    let title = item.volumeInfo.title.substring(0,30);
+
+    let stars = item.volumeInfo.averageRating ? item.volumeInfo.averageRating : 0;
+     
+
     return (
-        <div key={index} className="col-sm-6 col-md-3 book-wrapper" onClick={this.handleClick.bind(null, item.id, item)}>
-            <div className="book-image" style={url}></div>
-            <div className="middle-layer"></div>
-            <div className="book-info">
-                <div className="book-title toggle-info">{item.volumeInfo.title}</div>
-                <div className="book-pages toggle-info">Pages: {item.volumeInfo.pageCount}</div>
-                <div className="book-category toggle-info">Category: {item.volumeInfo.categories}</div>
-                <div className="col-sm-2 book-stars toggle-info"></div>
-                <div className="book-card-footer toggle-info">
-                    <div className="price-block">
-                        <div className="price-image" style={urlPrice}></div>
-                        <div className="price-value">{price}</div>
-                    </div>
-                    <div className="cart-block">
-                        <div className="price-image" style={urlCart}></div>
-                        <div className="price-value">BUY</div>
-                    </div>
+        <div key={index} className="col-lg-3 col-md-6 mb-4">
+            <div className="card" onClick={this.handleClick.bind(null, item.id, item)}>
+                <img className="card-img-top" src={src} />
+                <div className="card-body">
+                    <h4 className="card-title">{title}</h4>
+                    <p className="card-text">Author: <span>{authorDisplay}</span></p>
+                    <p className="card-text">Categorie: <span>{item.volumeInfo.categories}</span></p>
+                    <p className="card-text">Rating: <span>{stars}</span></p>
                 </div>
             </div>
+                <div className="price-block">
+                    <p className="card-text price">{price}</p>
+                    <button className="btn-default render-btn" onClick={this.handleBuy.bind(null, item)} type="submit">BUY</button>
+                </div>
 
         </div>
     )

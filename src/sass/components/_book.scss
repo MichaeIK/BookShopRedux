@@ -2,9 +2,10 @@
 .wrapper-for-books {
     display: flex;
     padding: 15px;
+    margin: 10px;
     flex-wrap: wrap;
     justify-content: space-around  ;
-    background-color: #C4C4C4;  
+    background-color: white;  
 }
 .central-wrapper {
     background-color: white;
@@ -17,14 +18,65 @@
     left: 0;
     transition: .5s;
 }
-.book-wrapper {
+.mb-4 {
+    margin: 10px;
+}
+.card {
+    height: 320px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #C4C4C4;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    img {
+        width: 128px;
+        height: 161px;
+    }
+    h4 {
+        text-align: center;
+        font-weight: bold;
+    }
+    span {
+        font-weight: bold;
+    }
+}
+/*.card:*/
+
+.price-block { 
+    margin-top: -10px;
+    padding-top: 5px;
+    height: 35px;
+    background-color: #efefef;
+    border: 1px solid #C4C4C4;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    }
+    p {
+        margin-left: 15px;
+        text-align: justify;
+    }
+    .render-btn{
+        position: absolute;
+        left: 210px;
+        top: 5px;
+        background-color: #007aff;
+        color: #fff;
+        padding: 3px;
+    }
+    .render-btn:hover {
+            background-color: #007aff;
+            color: black;
+        };
+
+
+/*.book-wrapper {
     width: 180px;
     height: 250px;
     position: relative;
     margin: 20px;
     
         .book-image {
-            // float: left;
+            float: left;
             width: 100%;
             height: 80%; 
             background-repeat: no-repeat;
@@ -96,4 +148,4 @@
     }
 
 
-}
+}*/
