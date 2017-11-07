@@ -106,7 +106,7 @@ export default class Book extends React.Component {
             <div className="row">
                 <div className="central-wrapper">
                     {this.props.match.params.category ?
-                        <div className='col-md-3 col-sm-12'>
+                        <div className='col-md-4 col-sm-12'>
                             <Categories _push={this.handleChangeCategory}
                                 fetch={this.fetchData} />
 
@@ -133,7 +133,7 @@ export default class Book extends React.Component {
                             this.renderBooks(item, index))}
 
                         <button onClick={this.showMore} type="button" className="col-sm-12 btn btn-default btn-lg">
-                            <span className="glyphicon glyphicon-repeat" aria-hidden="true"></span> Show more
+                             Show more ...
                         </button>
                     </div>
 

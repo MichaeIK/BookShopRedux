@@ -39,8 +39,25 @@ export default ({
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
 	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary'],
+
 	userMenu: ['Cart', 'Wish list', 'Order history', 'View history', 'Exit'],
-	activeCategory: 'temporary'
 	
-    
+	activeCategory: 'temporary',
+
+	watchedBooks:[
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'}
+]	   
 });

@@ -2,7 +2,7 @@
 .wrapper-for-books {
     display: flex;
     padding: 15px;
-    margin: 10px;
+    margin: 10px 0 0 30px;
     flex-wrap: wrap;
     justify-content: space-around  ;
     background-color: white;  
@@ -10,19 +10,20 @@
 .central-wrapper {
     background-color: white;
 }
-.class {
+/*.class {
     height: 100%;
     width: 0%;
     position: absolute;
     top: 0;
     left: 0;
     transition: .5s;
-}
+}*/
 .mb-4 {
     margin: 10px;
 }
 .card {
     height: 320px;
+    width: 263px;
     background: white;
     padding: 10px;
     border: 1px solid #C4C4C4;
@@ -30,7 +31,6 @@
     cursor: pointer;
     img {
         width: 128px;
-        height: 161px;
     }
     h4 {
         text-align: center;
@@ -45,6 +45,7 @@
 .price-block { 
     margin-top: -10px;
     padding-top: 5px;
+    width: 263px;
     height: 35px;
     background-color: #efefef;
     border: 1px solid #C4C4C4;
@@ -55,7 +56,7 @@
         margin-left: 15px;
         text-align: justify;
     }
-    .render-btn{
+    .btn-success{
         position: absolute;
         left: 210px;
         top: 5px;
