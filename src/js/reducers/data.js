@@ -28,13 +28,23 @@ export default function data(state = initial, action) {
     let { type, payload, category } = action;
 
     switch (type) {
+        case types.CLEAR_SEARCH: 
+            return state.map((item, i) => {
+                console.log();
+                if(Object.keys(item)[0] === "search") return ({ search: [] });
+                return item;
+            })
         case types.FETCH_BOOKS:
+            
+            // console.log("FETCH_BOOKS: >>>> ", payload);
+
             let check = 0;
             state.map((item) => {
                 if (Object.keys(item)[0] === category) {
                     check = 1;
                 }
             })
+            
             if (check) {
                 return state.map((item, index) => {
                     // console.log("DATA REDUCER: ", item)
@@ -47,17 +57,15 @@ export default function data(state = initial, action) {
             } else {
                 return state.map((item, index) => {
                     let key = Object.keys(item)[0];
-                    if ( key === 'temporary') {
-                        return { [ key]: [...payload] };
+                    if ( key === 'search') {
+                        return { [key]: [ ...item[key], ...payload] };
 
                     } else return item;
                 })
             }
 
-        // return [...state, ...payload];
 
         case types.ADD_CATEGORIES_TO_BOOK_ARRAY:
-            // console.log('add', payload);
             if (JSON.parse(localStorage.getItem('books'))) {
                 return state;
             } else {
