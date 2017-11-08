@@ -38,7 +38,7 @@ export default class Categories extends React.Component {
             <ul>
                 {this.props.categories.map((item,i) => 
                     {return  <li key={i} 
-                    onClick={this.context.changeCategory.bind(null, item)}>{item}</li>})}
+                    onClick={this.context.changeCategory.bind(null, "category", item)}>{item}</li>})}
             </ul>
         )
     }

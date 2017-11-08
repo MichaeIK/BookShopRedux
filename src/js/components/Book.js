@@ -11,6 +11,7 @@ import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
 import fetchData from '../functions/fetchData';
 import { renderBooks } from '../functions/renderBooks';
+import PropTypes from 'prop-types';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -40,9 +41,16 @@ export default class Book extends React.Component {
         }
     }
 
-    // componentWillMount() {
-    //     this.fetchData();
-    // }
+    componentWillMount() {
+        console.log(this.props);
+        this.context.changeCategory("search", "tests");        
+        // this.context.fetchData(this.props.match.params.category);
+    }
+
+    static contextTypes = {
+        changeCategory: PropTypes.func.isRequired,
+        fetchData: PropTypes.func.isRequired
+    }
     
     handleClick = (id, item) => {
         this.props.addToHistory(item);
@@ -62,9 +70,12 @@ export default class Book extends React.Component {
 
 
     showMore = () => {
-        let startingIndex = this.props.books[0][this.props.category].length;
-        console.log('startingIndex', startingIndex, 'this.cat', this.props.category);
-        this.fetchData(this.props.category, startingIndex);
+        let cat = this.props.category === "temporary" ? this.props.match.params.category : this.props.category;
+        let category = this.props.category; 
+        // let startingIndex = this.props.books[0][cat].length;
+        let startIndex = this.props.books[0][category].length;
+        console.log('startingIndex', startIndex, 'this.cat', this.props.category);
+        this.fetchData(cat, startIndex);
     }
 
     

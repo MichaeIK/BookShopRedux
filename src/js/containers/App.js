@@ -36,27 +36,31 @@ export default class App extends React.Component {
 
     componentWillMount() {
         this.props.addCategoriesToBookArray(this.props.categories);
-        this.fetchData();
     }
 
-    handleChangeCategory = (cat, search) => {
+    handleChangeCategory = (category, data, search) => {
         // console.log(">>>>>>>>>>>>>>>>>>>>>>", cat)
-        this.props.changeActiveCategory(cat);
-        this.fetchData(cat);
+        this.fetchData(data);
         if(search === true) {
-            // this.fetchData(cat, 0);    
-            this.props.history.push(`/search/${cat}`, "search");
-        }    
-        else this.props.history.push(`/category/${cat}`);
+            this.props.changeActiveCategory("currentSearch");        
+            this.props.history.push(`/${category}/${data}`, "search");
+        } else {
+            this.props.changeActiveCategory(category);    
+            this.props.history.push(`/${category}/${data}`);
+        }
     }
 
     getChildContext() {
         let self = this;
-        return { changeCategory: self.handleChangeCategory };
+        return {
+            changeCategory: self.handleChangeCategory,
+            fetchData: self.fetchData
+        };
     }
 
     static childContextTypes = {
-        changeCategory: PropTypes.func.isRequired
+        changeCategory: PropTypes.func.isRequired,
+        fetchData: PropTypes.func.isRequired
     }
 
     render() {
