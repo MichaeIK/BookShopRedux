@@ -14,10 +14,10 @@ import { bindActionCreators } from 'redux';
 import { addCategoriesToBookArray } from '../actions';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ENV_HREF } from '../config';
-
+import PropTypes from 'prop-types'
+import Notify from '../components/Notify';
 
 const mapStateToProps = (state) => {
-    // console.log('from app', state.data);
     return ({ categories: state.categories })
 };
 
@@ -27,18 +27,35 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends React.Component {
 
+    state = { notify:false, val: ''}
+
     componentWillMount() {
 
         this.props.addCategoriesToBookArray(this.props.categories);
 
     }
 
-    render() {
-        // console.log(`${ENV_HREF}book/:id`);
-        return (
+    unmountNotify = () => {
+        this.setState({notify: !this.state.notify});
+    }
 
+    val = (item) => {
+        this.setState({val: item})
+    }
+
+    static childContextTypes = {
+        notify: PropTypes.func.isRequired,
+        val_fun: PropTypes.func.isRequired,
+        val: PropTypes.string.isRequired
+    }
+
+    getChildContext = () =>({ notify: this.unmountNotify, val_fun: this.val, val: this.state.val});
+
+    render() {
+        return (
             <Router>
                 <MainLayout>
+                    {this.state.notify ? <Notify /> : null}
                     <Switch>
                         <Route exact path={ENV_HREF} component={Catalog} />
                         <Route path={`${ENV_HREF}category/:category/`} component={Book} />

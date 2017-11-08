@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {delFromCart, changeQuantity} from '../actions';
+import Checkout from './Checkout'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -54,9 +55,9 @@ export default class Cart extends React.Component {
         const url = {backgroundImage: `url(${item.book.volumeInfo.imageLinks.smallThumbnail})`};
         const star = {backgroundImage: 'url(../../assets/img/icons8-star-filled.png)'};
         
-        console.log(this.props)
+        
         return (
-            <div className='cart-wrapper row'>    
+            <div className='cart-wrapper row' key={index}>    
                 <div className='col-md-1 col-sm-12'>{index}</div>
                 <div style={url} className='col-md-3 col-sm-12 book-image'></div>
                 <div className='col-md-3 col-sm-12'>{item.book.volumeInfo.title}</div>
@@ -80,9 +81,10 @@ export default class Cart extends React.Component {
         return (
             <div>
                 {this.props.user.cart.map((item, index) => { return this.renderBuys(item, index+1)})}
-                <div className='col-md-11 col-sm-12'></div>
-                {/* <div className='col-md-1 col-sm-12'>{setTimeout(() => (this.sum), 3000)}</div> */}
-                <p>{this.sum()}</p>
+                <div className='col-md-10 col-sm-12'></div>
+        <div className='col-md-1 col-sm-12'><button >Checkout</button></div>
+                <div className='col-md-1 col-sm-12'>{this.sum()}</div>
+                
 
             </div>
             

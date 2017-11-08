@@ -67,7 +67,7 @@ export default function users(state = { users: initialState.users,
                 if( item.name == state.authorized) {
                     
                     let viewList = item.cart.findIndex(x => (x.book.id == payload.id))
-                    console.log(payload)
+                    
                     if (viewList == -1) {                   
                         return {...item,  cart: [...item.cart, {book:payload, quantity:1 }] }
                     } else {
@@ -111,12 +111,6 @@ export default function users(state = { users: initialState.users,
                         console.log(book);
                         if(item.book.id === book.book.id) {
                             return {...item, quantity: payload === "+" ? item.quantity + 1 : (item.quantity==0 ? item.quantity=0 : item.quantity- 1) }
-                            // if (payload === '+'){
-                            //     return {...item, quantity: item.quantity+1 }
-                            // }
-                            // else if (payload === '+') {
-                            //     return {...item, quantity: (item.quantity==0 ? item.quantity=0 : item.quantity- 1) }
-                            // }
                             
                         } else return item;
                     }) }

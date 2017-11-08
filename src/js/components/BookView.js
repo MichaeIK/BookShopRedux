@@ -1,7 +1,7 @@
 import React from 'react';
 import Categories from './Categories';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 
 import { addToWishlist, addToHistory, addToCart, fetchBooks, changeActiveCategory } from '../actions';
 
@@ -36,34 +36,35 @@ export default class BookView extends React.Component {
 
 
     constructor(props) {
-        // console.log(1111111111111);
         super(props)
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
     }
 
     handleChangeCategory(cat) {
-
-        // console.log('Change category?', cat, this.props);
         this.props.changeActiveCategory(cat);
         this.props.history.push(`/category/${cat}`);
         this.forceUpdate();
     }
 
-
-
-    handleBuy = () => {
-        this.props.addToCart(this.props.book)
+    handleBuy = () => {        
+        this.props.addToCart(this.props.book);
+        this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to the cart`);
+        this.context.notify();        
     }
+    static contextTypes = {
+        notify: PropTypes.func.isRequired,
+        val_fun: PropTypes.func.isRequired,
+        val: PropTypes.string.isRequired
+     };
 
     handleWish = () => {
         console.log(this.props.book)
         this.props.addToWishlist(this.props.book)
+        this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
+        this.context.notify();
     }
-
-    // componentWillMount() {
-    //     this.props.addToHistory(this.props.book)
-    // }
+    
 
 
     render() {
