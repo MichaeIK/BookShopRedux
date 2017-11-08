@@ -11,29 +11,45 @@ import Account from '../components/Account';
 import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { addCategoriesToBookArray } from '../actions';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { addCategoriesToBookArray, changeActiveCategory, fetchBooks } from '../actions';
+import { withRouter } from 'react-router-dom';
 import { ENV_HREF } from '../config';
+
 import PropTypes from 'prop-types'
 import Notify from '../components/Notify';
+import fetchData from '../functions/fetchData';
+
 
 const mapStateToProps = (state) => {
-    return ({ categories: state.categories })
+    return ({ categories: state.categories, data: state.data, category: state.category })
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addCategoriesToBookArray }, dispatch);
+    return bindActionCreators({ addCategoriesToBookArray, changeActiveCategory, fetchBooks }, dispatch);
 }
+@withRouter
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends React.Component {
 
     state = { notify:false, val: ''}
 
-    componentWillMount() {
-
-        this.props.addCategoriesToBookArray(this.props.categories);
-
+    
+    constructor(props) {
+        super(props);
+        this.fetchData = fetchData.bind(this);
     }
+
+    handleChangeCategory = (category, data, stop_fetch) => {
+        console.log("! >>>>>> ", category, data, stop_fetch)
+        stop_fetch ? this.fetchData(category, data) : this.fetchData(data);
+        this.props.changeActiveCategory(data);        
+        this.props.history.push(`/${category}/${data}`);
+    }
+
+    componentWillMount() {
+        this.props.addCategoriesToBookArray(this.props.categories);
+    }
+
 
     unmountNotify = () => {
         this.setState({notify: !this.state.notify});
@@ -46,34 +62,40 @@ export default class App extends React.Component {
     static childContextTypes = {
         notify: PropTypes.func.isRequired,
         val_fun: PropTypes.func.isRequired,
-        val: PropTypes.string.isRequired
+        val: PropTypes.string.isRequired,
+        changeCategory: PropTypes.func.isRequired,
+        fetchData: PropTypes.func.isRequired,
+        historyPush: PropTypes.func.isRequired
     }
 
-    getChildContext = () =>({ notify: this.unmountNotify, val_fun: this.val, val: this.state.val});
+    getChildContext() {
+        let self = this;
+        return {
+            changeCategory: self.handleChangeCategory,
+            fetchData: self.fetchData,
+            historyPush: self.props.history.push,
+            notify: self.unmountNotify,
+            val_fun: self.val, 
+            val: self.state.val
+        };
+    }    
 
     render() {
         return (
-            <Router>
-                <MainLayout>
-                    {this.state.notify ? <Notify /> : null}
-                    <Switch>
-                        <Route exact path={ENV_HREF} component={Catalog} />
-                        <Route path={`${ENV_HREF}category/:category/`} component={Book} />
-                        <Route path={`${ENV_HREF}book/:id`} component={BookView} />
-                        <Route path={`${ENV_HREF}cart`} component={Cart} />
-                        <Route path={`${ENV_HREF}favourites`} component={Favourites} />
-                        <Route path={`${ENV_HREF}search/:category/`} component={Book} />
-                        <Route path={`${ENV_HREF}registration`} component={Registration} />
-                        <Route path={`${ENV_HREF}account/:category/`} component={Account} />
-                        {/* <Route path="*" component={() => <div>Page Not Found</div>} /> */}
-                    </Switch>
-                </MainLayout>
-                {/* <App /> */}
-            </Router>
-
-
-
-
+            <MainLayout>
+                {this.state.notify ? <Notify /> : null}
+                <Switch>
+                    <Route exact path={ENV_HREF} component={Catalog} />
+                    <Route path={`${ENV_HREF}category/:category/`} component={Book} />
+                    <Route path={`${ENV_HREF}book/:id`} component={BookView} />
+                    <Route path={`${ENV_HREF}cart`} component={Cart} />
+                    <Route path={`${ENV_HREF}favourites`} component={Favourites} />
+                    <Route path={`${ENV_HREF}search/:category/`} component={Book} />
+                    <Route path={`${ENV_HREF}registration`} component={Registration} />
+                    <Route path={`${ENV_HREF}account/:category/`} component={Account} />
+                    {/* <Route path="*" component={() => <div>Page Not Found</div>} /> */}
+                </Switch>
+            </MainLayout>
         )
     }
 }

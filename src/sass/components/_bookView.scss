@@ -1,5 +1,8 @@
 .book-view-wrapper {
-    background-color: #fff;  
+    background-color: #fff; 
+    span {
+        font-weight: bold;
+    } 
     
     .book-image {
         width: 340px;
@@ -9,6 +12,7 @@
     }
     .desc {
         float: left;
+        margin-top: 20px;
     }    
     .cost{
         button, p {
@@ -29,5 +33,8 @@
     a {
         text-decoration: none;
         color: #fff;
+    }
+    .about {
+    margin-left: 35px;
     }
 }

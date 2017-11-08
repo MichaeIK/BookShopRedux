@@ -9,12 +9,14 @@ import { fetchBooks, addToHistory, addToCart, changeActiveCategory } from '../ac
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
-import { fetchData } from '../functions/fetchData';
+import fetchData from '../functions/fetchData';
 import { renderBooks } from '../functions/renderBooks';
 import PropTypes from 'prop-types';
+
 const mapStateToProps = (state, ownProps) => {
     return {
         category: state.activeCategory.active,
+        data: state.data,
         books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active })
     }
 }
@@ -31,7 +33,7 @@ export default class Book extends React.Component {
 
     constructor(props) {
         super(props)
-        this.handleChangeCategory = this.handleChangeCategory.bind(this);
+        // this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
         this.renderBooks = renderBooks.bind(this);
         this.state = {
@@ -40,10 +42,28 @@ export default class Book extends React.Component {
         }
     }
 
+    // componentWillReceiveProps(nextProps) {
+    //     // console.log("nextProps >>>>> ", nextProps);
+    // }
+
     componentWillMount() {
-        this.fetchData();
+        console.log("WAAAAAAAAAAAAAAT?")
+        let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
+        tempCategory = tempCategory[Object.keys(tempCategory)[0]]
+        
+        if(this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
+        if(this.props.match.url !== "/" && tempCategory.length === 0) {
+            this.props.changeActiveCategory(this.props.match.params.category);
+            this.fetchData(this.props.match.params.category);
+        }
+
     }
 
+    static contextTypes = {
+        changeCategory: PropTypes.func.isRequired,
+        fetchData: PropTypes.func.isRequired
+    }
+    
     handleClick = (id, item) => {
         this.props.addToHistory(item);
         this.props.history.push(`/book/${id}`);
@@ -68,17 +88,19 @@ export default class Book extends React.Component {
 
 
     showMore = () => {
-        let startingIndex = this.props.books[0][this.props.category].length;
-        console.log('startingIndex', startingIndex, 'this.cat', this.props.category);
-        this.fetchData(this.props.category, startingIndex);
+        let cat = this.props.category !== "search" 
+            ? this.props.category
+            : this.props.match.params.category;
+
+
+        let category = this.props.category;
+
+        let startIndex = this.props.books[0][category].length;
+        // console.log('startingIndex', startIndex, '\nthis.props', this.props);
+        this.fetchData(cat, null, startIndex);
     }
 
-    handleChangeCategory(cat) {
-        this.forceUpdate();
-        this.props.changeActiveCategory(cat);
-        this.props.history.push(`/category/${cat}`);
-    }
-
+    
     showDropdown = () => {
         this.setState({ dropdown: !this.state.dropdown })
         console.log(this.state.dropdown)
@@ -112,27 +134,26 @@ export default class Book extends React.Component {
             <div className="row">
                 <div className="central-wrapper">
                     {this.props.match.params.category ?
-                        <div className='col-md-4 col-sm-12'>
-                            <Categories _push={this.handleChangeCategory}
-                                fetch={this.fetchData} />
+
+
+                        <div className='col-md-3 col-sm-12'>
+                            <Categories/>
+
 
                         </div>
                         : null}
 
                     <div className="wrapper-for-books">
-
                         <div className="dropdown">
-                            <button onClick={this.showDropdown}
-                                className='dropbtn'>
-                                Сортировка
+                            <button onClick={this.showDropdown} className='btn btn-primary dropdown-toggle' type="button" data-toggle="dropdown">
+                                Сортировка <span className="caret"></span>
                             </button>
-                            <div id="myDropdown"
+                            <ul id="myDropdown"
                                 className={!this.state.dropdown ? 'dropdown-content' : 'dropdown-content show'}>
-                                <div data-sort="upPrice" onClick={this.handleSort}>от дорогих к дешевым</div>
-                                <div data-sort="downPrice" onClick={this.handleSort}>от дешевых к дорогим</div>
-                                <div data-sort="popularity" onClick={this.handleSort}>по популярности</div>
-
-                            </div>
+                                <li className="dropdown_li" data-sort="upPrice" onClick={this.handleSort}>от дорогих к дешевым</li>
+                                <li className="dropdown_li" data-sort="downPrice" onClick={this.handleSort}>от дешевых к дорогим</li>
+                                <li className="dropdown_li" data-sort="popularity" onClick={this.handleSort}>по популярности</li>
+                            </ul>
                         </div>
 
                         {books[cat].sort(this.sortBooks).map((item, index) =>

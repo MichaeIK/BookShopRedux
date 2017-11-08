@@ -17,7 +17,7 @@ const postsMiddleware = store => next => action => {
         // console.log('to localStorage');
         // action = {...action, payload: {...action.payload, contentToggle: false}}    
         next(action);
-        localStorage.setItem('books', JSON.stringify(store.getState().data));
+        // localStorage.setItem('books', JSON.stringify(store.getState().data));
         return; }       
     // } else if(action.type === DELETE_POST || action.type === UPDATE_EDITED_POST) {
     //     next(action);
