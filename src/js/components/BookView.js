@@ -71,7 +71,6 @@ export default class BookView extends React.Component {
         const star = { backgroundImage: 'url(../../assets/img/icons8-star-filled.png)' }
         const heart = { backgroundImage: 'url(../../assets/img/icons8-heart.png)' }
         let author = book.volumeInfo.authors[0];
-        console.log(book.saleInfo.listPrice.currencyCode)
 
         return (
             <div className="book-view-wrapper row">
@@ -87,7 +86,7 @@ export default class BookView extends React.Component {
                             <div><p><span>Publishing date: </span> {book.volumeInfo.publishedDate}</p></div>
                             <div><p><span>Number of pages: </span> {book.volumeInfo.pageCount}</p></div>
                             <div className='cost'>
-                                <p><span>Price: </span> {book.saleInfo.listPrice.amount} {book.saleInfo.listPrice.currencyCode}</p>
+                                <p><span>Price: </span> {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount:400} UAH</p>
                                 <button className='btn-default btn-bookView' onClick={this.handleBuy}>Buy</button>
                                 {book.volumeInfo.previewLink ?
                                     <button className='btn-default btn-bookView' >
