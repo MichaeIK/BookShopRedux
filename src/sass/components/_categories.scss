@@ -13,12 +13,20 @@ ul {
         background-color: #fff;
         padding: 10px 0 10px 35px;
         color: #3e77aa;
+
     }
+    
     li:hover {
         background-color: lightgrey; 
     }
 }
 
+.categoryMenu:last-child {
+        display: none;
+        }
+.categoryMenu:nth-child(14) {
+        display: none;
+        }
 
 @media screen and (max-height: 330px) {
     .menue {

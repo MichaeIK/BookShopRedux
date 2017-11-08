@@ -74,7 +74,7 @@ export default class Categories extends React.Component {
                 <div ref="bounding">
                     <ul className="menue" ref="menue">
                         {this.props.categories.map((item, i) => {
-                            return <li key={i}
+                            return <li className="categoryMenu" key={i}
                                 onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>
                         })}
                     </ul>
