@@ -38,9 +38,9 @@ export default ({
 	}
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
-	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary', 'currentSearch'],
+	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary', 'search'],
 	userMenu: ['Cart', 'Wish list', 'Order history', 'View history', 'Exit'],
-	activeCategory: 'temporary'
+	activeCategory: 'React'
 	
     
 });

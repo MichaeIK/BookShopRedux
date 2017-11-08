@@ -8,12 +8,10 @@ export default function activeCategory(state = {active: initialState.activeCateg
 
     switch (type) {
         case types.CHANGE_ACTIVE_CATEGORY:
-            // console.log('change category to', payload);
-
             if (state.categories.includes(payload)) {
                 return {...state, active: payload};
             }
-            return {...state, active: "temporary"};    
+            return {...state, active: "search"};    
         
         default:
             return state;

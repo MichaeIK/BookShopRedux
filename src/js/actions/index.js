@@ -19,4 +19,5 @@ export const addToWishlist = (payload) => ({type: types.ADD_TO_WISHLIST, payload
 export const authorized = (payload) => ({type: types.AUTHORIZED, payload});
 
 export const changeActiveCategory = (payload) => ({type: types.CHANGE_ACTIVE_CATEGORY, payload});
+export const clearSearch = () => ({type: types.CLEAR_SEARCH});
 

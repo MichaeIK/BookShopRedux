@@ -18,7 +18,6 @@ import fetchData from '../functions/fetchData';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => {
-    console.log('from app', state.data);
     return ({ categories: state.categories, data: state.data, category: state.category })
 };
 
@@ -38,29 +37,26 @@ export default class App extends React.Component {
         this.props.addCategoriesToBookArray(this.props.categories);
     }
 
-    handleChangeCategory = (category, data, search) => {
-        // console.log(">>>>>>>>>>>>>>>>>>>>>>", cat)
-        this.fetchData(data);
-        if(search === true) {
-            this.props.changeActiveCategory("currentSearch");        
-            this.props.history.push(`/${category}/${data}`, "search");
-        } else {
-            this.props.changeActiveCategory(category);    
-            this.props.history.push(`/${category}/${data}`);
-        }
+    handleChangeCategory = (category, data, stop_fetch) => {
+        console.log("! >>>>>> ", category, data, stop_fetch)
+        stop_fetch ? this.fetchData(category, data) : this.fetchData(data);
+        this.props.changeActiveCategory(data);        
+        this.props.history.push(`/${category}/${data}`);
     }
 
     getChildContext() {
         let self = this;
         return {
             changeCategory: self.handleChangeCategory,
-            fetchData: self.fetchData
+            fetchData: self.fetchData,
+            historyPush: self.props.history.push
         };
     }
 
     static childContextTypes = {
         changeCategory: PropTypes.func.isRequired,
-        fetchData: PropTypes.func.isRequired
+        fetchData: PropTypes.func.isRequired,
+        historyPush: PropTypes.func.isRequired
     }
 
     render() {

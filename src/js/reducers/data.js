@@ -28,6 +28,12 @@ export default function data(state = initial, action) {
     let { type, payload, category } = action;
 
     switch (type) {
+        case types.CLEAR_SEARCH: 
+            return state.map((item, i) => {
+                console.log();
+                if(Object.keys(item)[0] === "search") return ({ search: [] });
+                return item;
+            })
         case types.FETCH_BOOKS:
             
             // console.log("FETCH_BOOKS: >>>> ", payload);
@@ -51,7 +57,7 @@ export default function data(state = initial, action) {
             } else {
                 return state.map((item, index) => {
                     let key = Object.keys(item)[0];
-                    if ( key === 'temporary') {
+                    if ( key === 'search') {
                         return { [key]: [ ...item[key], ...payload] };
 
                     } else return item;

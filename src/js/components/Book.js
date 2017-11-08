@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import { fetchBooks, addToHistory, addToCart } from '../actions';
+import { fetchBooks, addToHistory, addToCart, changeActiveCategory } from '../actions';
 
 import { withRouter } from 'react-router';
 import Slider from './Slider';
@@ -16,13 +16,14 @@ import PropTypes from 'prop-types';
 const mapStateToProps = (state, ownProps) => {
     return {
         category: state.activeCategory.active,
+        data: state.data,
         books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active })
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
 
-    return bindActionCreators({ fetchBooks, addToHistory, addToCart }, dispatch);
+    return bindActionCreators({ fetchBooks, addToHistory, addToCart, changeActiveCategory }, dispatch);
 
 }
 
@@ -41,10 +42,21 @@ export default class Book extends React.Component {
         }
     }
 
+    // componentWillReceiveProps(nextProps) {
+    //     // console.log("nextProps >>>>> ", nextProps);
+    // }
+
     componentWillMount() {
-        console.log(this.props);
-        this.context.changeCategory("search", "tests");        
-        // this.context.fetchData(this.props.match.params.category);
+        console.log("WAAAAAAAAAAAAAAT?")
+        let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
+        tempCategory = tempCategory[Object.keys(tempCategory)[0]]
+        
+        if(this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
+        if(this.props.match.url !== "/" && tempCategory.length === 0) {
+            this.props.changeActiveCategory(this.props.match.params.category);
+            this.fetchData(this.props.match.params.category);
+        }
+
     }
 
     static contextTypes = {
@@ -70,12 +82,16 @@ export default class Book extends React.Component {
 
 
     showMore = () => {
-        let cat = this.props.category === "temporary" ? this.props.match.params.category : this.props.category;
-        let category = this.props.category; 
-        // let startingIndex = this.props.books[0][cat].length;
+        let cat = this.props.category !== "search" 
+            ? this.props.category
+            : this.props.match.params.category;
+
+
+        let category = this.props.category;
+
         let startIndex = this.props.books[0][category].length;
-        console.log('startingIndex', startIndex, 'this.cat', this.props.category);
-        this.fetchData(cat, startIndex);
+        // console.log('startingIndex', startIndex, '\nthis.props', this.props);
+        this.fetchData(cat, null, startIndex);
     }
 
     
