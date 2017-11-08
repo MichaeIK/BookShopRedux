@@ -114,19 +114,16 @@ export default class Book extends React.Component {
                         : null}
 
                     <div className="wrapper-for-books">
-
                         <div className="dropdown">
-                            <button onClick={this.showDropdown}
-                                className='dropbtn'>
-                                Сортировка
+                            <button onClick={this.showDropdown} className='btn btn-primary dropdown-toggle' type="button" data-toggle="dropdown">
+                                Сортировка <span className="caret"></span>
                             </button>
-                            <div id="myDropdown"
+                            <ul id="myDropdown"
                                 className={!this.state.dropdown ? 'dropdown-content' : 'dropdown-content show'}>
-                                <div data-sort="upPrice" onClick={this.handleSort}>от дорогих к дешевым</div>
-                                <div data-sort="downPrice" onClick={this.handleSort}>от дешевых к дорогим</div>
-                                <div data-sort="popularity" onClick={this.handleSort}>по популярности</div>
-
-                            </div>
+                                <li className="dropdown_li" data-sort="upPrice" onClick={this.handleSort}>от дорогих к дешевым</li>
+                                <li className="dropdown_li" data-sort="downPrice" onClick={this.handleSort}>от дешевых к дорогим</li>
+                                <li className="dropdown_li" data-sort="popularity" onClick={this.handleSort}>по популярности</li>
+                            </ul>
                         </div>
 
                         {books[cat].sort(this.sortBooks).map((item, index) =>

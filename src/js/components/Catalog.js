@@ -26,7 +26,7 @@ export default class Catalog extends React.Component {
 
     handleChangeCategory(cat) {
        
-        console.log('Change category?', cat, this.props);
+        // console.log('Change category?', cat, this.props);
         this.props.changeActiveCategory(cat);
         this.props.history.push(`/category/${cat}`);
         this.forceUpdate();
