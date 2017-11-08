@@ -19,6 +19,8 @@ export function renderBooks(item, index) {
      
 
     return (
+
+
         <div key={index} className="col-lg-3 col-md-6 mb-4">
             <div className="card" onClick={this.handleClick.bind(null, item.id, item)}>
                 <img className="card-img-top" src={src} />

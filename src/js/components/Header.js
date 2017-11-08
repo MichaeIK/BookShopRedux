@@ -58,7 +58,6 @@ export default class Header extends React.Component {
       this.forceUpdate();
       this.fetchData(this.refs.search.value);
       this.props.history.push(`/search/${this.refs.search.value}`);
-      
       this.refs.search.value = '';
     }
   }
