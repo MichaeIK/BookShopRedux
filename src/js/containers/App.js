@@ -14,8 +14,11 @@ import { bindActionCreators } from 'redux';
 import { addCategoriesToBookArray, changeActiveCategory, fetchBooks } from '../actions';
 import { withRouter } from 'react-router-dom';
 import { ENV_HREF } from '../config';
+
+import PropTypes from 'prop-types'
+import Notify from '../components/Notify';
 import fetchData from '../functions/fetchData';
-import PropTypes from 'prop-types';
+
 
 const mapStateToProps = (state) => {
     return ({ categories: state.categories, data: state.data, category: state.category })
@@ -28,13 +31,12 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends React.Component {
 
+    state = { notify:false, val: ''}
+
+    
     constructor(props) {
         super(props);
         this.fetchData = fetchData.bind(this);
-    }
-
-    componentWillMount() {
-        this.props.addCategoriesToBookArray(this.props.categories);
     }
 
     handleChangeCategory = (category, data, stop_fetch) => {
@@ -44,24 +46,44 @@ export default class App extends React.Component {
         this.props.history.push(`/${category}/${data}`);
     }
 
-    getChildContext() {
-        let self = this;
-        return {
-            changeCategory: self.handleChangeCategory,
-            fetchData: self.fetchData,
-            historyPush: self.props.history.push
-        };
+    componentWillMount() {
+        this.props.addCategoriesToBookArray(this.props.categories);
+    }
+
+
+    unmountNotify = () => {
+        this.setState({notify: !this.state.notify});
+    }
+
+    val = (item) => {
+        this.setState({val: item})
     }
 
     static childContextTypes = {
+        notify: PropTypes.func.isRequired,
+        val_fun: PropTypes.func.isRequired,
+        val: PropTypes.string.isRequired,
         changeCategory: PropTypes.func.isRequired,
         fetchData: PropTypes.func.isRequired,
         historyPush: PropTypes.func.isRequired
     }
 
+    getChildContext() {
+        let self = this;
+        return {
+            changeCategory: self.handleChangeCategory,
+            fetchData: self.fetchData,
+            historyPush: self.props.history.push,
+            notify: self.unmountNotify,
+            val_fun: self.val, 
+            val: self.state.val
+        };
+    }    
+
     render() {
         return (
             <MainLayout>
+                {this.state.notify ? <Notify /> : null}
                 <Switch>
                     <Route exact path={ENV_HREF} component={Catalog} />
                     <Route path={`${ENV_HREF}category/:category/`} component={Book} />

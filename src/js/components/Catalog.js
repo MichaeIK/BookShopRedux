@@ -21,7 +21,6 @@ export default class Catalog extends React.Component {
 
 
     render() {
-        console.log(this.props.watchedBooks)
         let urlssdfsd
         let urls = [
             {

@@ -70,10 +70,16 @@ export default class Book extends React.Component {
     }
 
     handleBuy = (item) => {
+        this.context.notify();
+        this.context.val_fun(`You add "${item.volumeInfo.title}" to the cart`)
         this.props.addToCart(item);
-        console.log('hey')
     }
 
+    static contextTypes = {
+       notify: PropTypes.func.isRequired,
+       val_fun: PropTypes.func.isRequired,
+       val: PropTypes.string.isRequired
+    };
 
     cat = this.props.category;
     books = this.props.books[0];
@@ -105,7 +111,7 @@ export default class Book extends React.Component {
         this.setState({sortType: e.target.getAttribute('data-sort')});
     }
     sortBooks = (a, b) => {
-        console.log('sort');
+        // console.log('sort');
         let priceA = a.saleInfo.retailPrice ? a.saleInfo.retailPrice.amount : 0;
         let priceB = b.saleInfo.retailPrice ? b.saleInfo.retailPrice.amount : 0;
         let starsA = a.volumeInfo.averageRating ? a.volumeInfo.averageRating : 0;

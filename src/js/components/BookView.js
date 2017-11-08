@@ -1,7 +1,7 @@
 import React from 'react';
 import Categories from './Categories';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 
 import { addToWishlist, addToHistory, addToCart, fetchBooks, changeActiveCategory } from '../actions';
 
@@ -33,17 +33,24 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class BookView extends React.Component {
 
-    handleBuy = () => {
-        this.props.addToCart(this.props.book)
+    handleBuy = () => {        
+        this.props.addToCart(this.props.book);
+        this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to the cart`);
+        this.context.notify();        
+
     }
+    static contextTypes = {
+        notify: PropTypes.func.isRequired,
+        val_fun: PropTypes.func.isRequired,
+        val: PropTypes.string.isRequired
+     };
 
     handleWish = () => {
         this.props.addToWishlist(this.props.book)
+        this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
+        this.context.notify();
     }
-
-    // componentWillMount() {
-    //     this.props.addToHistory(this.props.book)
-    // }
+    
 
 
     render() {
