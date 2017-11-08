@@ -42,12 +42,12 @@ export default class Cart extends React.Component {
         console.log('this is suuuum', this.props.user.cart)
         this.props.user.cart.map((item, index) => { 
             console.log(item.book )
-            let before_sum = (item.book.saleInfo.listPrice ? item.book.saleInfo.listPrice.amount:400)*item.quantity
+            let before_sum = (item.book.saleInfo.listPrice ? Math.round(item.book.saleInfo.listPrice.amount):0)*item.quantity
             sum += before_sum        
             console.log('sum', sum)
             
         })
-        return sum
+        return (Math.round(sum))
         sum=0
     }
  
@@ -62,7 +62,7 @@ export default class Cart extends React.Component {
                 <div style={url} className='col-md-3 col-sm-12 book-image'></div>
                 <div className='col-md-3 col-sm-12'>{item.book.volumeInfo.title}</div>
                 <div className='col-md-2 col-sm-12'>
-                    {(item.book.saleInfo.listPrice ? item.book.saleInfo.listPrice.amount:400)*item.quantity}
+                    {(item.book.saleInfo.listPrice ? Math.round(item.book.saleInfo.listPrice.amount):0)*item.quantity}
                     {item.book.saleInfo.listPrice ? item.book.saleInfo.listPrice.currencyCode :'UAH' }
                 </div>
                 <div className='col-md-2 col-sm-12'>

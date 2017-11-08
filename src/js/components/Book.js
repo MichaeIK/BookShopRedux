@@ -111,9 +111,8 @@ export default class Book extends React.Component {
         this.setState({sortType: e.target.getAttribute('data-sort')});
     }
     sortBooks = (a, b) => {
-        // console.log('sort');
-        let priceA = a.saleInfo.retailPrice ? a.saleInfo.retailPrice.amount : 0;
-        let priceB = b.saleInfo.retailPrice ? b.saleInfo.retailPrice.amount : 0;
+        let priceA = a.saleInfo.retailPrice ? Math.round(a.saleInfo.retailPrice.amount) : 0;
+        let priceB = b.saleInfo.retailPrice ? Math.round(b.saleInfo.retailPrice.amount) : 0;
         let starsA = a.volumeInfo.averageRating ? a.volumeInfo.averageRating : 0;
         let starsB = b.volumeInfo.averageRating ? b.volumeInfo.averageRating : 0;
         switch (this.state.sortType) {
