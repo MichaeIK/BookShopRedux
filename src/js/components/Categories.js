@@ -59,8 +59,8 @@ export default class Categories extends React.Component {
 
     render() {
         window.onscroll = (e) => {
-            console.dir(document)
-            console.log(document.clientHeight)
+            // console.dir(document)
+            // console.log(document.clientHeight)
             if (this.refs.bounding.getBoundingClientRect().top <= 0) {
                 this.refs.menue.style.position = 'fixed';
                 this.refs.menue.style.top = '50px';

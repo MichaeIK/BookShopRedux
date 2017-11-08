@@ -11,6 +11,7 @@ import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
 import fetchData from '../functions/fetchData';
 import { renderBooks } from '../functions/renderBooks';
+import { renderStars } from '../functions/renderStars';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = (state, ownProps) => {
@@ -36,6 +37,7 @@ export default class Book extends React.Component {
         // this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.fetchData = fetchData.bind(this);
         this.renderBooks = renderBooks.bind(this);
+        this.renderStars = renderStars.bind(this);
         this.state = {
             dropdown: false,
             sortType: 'popularity'

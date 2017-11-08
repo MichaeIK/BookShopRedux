@@ -43,15 +43,32 @@
     border: 1px solid #C4C4C4;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
-    img {
-        width: 128px;
+    .book-top-part::after {
+        clear: both;
+        content: '';
+        display: block;
     }
+    .book-top-part {
+        img {
+            width: 128px;
+            float: left;
+        }
+        .row {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
     h4 {
         text-align: center;
         font-weight: bold;
     }
     span {
         font-weight: bold;
+    }
+    .fa {
+        color:rgb(255, 213, 23);
+        margin: 5px 10px 10px 50px; 
     }
 }
 /*.card:*/
