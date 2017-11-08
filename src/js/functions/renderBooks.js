@@ -6,8 +6,8 @@ export function renderBooks(item, index) {
                 item.volumeInfo.imageLinks.smallThumbnail : 
                 '../../assets/img/book_default.jpg';
 
-    let price = item.saleInfo.retailPrice ? 
-    `${item.saleInfo.retailPrice.amount} UAH` : 
+    let price = item.saleInfo.listPrice ? 
+    `${Math.round(item.saleInfo.listPrice.amount)} UAH` : 
     'FREE';
 
     let author = item.volumeInfo.authors  ? item.volumeInfo.authors.length >1 ? item.volumeInfo.authors[0]+' ...' : item.volumeInfo.authors[0] : "-";

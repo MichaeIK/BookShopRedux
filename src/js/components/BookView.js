@@ -14,10 +14,7 @@ const mapStateToProps = (state, ownProps) => {
     for (let i = 0; i < state.data.length; i++) {
         if (!isInclude) {
             for (let key in state.data[i]) {
-
-                // console.log('state.data[i][key]', state.data[i][key], key);
                 isInclude = state.data[i][key].find((item) => { return item.id == ownProps.match.params.id })
-                // console.log('i', i, isInclude);
             }
         }
     }
@@ -76,7 +73,7 @@ export default class BookView extends React.Component {
                             <div><p><span>Publishing date: </span> {book.volumeInfo.publishedDate}</p></div>
                             <div><p><span>Number of pages: </span> {book.volumeInfo.pageCount}</p></div>
                             <div className='cost'>
-                                <p><span>Price: </span> {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount:400} UAH</p>
+                                <p><span>Price: </span> {book.saleInfo.listPrice ? Math.round(book.saleInfo.listPrice.amount):0} UAH</p>
                                 <button className='btn-default btn-bookView' onClick={this.handleBuy}>Buy</button>
                                 {book.volumeInfo.previewLink ?
                                     <button className='btn-default btn-bookView' >
