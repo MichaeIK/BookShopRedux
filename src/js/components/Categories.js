@@ -15,6 +15,18 @@ const mapStateToProps = (state) => {
 @connect(mapStateToProps, { changeActiveCategory })
 export default class Categories extends React.Component {
 
+
+    constructor(props) {
+        super(props)
+
+    this.state = {
+        ontop: 500,
+    }
+        
+    }
+    
+  
+
   
     handleChangeCategory = (cat) => {     
         let data = this.props.data.filter((item) => Object.keys(item)[0] == cat); 
@@ -44,14 +56,25 @@ export default class Categories extends React.Component {
     }
 
     render() {
-        // console.log(this.context)
+        window.onscroll = (e)=>{
+            console.dir(document)
+            console.log(document.clientHeight)
+            if(this.refs.bounding.getBoundingClientRect().top <= 0){
+              this.refs.menue.style.position='fixed';  
+              this.refs.menue.style.top='50px';  
+            } else {
+                this.refs.menue.style.position ='relative';
+                this.refs.menue.style.top ='';
+
+            }
         return (
-            
-            <ul>
-                {this.props.categories.map((item,i) => 
-                    {return  <li key={i} 
-                    onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>})}
-            </ul>
+            <div ref="bounding">
+                <ul className="menue" ref="menue">
+                    {this.props.categories.map((item,i) => 
+                        {return  <li key={i} 
+                        onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>})}
+                </ul>
+            </div>
         )
     }
 }

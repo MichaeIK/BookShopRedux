@@ -9,7 +9,7 @@ export default ({
 
 	books : [],
 	
-	authorized: 'Please login', 
+	authorized: 'Bella', 
 
     users: [
     	{name: 'Michael', 
@@ -41,6 +41,22 @@ export default ({
 	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary', 'search'],
 	userMenu: ['Cart', 'Wish list', 'Order history', 'View history', 'Exit'],
 	activeCategory: 'React'
+
 	
-    
+	watchedBooks:[
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'},
+    {img:'https://i.pinimg.com/736x/6e/d6/1e/6ed61ee28ac6c5d0a547a04bc4a22b37--senior-pictures-balloons-senior-pics.jpg'}
+]	   
 });

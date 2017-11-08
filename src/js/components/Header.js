@@ -32,7 +32,6 @@ const user = {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("map state to props in HEADER.JS: ", state)
   return ({User: state.users.authorized, 
           users: state.users.users})
 
@@ -57,12 +56,6 @@ export default class Header extends React.Component {
     if (e.key === 'Enter') {
       this.props.clearSearch();
       this.context.changeCategory("search", this.refs.search.value, true);
-      // console.log(this.refs.search.value);
-      // this.props.changeActiveCategory(this.refs.search.value);
-      // // this.forceUpdate();
-      // this.fetchData(this.refs.search.value);
-      // this.props.history.push(`/search/${this.refs.search.value}`);
-      
       this.refs.search.value = '';
     }
   }
@@ -80,11 +73,16 @@ export default class Header extends React.Component {
       if(item.name === nextProps.User){
         if (item.cart.length > 0){
           cartEmptyCart = {
-            backgroundImage: 'url(../../assets/img/shopping_cart.png)'
+            backgroundImage: 'url(../../assets/img/shopping_cart.png)' 
+          }
+        } else {
+            cartEmptyCart = {
+                backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+            }
           }
         }
       }
-    })
+    )
   }
 
 	handleOnClickUser =()=>{

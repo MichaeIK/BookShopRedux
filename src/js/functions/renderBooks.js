@@ -19,6 +19,8 @@ export function renderBooks(item, index) {
      
 
     return (
+
+
         <div key={index} className="col-lg-3 col-md-6 mb-4">
             <div className="card" onClick={this.handleClick.bind(null, item.id, item)}>
                 <img className="card-img-top" src={src} />
@@ -31,7 +33,7 @@ export function renderBooks(item, index) {
             </div>
                 <div className="price-block">
                     <p className="card-text price">{price}</p>
-                    <button className="btn-default render-btn" onClick={this.handleBuy.bind(null, item)} type="submit">BUY</button>
+                    <button className="btn-default btn-success" onClick={this.handleBuy.bind(null, item)}>BUY</button>
                 </div>
 
         </div>

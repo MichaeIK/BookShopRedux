@@ -1,13 +1,30 @@
 ul {
+    position: relative;
+    width: 300px;
+    /*top: 50px;*/
     list-style: none;
+    /*width: 100%;*/
+    border: 1px solid #efefef;
+    box-shadow: 5px 5px 5px #888888;
+    margin: 15px;
     li {
-        
         display: block;
-        border: 1px solid black;
-        background-color: #5c5c5c;
-        padding: 10px;
+        /*margin-left: 35px;*/
+        background-color: #fff;
+        padding: 10px 0 10px 35px;
+        color: #3e77aa;
     }
     li:hover {
-        background-color: white; 
+        background-color: lightgrey; 
     }
 }
+
+
+@media screen and (max-height: 330px) {
+    .menue {
+        position: relative!important;
+        top: 0!important;
+
+    }
+}
+

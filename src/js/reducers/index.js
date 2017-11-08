@@ -5,6 +5,7 @@ import history from './history';
 import users from './users';
 import authorization from './authorization';
 import activeCategory from './activeCategory';
+import slider from './slider'
 
 // Reducer - это обработчик события, мы можем создавать под определенные логически cвязаные
 // действия свой редьюсер, например в случае с нашим репозиторием, я создал
@@ -19,7 +20,8 @@ const reducers = combineReducers({
     history,
     users,
     authorization, 
-    activeCategory
+    activeCategory,
+    slider
 });
 
 export default reducers;

@@ -51,7 +51,8 @@ export default class BookView extends React.Component {
         const url = { backgroundImage: `url(${this.props.book.volumeInfo.imageLinks.thumbnail})` }
         const star = { backgroundImage: 'url(../../assets/img/icons8-star-filled.png)' }
         const heart = { backgroundImage: 'url(../../assets/img/icons8-heart.png)' }
-
+        let author = book.volumeInfo.authors[0];
+        console.log(book.saleInfo.listPrice.currencyCode)
 
         return (
             <div className="book-view-wrapper row">
@@ -63,16 +64,16 @@ export default class BookView extends React.Component {
                         <div className="col-md-6 col-sm-12 book-image" style={url}>
                             <div className="star" style={heart} onClick={this.handleWish}></div>
                         </div>
-                        <div className="col-md-6 col-sm-12">
-                            <div><p>Title: {book.volumeInfo.title}</p></div>
-                            <div><p>Author: {book.volumeInfo.author}</p></div>
-                            <div><p>Publishing date: {book.volumeInfo.publishedDate}</p></div>
-                            <div><p>Number of pages: {book.volumeInfo.pageCount}</p></div>
+                        <div className="col-md-6 col-sm-12 about">
+                            <div><p><span>Title: </span> {book.volumeInfo.title}</p></div>
+                            <div><p><span>Author: </span> {author}</p></div>
+                            <div><p><span>Publishing date: </span> {book.volumeInfo.publishedDate}</p></div>
+                            <div><p><span>Number of pages: </span> {book.volumeInfo.pageCount}</p></div>
                             <div className='cost'>
-                                <p>Price: 3000 ГРН</p>
-                                <button className='btn-success' onClick={this.handleBuy}>Buy</button>
+                                <p><span>Price: </span> {book.saleInfo.listPrice.amount} {book.saleInfo.listPrice.currencyCode}</p>
+                                <button className='btn-default btn-bookView' onClick={this.handleBuy}>Buy</button>
                                 {book.volumeInfo.previewLink ?
-                                    <button className='btn-success' >
+                                    <button className='btn-default btn-bookView' >
                                         <a target="blank" href={book.volumeInfo.previewLink}>Read pasage</a>
                                     </button> : null}
                             </div>
@@ -83,6 +84,8 @@ export default class BookView extends React.Component {
                                 <div className="star" style={star}></div>
                                 <div className="star" style={star}></div>
                             </div>
+                            <p><span>Description: </span></p>
+                            <p>{book.volumeInfo.description}...</p>
                         </div>
                     </div>
                 </div>

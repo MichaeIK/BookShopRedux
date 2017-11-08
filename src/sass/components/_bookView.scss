@@ -1,5 +1,8 @@
 .book-view-wrapper {
-    background-color: #C4C4C4;  
+    background-color: #fff; 
+    span {
+        font-weight: bold;
+    } 
     
     .book-image {
         width: 340px;
@@ -9,7 +12,7 @@
     }
     .desc {
         float: left;
-        border: 1px solid black;
+        margin-top: 20px;
     }    
     .cost{
         button, p {
@@ -21,7 +24,17 @@
         width: 50px;
         display: inline-block;
     }
-    .btn-success {
+    .btn-bookView {
         margin: 0 0 0 20px;
+        background-color: #007aff;
+        color: #fff;
+        padding: 3px;
+    }
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+    .about {
+    margin-left: 35px;
     }
 }
