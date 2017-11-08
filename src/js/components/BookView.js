@@ -7,7 +7,6 @@ import { addToWishlist, addToHistory, addToCart, fetchBooks, changeActiveCategor
 
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
-import { fetchData } from '../functions/fetchData';
 
 const mapStateToProps = (state, ownProps) => {
 
@@ -34,24 +33,6 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class BookView extends React.Component {
 
-
-    constructor(props) {
-        // console.log(1111111111111);
-        super(props)
-        this.handleChangeCategory = this.handleChangeCategory.bind(this);
-        this.fetchData = fetchData.bind(this);
-    }
-
-    handleChangeCategory(cat) {
-
-        // console.log('Change category?', cat, this.props);
-        this.props.changeActiveCategory(cat);
-        this.props.history.push(`/category/${cat}`);
-        this.forceUpdate();
-    }
-
-
-
     handleBuy = () => {
         this.props.addToCart(this.props.book)
     }
@@ -75,7 +56,9 @@ export default class BookView extends React.Component {
 
         return (
             <div className="book-view-wrapper row">
-                <div className='col-md-3 col-sm-12'><Categories _push={this.handleChangeCategory} fetch={this.fetchData} /></div>
+                <div className='col-md-3 col-sm-12'>
+                    <Categories />
+                </div>
                 <div className='col-md-9 col-sm-12 desc'>
                     <div className="wrapper-for-books">
                         <div className="col-md-6 col-sm-12 book-image" style={url}>

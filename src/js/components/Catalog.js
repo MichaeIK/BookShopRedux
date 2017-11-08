@@ -6,7 +6,7 @@ import { fetchBooks, changeActiveCategory } from '../actions';
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
-import {fetchData} from '../functions/fetchData';
+// import {fetchData} from '../functions/fetchData';
 
 const mapStateToProps = (state) => {
     return {watchedBooks: state.slider}
@@ -18,19 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Catalog extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handleChangeCategory = this.handleChangeCategory.bind(this);
-        this.fetchData = fetchData.bind(this);
-    }
 
-    handleChangeCategory(cat) {
-       
-        // console.log('Change category?', cat, this.props);
-        this.props.changeActiveCategory(cat);
-        this.props.history.push(`/category/${cat}`);
-        this.forceUpdate();
-    }
 
     render() {
         console.log(this.props.watchedBooks)
@@ -56,7 +44,10 @@ export default class Catalog extends React.Component {
                             <div className="slide" style={urls[2]}></div>
                     </div>
                 </div>
-                <div className='col-md-3 col-sm-12 categories'><Categories _push={this.handleChangeCategory} fetch={this.fetchData}/></div>
+                <div className='col-md-3 col-sm-12 categories'>
+                    <Categories />
+                </div>
+                
                 <Book />
             </div>
         )
