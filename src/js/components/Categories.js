@@ -1,17 +1,19 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { changeActiveCategory } from '../actions';
 
 const mapStateToProps = (state) => {
-    return ({ categories: state.categories,
+    return ({
+        categories: state.categories,
         category: state.activeCategory.active,
         data: state.data,
-        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active }) })
+        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active })
+    })
 };
 
-@withRouter 
+@withRouter
 @connect(mapStateToProps, { changeActiveCategory })
 export default class Categories extends React.Component {
 
@@ -19,24 +21,24 @@ export default class Categories extends React.Component {
     constructor(props) {
         super(props)
 
-    this.state = {
-        ontop: 500,
-    }
-        
-    }
-    
-  
+        this.state = {
+            ontop: 500,
+        }
 
-  
-    handleChangeCategory = (cat) => {     
-        let data = this.props.data.filter((item) => Object.keys(item)[0] == cat); 
+    }
+
+
+
+
+    handleChangeCategory = (cat) => {
+        let data = this.props.data.filter((item) => Object.keys(item)[0] == cat);
         // console.log(data);
-       if(data[0][Object.keys(data[0])[0]].length == 0) {
+        if (data[0][Object.keys(data[0])[0]].length == 0) {
             this.context.changeCategory("category", cat);
-       } else {
+        } else {
             this.props.changeActiveCategory(cat);
-           this.props.history.push(`/category/${cat}`);
-       }
+            this.props.history.push(`/category/${cat}`);
+        }
 
         // this.props._push(cat);
         // this.props.fetch(cat);
@@ -45,7 +47,7 @@ export default class Categories extends React.Component {
         // //     console.log('111')
         // //     this.props.fetch(cat);
         // // }
-       
+
         // this.forceUpdate();
     }
 
@@ -56,25 +58,27 @@ export default class Categories extends React.Component {
     }
 
     render() {
-        window.onscroll = (e)=>{
+        window.onscroll = (e) => {
             console.dir(document)
             console.log(document.clientHeight)
-            if(this.refs.bounding.getBoundingClientRect().top <= 0){
-              this.refs.menue.style.position='fixed';  
-              this.refs.menue.style.top='50px';  
+            if (this.refs.bounding.getBoundingClientRect().top <= 0) {
+                this.refs.menue.style.position = 'fixed';
+                this.refs.menue.style.top = '50px';
             } else {
-                this.refs.menue.style.position ='relative';
-                this.refs.menue.style.top ='';
+                this.refs.menue.style.position = 'relative';
+                this.refs.menue.style.top = '';
 
             }
-        return (
-            <div ref="bounding">
-                <ul className="menue" ref="menue">
-                    {this.props.categories.map((item,i) => 
-                        {return  <li key={i} 
-                        onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>})}
-                </ul>
-            </div>
-        )
+        }
+            return (
+                <div ref="bounding">
+                    <ul className="menue" ref="menue">
+                        {this.props.categories.map((item, i) => {
+                            return <li key={i}
+                                onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>
+                        })}
+                    </ul>
+                </div>
+            )
+        }
     }
-}

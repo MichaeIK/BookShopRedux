@@ -40,7 +40,7 @@ export default ({
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
 	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary', 'search'],
 	userMenu: ['Cart', 'Wish list', 'Order history', 'View history', 'Exit'],
-	activeCategory: 'React'
+	activeCategory: 'React',
 
 	
 	watchedBooks:[
