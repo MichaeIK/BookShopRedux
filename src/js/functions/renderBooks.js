@@ -17,7 +17,7 @@ export function renderBooks(item, index) {
 
     let stars = item.volumeInfo.averageRating ? item.volumeInfo.averageRating : 0;
     let isInWishList = false;
-
+    console.log(this.props)
     if (this.props.user.wishList.length > 0) {
         let temp = this.props.user.wishList.filter((book) => book.id === item.id );
         if (temp.length > 0) isInWishList = true;

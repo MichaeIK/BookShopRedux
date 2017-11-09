@@ -5,7 +5,7 @@ import Login from '../components/Login';
 import Registration from '../components/Registration';
 import initialState from '../constants/initialState';
 
-import { fetchBooks, changeActiveCategory, clearSearch, logout } from '../actions';
+import { fetchBooks, changeActiveCategory, clearSearch } from '../actions';
 
 import { bindActionCreators } from 'redux';
 import fetchData from '../functions/fetchData';
@@ -13,7 +13,7 @@ import fetchData from '../functions/fetchData';
 import PropTypes from 'prop-types';
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch, logout }, dispatch);
+  return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch }, dispatch);
 }
 
 const logo = {
@@ -33,7 +33,8 @@ const user = {
 
 const mapStateToProps = (state) => {
   return ({User: state.users.authorized, 
-          users: state.users.users})
+          users: state.users.users,
+          user: state.users.users.filter((item) => item.name === state.users.authorized)[0] })
 
 }
 
@@ -69,11 +70,6 @@ export default class Header extends React.Component {
 	}
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.User == 'Please login'){
-      cartEmptyCart = {
-        backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
-      }
-    }
     nextProps.users.map((item) => {
       if(item.name === nextProps.User){
         if (item.cart.length > 0){
@@ -113,10 +109,6 @@ export default class Header extends React.Component {
   closeReg = () => {
     this.setState({ visibleReg: !this.state.visibleReg });
   }
-  handleLogout = () => {
-    this.props.logout()
-    this.props.history.push(`/`)
-  }
 
 
 
@@ -132,6 +124,7 @@ export default class Header extends React.Component {
               	</div>
               	<div className="col-md-1 col-sm-12 accoundBlock">
                   <div className="cart" onClick={this.handleOnClickCart} style={cartEmptyCart}>
+                  
                   </div>
                 </div>
                 <div className="col-md-1 col-sm-12 accoundBlock">
@@ -146,8 +139,8 @@ export default class Header extends React.Component {
                     <li key={i} 
                      onClick={() => this.props.history.push(`/account/${item}`)}>
                       {item}
-                    </li> )}
-                    <li onClick={this.handleLogout}>Exit</li>
+                    </li>
+                  )}
                   </ul>
               	</div>
             </div>
