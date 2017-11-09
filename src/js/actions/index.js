@@ -22,3 +22,10 @@ export const authorized = (payload) => ({type: types.AUTHORIZED, payload});
 export const changeActiveCategory = (payload) => ({type: types.CHANGE_ACTIVE_CATEGORY, payload});
 export const clearSearch = () => ({type: types.CLEAR_SEARCH});
 
+
+
+// store.dispatch({type: types.FETCH_BOOKS, payload, category});
+// store.dispatch(fetchBooks("ddd", "bbb"));
+
+
+// store.dispatch({ type: "FETCH_BOOKS", payload: "payload" })

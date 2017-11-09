@@ -1,8 +1,8 @@
-
-
+import store from '../store';
+import {fetchBooks} from '../actions';
 
 export default function fetchData(category, keyword, startIndex = 0) {
-    _fetch = _fetch.bind(this);
+    // _fetch = _fetch.bind(this);
     console.log(" FETCH >>>>>> ", category, keyword, startIndex);
     if(category != "search") {
         // console.log("FETCH >>>> ", this)        
@@ -17,12 +17,26 @@ function _fetch(_search, _index) {
         .then(res => res.json())
         .then(res => {
             // console.log('category >>> ', keyword);
-            this.props.fetchBooks(res.items, _search);
+            store.dispatch(fetchBooks(res.items, _search));
         })
         .catch(err => console.log('ERROR: ', err));
 
 }
 
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         fetchBooks: dispatch(fetchBooks),
+
+//     }
+// }
+
+//the same
+// const mapDispatchToProps = (dispatch) => {
+    
+//         return bindActionCreators({ fetchBooks, addToHistory, addToCart, changeActiveCategory, addToWishlist }, dispatch);
+    
+//     }
 
 //  export default function fetchData(keyword, startIndex = 0) {
 //     console.log('this.props from fetch', this.props, keyword, startIndex)

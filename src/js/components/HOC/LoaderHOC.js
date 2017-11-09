@@ -1,0 +1,86 @@
+import React from 'react';
+import "./LoaderHOC.scss";
+import fetchData from '../../functions/fetchData';
+import { renderBooks } from '../../functions/renderBooks';
+import { renderStars } from '../../functions/renderStars';
+
+
+import { connect } from 'react-redux';
+import { fetchBooks, addToHistory, addToCart, changeActiveCategory, addToWishlist } from '../../actions';
+
+import { bindActionCreators } from 'redux';
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default function LoaderHOC(WrappedComponent) {
+    return class LoaderHOC extends React.Component {
+
+        constructor() {
+            super()
+
+            this.fetchData = fetchData.bind(this);
+            this.renderBooks = renderBooks.bind(this);
+            this.renderStars = renderStars.bind(this);
+            
+        }
+
+        handleClick = (id, item) => {
+            this.props.addToHistory(item);
+            this.props.history.push(`/book/${id}`);
+        }
+
+        handleBuy = (item) => {
+            this.context.notify();
+            this.context.val_fun(`You add "${item.volumeInfo.title}" to the cart`)
+            this.props.addToCart(item);
+        }
+
+        handleWish (item, event) {
+            console.log(event.target);
+            event.stopPropagation();
+            console.log('book from hanlde Wish', item)
+            
+            this.props.addToWishlist(item)
+            // this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
+            // this.context.notify();
+        }
+
+        componentWillMount() {
+            console.log("WAAAAAAAAAAAAAAT?")
+            let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
+            tempCategory = tempCategory[Object.keys(tempCategory)[0]]
+    
+            if (this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
+            if (this.props.match.url !== "/" && tempCategory.length === 0) {
+                this.props.changeActiveCategory(this.props.match.params.category);
+                this.fetchData(this.props.match.params.category);
+            }
+    
+        }
+
+        render() {
+            console.log("LoaderHOC >>> ", this.props.books[0][Object.keys(this.props.books[0])[0]].length);
+            return this.props.books[0][Object.keys(this.props.books[0])[0]].length !== 0 
+            ? <WrappedComponent {...this.props} renderBooks={this.renderBooks}/> : <div className="loader"></div>;
+        }
+    }
+}
+
+
+
+const mapStateToProps = (state, ownProps) => {
+    // console.log('from Book: ', state.users.users);
+    // let user = state.users.users.filter((item) => item.name === state.users.authorized);
+    // console.log(user[0], user[0].wishList);
+    return {
+        category: state.activeCategory.active,
+        data: state.data,
+        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active}), 
+        user: state.users.users.filter((item) => item.name === state.users.authorized)[0] 
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+    return bindActionCreators({ fetchBooks, addToHistory, addToCart, changeActiveCategory, addToWishlist }, dispatch);
+
+}
