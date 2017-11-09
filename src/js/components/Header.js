@@ -5,7 +5,7 @@ import Login from '../components/Login';
 import Registration from '../components/Registration';
 import initialState from '../constants/initialState';
 
-import { fetchBooks, changeActiveCategory, clearSearch } from '../actions';
+import { fetchBooks, changeActiveCategory, clearSearch, logout } from '../actions';
 
 import { bindActionCreators } from 'redux';
 import fetchData from '../functions/fetchData';
@@ -13,7 +13,7 @@ import fetchData from '../functions/fetchData';
 import PropTypes from 'prop-types';
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch }, dispatch);
+  return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch, logout }, dispatch);
 }
 
 const logo = {
@@ -69,6 +69,11 @@ export default class Header extends React.Component {
 	}
 
   componentWillReceiveProps(nextProps) {
+    if(nextProps.User == 'Please login'){
+      cartEmptyCart = {
+        backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+      }
+    }
     nextProps.users.map((item) => {
       if(item.name === nextProps.User){
         if (item.cart.length > 0){
@@ -108,6 +113,10 @@ export default class Header extends React.Component {
   closeReg = () => {
     this.setState({ visibleReg: !this.state.visibleReg });
   }
+  handleLogout = () => {
+    this.props.logout()
+    this.props.history.push(`/`)
+  }
 
 
 
@@ -137,8 +146,8 @@ export default class Header extends React.Component {
                     <li key={i} 
                      onClick={() => this.props.history.push(`/account/${item}`)}>
                       {item}
-                    </li>
-                  )}
+                    </li> )}
+                    <li onClick={this.handleLogout}>Exit</li>
                   </ul>
               	</div>
             </div>

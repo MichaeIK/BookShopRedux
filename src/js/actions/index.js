@@ -14,10 +14,12 @@ export const addToHistory = (payload) => ({type: types.ADD_TO_HISTORY, payload})
 export const addToCart = (payload) => ({type: types.ADD_TO_CART, payload});
 export const delFromCart = (payload) => ({type: types.DEL_FROM_CART, payload});
 export const addToWishlist = (payload) => ({type: types.ADD_TO_WISHLIST, payload});
+export const addToOrderHistory = (payload) => ({type: types.ADD_TO_ORDER_HISTORY, payload});
 export const changeQuantity = (payload, book) => ({type: types.CHANGE_QUANTITY, payload, book});
 
 
 export const authorized = (payload) => ({type: types.AUTHORIZED, payload});
+export const logout = (payload) => ({type: types.LOGUOT, payload});
 
 export const changeActiveCategory = (payload) => ({type: types.CHANGE_ACTIVE_CATEGORY, payload});
 export const clearSearch = () => ({type: types.CLEAR_SEARCH});

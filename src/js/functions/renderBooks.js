@@ -51,7 +51,6 @@ export function renderBooks(item, index) {
                 <p className="card-text price">{price}</p>
                 <button className="btn-default btn-success" onClick={this.handleBuy.bind(null, item)}>BUY</button>
             </div>
-
         </div>
     )
 }

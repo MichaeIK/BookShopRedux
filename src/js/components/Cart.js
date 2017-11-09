@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {delFromCart, changeQuantity} from '../actions';
+import {delFromCart, changeQuantity, addToOrderHistory} from '../actions';
 import Checkout from './Checkout'
+import { withRouter } from 'react-router-dom';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,11 +13,11 @@ const mapStateToProps = (state, ownProps) => {
  }
 
  const mapDispatchToProps = (dispatch)=> {
-	return bindActionCreators({delFromCart, changeQuantity}, dispatch);
+	return bindActionCreators({delFromCart, changeQuantity, addToOrderHistory}, dispatch);
 }
 
-
- @connect(mapStateToProps, mapDispatchToProps)
+@withRouter
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Cart extends React.Component {
     
     
@@ -36,7 +37,12 @@ export default class Cart extends React.Component {
     handleDel(id_book){
         this.props.delFromCart(id_book)
     }
-    
+    handleCheckout = () => {
+        this.props.history.push(`/account/checkout`)
+        let summ = this.sum()
+        this.props.addToOrderHistory({books: this.props.user.cart, sum: summ})
+        // console.log(new Date(year, month, date, hours, minutes))
+    }
     sum() {
         let sum = 0
         console.log('this is suuuum', this.props.user.cart)
@@ -50,10 +56,10 @@ export default class Cart extends React.Component {
         return (Math.round(sum))
         sum=0
     }
- 
+    // home() { console.log(this); this.props.history.push(`/`);}
     renderBuys(item,index) {
         const url = {backgroundImage: `url(${item.book.volumeInfo.imageLinks.smallThumbnail})`};
-        const star = {backgroundImage: 'url(../../assets/img/icons8-star-filled.png)'};
+        const star = {backgroundImage: 'url(../../assets/img/if_icon-ios7-trash-outline_211835.png)'};
         
         
         return (
@@ -76,14 +82,16 @@ export default class Cart extends React.Component {
     )}
 
     render() {
-        // let a = this.sum()
-        console.log('df', )
         return (
             <div>
-                {this.props.user.cart.map((item, index) => { return this.renderBuys(item, index+1)})}
-                <div className='col-md-10 col-sm-12'></div>
-        <div className='col-md-1 col-sm-12'><button >Checkout</button></div>
-                <div className='col-md-1 col-sm-12'>{this.sum()}</div>
+                <div >{this.props.user.cart.map((item, index) => { return this.renderBuys(item, index+1)})}</div>
+                <div className='col-md-1 col-sm-12'>{}<button onClick={() => this.props.history.push(`/`)}>Back to store</button></div>
+                <div className='col-md-9 col-sm-12'></div>
+                {this.props.user.cart.length !=0 ? (<div>
+                                                        {/* <div className='col-md-1 col-sm-12'>{this.sum()} {this.props.user.cart[0].book.saleInfo.listPrice.currencyCode}</div> */}
+                                                        <div className='col-md-1 col-sm-12'><button onClick={this.handleCheckout}>Checkout</button></div>
+                                                    </div>): false}
+                
                 
 
             </div>
