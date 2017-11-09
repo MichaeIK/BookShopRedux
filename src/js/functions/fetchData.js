@@ -13,7 +13,7 @@ export default function fetchData(category, keyword, startIndex = 0) {
 }
 
 function _fetch(_search, _index) {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${_search}&maxResults=3&startIndex=${_index}&key=AIzaSyDpm9brtHcnYBrtHeGp7oa2nHeGwo5LQXI&country=UA`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${_search}&maxResults=21&startIndex=${_index}&key=AIzaSyA4JIoWhviEmDzk2ArCPSnrgvdyF_bgcEU&country=UA`)
         .then(res => res.json())
         .then(res => {
             // console.log('category >>> ', keyword);

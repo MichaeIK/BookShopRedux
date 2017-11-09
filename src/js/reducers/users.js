@@ -97,6 +97,8 @@ export default function users(state = { users: initialState.users,
                     if (viewList == -1) { 
                         return {...item,  wishList: [...item.wishList, payload] }
                     } else {
+                        console.log('item deleted from WL', item, item.wishList);
+                        item.wishList.splice(viewList, 1);
                         return item;
                     }
                 }
@@ -117,6 +119,26 @@ export default function users(state = { users: initialState.users,
                 }
                 return item;                 
             }) }
+        case types.ADD_TO_ORDER_HISTORY:
+            return { users: state.users.map((item,index)=> { 
+                if( item.name == state.authorized) {   
+                    // let ordHistory = item.orderHistory.findIndex(x => (x.id == payload.id)) 
+                    var date = new Date();
+                    let dd = date.getDate();
+                    let mm = date.getMonth() + 1;
+                    let yy = date.getFullYear() % 100;
+                    if (yy < 10) yy = '0' + yy;
+                    if (mm < 10) mm = '0' + mm;
+                    if (dd < 10) dd = '0' + dd;
+
+                    let ordHistory = { date: `${dd}.${mm}.${yy}`, buys: payload.books, sum: payload.sum} 
+                    console.log(ordHistory)
+                    
+                    return {...item,  orderHistory: [...item.orderHistory, ordHistory]}
+                    
+                }
+                else return item
+            }), authorized: state.authorized }
 
         case types.LOGUOT:
             return     { ...state, authorized: 'Please login' }
