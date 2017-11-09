@@ -5,9 +5,10 @@ import initialState from '../constants/initialState';
 import { renderBooks } from '../functions/renderBooks';
 import { addToCart } from '../actions';
 import { bindActionCreators } from 'redux';
+import { renderStars } from '../functions/renderStars';
 
 const mapStateToProps = (state) => {
-  return ({User: state.users})
+  return ({user: state.users.users.filter((item) => item.name === state.users.authorized)[0]})
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,20 +22,9 @@ export default class WishList extends React.Component {
     constructor(props) {
         super(props)
         this.renderBooks = renderBooks.bind(this);
+        this.renderStars = renderStars.bind(this);
     }
 
-    wishListArr = () =>{
-        let wishList;
-        this.props.User.users.map((item,i)=> {
-            if (item.name == this.props.User.authorized){
-                wishList = item.wishList;   
-            }   
-        })
-        return wishList;
-    }
-    componentDidUpdate() {
-        this.wishListArr();
-    }
     handleClick = (id) => {
         this.props.history.push(`/book/${id}`);
     }
@@ -45,10 +35,9 @@ export default class WishList extends React.Component {
     }
 
     render() {  
-        let list = this.wishListArr()
         return (
             <div className="wrapper-for-books">
-                {list.map((item, index) =>
+                {this.props.user.wishList.map((item, index) =>
                     this.renderBooks(item, index))}
             </div>
         );
