@@ -22,7 +22,7 @@ export default function LoaderHOC(WrappedComponent) {
             this.fetchData = fetchData.bind(this);
             this.renderBooks = renderBooks.bind(this);
             this.renderStars = renderStars.bind(this);
-
+            
         }
 
 
