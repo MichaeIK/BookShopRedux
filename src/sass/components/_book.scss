@@ -56,6 +56,16 @@
         .row {
             display: flex;
             flex-direction: column;
+           
+        }
+    }
+    .card-body{
+        .wrapper-for-rate-stars {
+            display: flex;
+            justify-content: space-between;
+            .fa {
+                color: red;
+            }
         }
     }
     
@@ -88,12 +98,16 @@
         text-align: justify;
     }
     .btn-success{
-        position: absolute;
-        left: 210px;
-        top: 5px;
+        margin: 0 0 0 20px;
         background-color: #007aff;
         color: #fff;
-        padding: 3px;
+        padding: 5px 15px;
+        border-radius: 10px;
+
+        position: absolute;
+        left: 164px;
+        top: 2px;
+       
     }
     .render-btn:hover {
         background-color: #007aff;

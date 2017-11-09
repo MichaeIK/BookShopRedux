@@ -19,7 +19,10 @@ const mapStateToProps = (state, ownProps) => {
             }
         }
     }
-    return { book: isInclude }
+    return {
+        book: isInclude,
+        user: state.users.users.filter((item) => item.name === state.users.authorized)[0]
+    }
 }
 
 
@@ -34,7 +37,7 @@ export default class BookView extends React.Component {
     constructor(props) {
         super(props)
         this.renderStars = renderStars.bind(this);
-        this.state = ({heartFill: false});
+        this.state = ({ heartFill: false });
     }
 
     handleBuy = () => {
@@ -50,7 +53,7 @@ export default class BookView extends React.Component {
     };
 
     handleWish = () => {
-        this.setState({heartFill: !this.state.heartFill});
+        this.setState({ heartFill: !this.state.heartFill });
         console.log(this.setState);
         this.props.addToWishlist(this.props.book)
         this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
@@ -64,6 +67,12 @@ export default class BookView extends React.Component {
         const heart = { backgroundImage: 'url(../../assets/img/icons8-heart.png)' }
         let author = book.volumeInfo.authors[0];
 
+        let isInWishList = false;
+        if (this.props.user.wishList.length > 0) {
+            let temp = this.props.user.wishList.filter((item) => book.id === item.id);
+            if (temp.length > 0) isInWishList = true;
+        }
+
         return (
             <div className="book-view-wrapper row">
                 <div className='col-md-3 col-sm-12'>
@@ -73,9 +82,9 @@ export default class BookView extends React.Component {
                     <div className="wrapper-for-books">
                         <div className="col-md-6 col-sm-12 book-image" style={url}>
                             <div className="star" onClick={this.handleWish}>
-                                {!this.state.heartFill ?
-                                    <i className='fa fa-heart-o fa-3x' aria-hidden="true"></i> :
-                                    <i className="fa fa-heart fa-3x" aria-hidden="true"></i>}  
+                                {!isInWishList ?
+                                    <i className='fa fa-heart-o fa-2x' aria-hidden="true"></i> :
+                                    <i className="fa fa-heart fa-2x" aria-hidden="true"></i>}
                             </div>
                         </div>
                         <div className="col-md-6 col-sm-12 about">

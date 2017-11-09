@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import { fetchBooks, addToHistory, addToCart, changeActiveCategory } from '../actions';
+import { fetchBooks, addToHistory, addToCart, changeActiveCategory, addToWishlist } from '../actions';
 
 import { withRouter } from 'react-router';
 import Slider from './Slider';
@@ -15,16 +15,20 @@ import { renderStars } from '../functions/renderStars';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = (state, ownProps) => {
+    // console.log('from Book: ', state.users.users);
+    // let user = state.users.users.filter((item) => item.name === state.users.authorized);
+    // console.log(user[0], user[0].wishList);
     return {
         category: state.activeCategory.active,
         data: state.data,
-        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active })
+        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active}), 
+        user: state.users.users.filter((item) => item.name === state.users.authorized)[0] 
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
 
-    return bindActionCreators({ fetchBooks, addToHistory, addToCart, changeActiveCategory }, dispatch);
+    return bindActionCreators({ fetchBooks, addToHistory, addToCart, changeActiveCategory, addToWishlist }, dispatch);
 
 }
 
@@ -38,23 +42,29 @@ export default class Book extends React.Component {
         this.fetchData = fetchData.bind(this);
         this.renderBooks = renderBooks.bind(this);
         this.renderStars = renderStars.bind(this);
+        this.handleWish = this.handleWish.bind(this);
         this.state = {
             dropdown: false,
-            sortType: 'popularity'
+            sortType: 'popularity'   
         }
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //     // console.log("nextProps >>>>> ", nextProps);
-    // }
+    handleWish (item, event) {
+        console.log(event.target);
+        event.stopPropagation();
+        console.log('book from hanlde Wish', item)
+        
+        this.props.addToWishlist(item)
+        // this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
+        // this.context.notify();
+    }
 
     componentWillMount() {
         console.log("WAAAAAAAAAAAAAAT?")
         let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
         tempCategory = tempCategory[Object.keys(tempCategory)[0]]
-        
-        if(this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
-        if(this.props.match.url !== "/" && tempCategory.length === 0) {
+
+        if (this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
+        if (this.props.match.url !== "/" && tempCategory.length === 0) {
             this.props.changeActiveCategory(this.props.match.params.category);
             this.fetchData(this.props.match.params.category);
         }
@@ -65,7 +75,7 @@ export default class Book extends React.Component {
         changeCategory: PropTypes.func.isRequired,
         fetchData: PropTypes.func.isRequired
     }
-    
+
     handleClick = (id, item) => {
         this.props.addToHistory(item);
         this.props.history.push(`/book/${id}`);
@@ -78,9 +88,9 @@ export default class Book extends React.Component {
     }
 
     static contextTypes = {
-       notify: PropTypes.func.isRequired,
-       val_fun: PropTypes.func.isRequired,
-       val: PropTypes.string.isRequired
+        notify: PropTypes.func.isRequired,
+        val_fun: PropTypes.func.isRequired,
+        val: PropTypes.string.isRequired
     };
 
     cat = this.props.category;
@@ -90,7 +100,7 @@ export default class Book extends React.Component {
 
 
     showMore = () => {
-        let cat = this.props.category !== "search" 
+        let cat = this.props.category !== "search"
             ? this.props.category
             : this.props.match.params.category;
 
@@ -102,7 +112,7 @@ export default class Book extends React.Component {
         this.fetchData(cat, null, startIndex);
     }
 
-    
+
     showDropdown = () => {
         this.setState({ dropdown: !this.state.dropdown })
         console.log(this.state.dropdown)
@@ -110,7 +120,7 @@ export default class Book extends React.Component {
 
     handleSort = (e) => {
         console.log(e.target.getAttribute('data-sort'));
-        this.setState({sortType: e.target.getAttribute('data-sort')});
+        this.setState({ sortType: e.target.getAttribute('data-sort') });
     }
     sortBooks = (a, b) => {
         let priceA = a.saleInfo.retailPrice ? Math.round(a.saleInfo.retailPrice.amount) : 0;
@@ -138,7 +148,7 @@ export default class Book extends React.Component {
 
 
                         <div className='col-md-3 col-sm-12'>
-                            <Categories/>
+                            <Categories />
 
 
                         </div>
@@ -157,11 +167,11 @@ export default class Book extends React.Component {
                             </ul>
                         </div>
 
-                        {books[cat].sort(this.sortBooks).map((item, index) =>
+                        {books[cat].sort(this.sortBooks).map((item, index) => 
                             this.renderBooks(item, index))}
 
                         <button onClick={this.showMore} type="button" className="col-sm-12 btn btn-default btn-lg">
-                             Show more ...
+                            Show more ...
                         </button>
                     </div>
 

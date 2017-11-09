@@ -97,6 +97,8 @@ export default function users(state = { users: initialState.users,
                     if (viewList == -1) { 
                         return {...item,  wishList: [...item.wishList, payload] }
                     } else {
+                        console.log('item deleted from WL', item, item.wishList);
+                        item.wishList.splice(viewList, 1);
                         return item;
                     }
                 }

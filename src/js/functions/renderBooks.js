@@ -16,24 +16,35 @@ export function renderBooks(item, index) {
     let title = item.volumeInfo.title.substring(0, 30);
 
     let stars = item.volumeInfo.averageRating ? item.volumeInfo.averageRating : 0;
+    let isInWishList = false;
 
+    if (this.props.user.wishList.length > 0) {
+        let temp = this.props.user.wishList.filter((book) => book.id === item.id );
+        if (temp.length > 0) isInWishList = true;
+    }
 
     return (
-
-
         <div key={index} className="col-lg-3 col-md-6 mb-4">
             <div className="card" onClick={this.handleClick.bind(null, item.id, item)}>
                 <div className="book-top-part">
-                <img className="card-img-top" src={src} />
-                <div className='row' >
-                    {this.renderStars(item, '').map((star) => star)}
-                </div>
+                    <img className="card-img-top" src={src} />
+                    <div className='row' >
+                        {this.renderStars(item, '').map((star) => star)}
+                    </div>
                 </div>
                 <div className="card-body">
                     <h4 className="card-title">{title}</h4>
                     <p className="card-text">Author: <span>{authorDisplay}</span></p>
                     <p className="card-text">Categorie: <span>{item.volumeInfo.categories}</span></p>
-                    {<p className="card-text">Rating: <span>{stars}</span></p>}
+                    <div className="wrapper-for-rate-stars">
+                        {<p className="card-text">Rating: <span>{stars}</span></p>}
+                        <div className="star" onClick={(event) => this.handleWish(item, event)}>
+                            {!isInWishList ?
+                                <i className='fa fa-heart-o fa-2x' aria-hidden="true"></i> :
+                                <i className="fa fa-heart fa-2x" aria-hidden="true"></i>}
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div className="price-block">
