@@ -2,9 +2,13 @@ import React from 'react';
 
 export default class Footer extends React.Component {
 
+  // componentDidMount() {
+  //   console.log('sdf',this.refs.footer.offsetTop)
+  // }
+
     render() {
         return (
-            <div className="footer">
+            <div className="footer" ref="footer">
             	<div className="col-md-2 col-sm-12 contact">
             		<p>&#9400; Dream Team</p>
             	</div>
