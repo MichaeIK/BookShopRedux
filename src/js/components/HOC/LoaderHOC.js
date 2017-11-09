@@ -4,6 +4,8 @@ import fetchData from '../../functions/fetchData';
 import { renderBooks } from '../../functions/renderBooks';
 import { renderStars } from '../../functions/renderStars';
 
+import PropTypes from 'prop-types';
+
 
 import { connect } from 'react-redux';
 import { fetchBooks, addToHistory, addToCart, changeActiveCategory, addToWishlist } from '../../actions';
@@ -20,8 +22,21 @@ export default function LoaderHOC(WrappedComponent) {
             this.fetchData = fetchData.bind(this);
             this.renderBooks = renderBooks.bind(this);
             this.renderStars = renderStars.bind(this);
-            
+
         }
+
+
+        static contextTypes = {
+            changeCategory: PropTypes.func.isRequired,
+            fetchData: PropTypes.func.isRequired
+        }
+
+        static contextTypes = {
+            notify: PropTypes.func.isRequired,
+            val_fun: PropTypes.func.isRequired,
+            val: PropTypes.string.isRequired
+        };
+
 
         handleClick = (id, item) => {
             this.props.addToHistory(item);
@@ -34,11 +49,11 @@ export default function LoaderHOC(WrappedComponent) {
             this.props.addToCart(item);
         }
 
-        handleWish (item, event) {
+        handleWish(item, event) {
             console.log(event.target);
             event.stopPropagation();
             console.log('book from hanlde Wish', item)
-            
+
             this.props.addToWishlist(item)
             // this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
             // this.context.notify();
@@ -48,19 +63,19 @@ export default function LoaderHOC(WrappedComponent) {
             console.log("WAAAAAAAAAAAAAAT?")
             let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
             tempCategory = tempCategory[Object.keys(tempCategory)[0]]
-    
+
             if (this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
             if (this.props.match.url !== "/" && tempCategory.length === 0) {
                 this.props.changeActiveCategory(this.props.match.params.category);
                 this.fetchData(this.props.match.params.category);
             }
-    
+
         }
 
         render() {
             console.log("LoaderHOC >>> ", this.props.books[0][Object.keys(this.props.books[0])[0]].length);
-            return this.props.books[0][Object.keys(this.props.books[0])[0]].length !== 0 
-            ? <WrappedComponent {...this.props} renderBooks={this.renderBooks}/> : <div className="loader"></div>;
+            return this.props.books[0][Object.keys(this.props.books[0])[0]].length !== 0
+                ? <WrappedComponent {...this.props} renderBooks={this.renderBooks} /> : <div className="loader"></div>;
         }
     }
 }
@@ -74,8 +89,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         category: state.activeCategory.active,
         data: state.data,
-        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active}), 
-        user: state.users.users.filter((item) => item.name === state.users.authorized)[0] 
+        books: state.data.filter((item) => { return Object.keys(item)[0] == state.activeCategory.active }),
+        user: state.users.users.filter((item) => item.name === state.users.authorized)[0]
     }
 }
 
