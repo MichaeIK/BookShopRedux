@@ -7,7 +7,6 @@ import fetchData from '../functions/fetchData';
 import { withRouter } from 'react-router';
 import Slider from './Slider';
 import { ORIGIN, ENV_HREF } from '../config';
-import PropTypes from 'prop-types';
 
 import LoaderHOC from './HOC/LoaderHOC';
 
@@ -37,17 +36,6 @@ export default class Book extends React.Component {
     }
 
 
-
-    static contextTypes = {
-        changeCategory: PropTypes.func.isRequired,
-        fetchData: PropTypes.func.isRequired
-    } 
-
-    static contextTypes = {
-        notify: PropTypes.func.isRequired,
-        val_fun: PropTypes.func.isRequired,
-        val: PropTypes.string.isRequired
-    };
 
     cat = this.props.category;
     books = this.props.books[0];
