@@ -18,6 +18,7 @@ export const changeQuantity = (payload, book) => ({type: types.CHANGE_QUANTITY, 
 
 
 export const authorized = (payload) => ({type: types.AUTHORIZED, payload});
+export const logout = (payload) => ({type: types.LOGUOT, payload});
 
 export const changeActiveCategory = (payload) => ({type: types.CHANGE_ACTIVE_CATEGORY, payload});
 export const clearSearch = () => ({type: types.CLEAR_SEARCH});

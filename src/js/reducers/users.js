@@ -108,7 +108,7 @@ export default function users(state = { users: initialState.users,
             return { ...state, users: state.users.map((item, index) => {
                 if(item.name === state.authorized) {
                     return { ...item, cart: item.cart.map((item, i) => {
-                        console.log(book);
+                        // console.log(book);
                         if(item.book.id === book.book.id) {
                             return {...item, quantity: payload === "+" ? item.quantity + 1 : (item.quantity==0 ? item.quantity=0 : item.quantity- 1) }
                             
@@ -117,6 +117,9 @@ export default function users(state = { users: initialState.users,
                 }
                 return item;                 
             }) }
+
+        case types.LOGUOT:
+            return     { ...state, authorized: 'Please login' }
 
         default:
             return state;

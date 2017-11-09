@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import initialState from '../constants/initialState';
+import { logout } from '../actions';
 import Cart from './Cart'
 import WishList from './WishList'
 import OrderHistory from './OrderHistory'
 import ViewHistory from './ViewHistory';
 import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
+
+const mapDispatchToProps =(dispatch)=> {
+    return bindActionCreators ({ logout }, dispatch)
+}
 
 @withRouter
+@connect(null, mapDispatchToProps)
 export default class Account extends React.Component {
     state = {
         Cart: false,
@@ -47,21 +55,29 @@ export default class Account extends React.Component {
     componentDidUpdate() {
 		this.menuDisplay(null);
     }
+
+    handleLogout = () => {
+        this.props.logout()
+        this.props.history.push(`/`)
+    }
+
     render() {
 		// console.log("Account render: >>> ", this.state);
         return (
             <div className="row">
                 <div className="col-md-2 col-sm-12">
-                    <ul>
+                    <ul className="account-menu">
                         {initialState.userMenu.map((item,i) => 
 							<li key={i}
 								onClick={this.menuDisplay.bind(null, item)}>
 								{item}
 							</li>
-						)}
+                        )}
+                        <li onClick={this.handleLogout}>Exit</li>
                     </ul>
                 </div>
-                <div className="col-md-10 col-sm-12">
+                <div className="col-md-1 col-sm-1"></div>
+                <div className="col-md-9 col-sm-12">
                     {this.state.Cart ? <Cart /> : null}
                     {this.state.WishList ? <WishList /> :null}
                     {this.state.OrderHistory? <OrderHistory /> :null}

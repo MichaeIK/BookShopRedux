@@ -47,7 +47,6 @@ export default class Book extends React.Component {
     // }
 
     componentWillMount() {
-        console.log("WAAAAAAAAAAAAAAT?")
         let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
         tempCategory = tempCategory[Object.keys(tempCategory)[0]]
         
