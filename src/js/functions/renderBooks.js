@@ -19,7 +19,7 @@ export function renderBooks(item, index) {
     let isInWishList = false;
 
     if (this.props.user !== undefined && this.props.user.wishList.length > 0) {
-        let temp = this.props.user.wishList.filter((book) => book.id === item.id );
+        let temp = this.props.user.wishList.filter((book) => book.id === item.id);
         if (temp.length > 0) isInWishList = true;
     }
 
@@ -38,16 +38,17 @@ export function renderBooks(item, index) {
                     <p className="card-text">Categorie: <span>{item.volumeInfo.categories}</span></p>
                     <div className="wrapper-for-rate-stars">
                         {<p className="card-text">Rating: <span>{stars}</span></p>}
-                        <div className="star" onClick={(event) => this.handleWish(item, event)}>
-                            {!isInWishList ?
-                                <i className='fa fa-heart-o fa-2x' aria-hidden="true"></i> :
-                                <i className="fa fa-heart fa-2x" aria-hidden="true"></i>}
-                        </div>
+
                     </div>
 
                 </div>
             </div>
             <div className="price-block">
+                <div className="heart" onClick={(event) => this.handleWish(item, event)}>
+                    {!isInWishList ?
+                        <i className='fa fa-heart-o fa-2x' aria-hidden="true"></i> :
+                        <i className="fa fa-heart fa-2x" aria-hidden="true"></i>}
+                </div>
                 <p className="card-text price">{price}</p>
                 <button className="btn-default btn-success" onClick={this.handleBuy.bind(null, item)}>BUY</button>
             </div>

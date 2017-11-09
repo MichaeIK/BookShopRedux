@@ -9,6 +9,7 @@ import Search from '../components/Search';
 import Registration from '../components/Registration';
 import Account from '../components/Account';
 import Checkout from '../components/Checkout';
+import ErrorPage from '../components/ErrorPage';
 import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -96,6 +97,7 @@ export default class App extends React.Component {
                     <Route path={`${ENV_HREF}account/checkout/`} component={Checkout} />
                     <Route path={`${ENV_HREF}account/:category/`} component={Account} />
                     {/* <Route path="*" component={() => <div>Page Not Found</div>} /> */}
+                    <Route path="*" component={ErrorPage} />
                 </Switch>
             </MainLayout>
         )
