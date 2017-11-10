@@ -87,7 +87,7 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickUser =()=>{
-    if (this.props.User == 'Please login') {
+    if (this.props.User == 'Anonim') {
       if (this.state.visibleReg == true){
         this.setState({visibleLogin: false})
         // this.refs.userMenuHover   ---------Michael block menu for Please login
