@@ -64,9 +64,7 @@
         .wrapper-for-rate-stars {
             display: flex;
             justify-content: space-between;
-            .fa {
-                color: red;
-            }
+            
         }
     }
     
@@ -93,7 +91,14 @@
     border: 1px solid #C4C4C4;
     border-radius: 0 0 10px 10px;
     position: relative;
-    
+    .heart {
+        position: absolute;
+        left: 200px;
+        top: -50px;
+        .fa {
+            color: red;
+        }
+    }
     p {
         margin-left: 15px;
         text-align: justify;
