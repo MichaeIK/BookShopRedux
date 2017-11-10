@@ -141,7 +141,7 @@ export default function users(state = { users: initialState.users,
             }), authorized: state.authorized }
 
         case types.LOGUOT:
-            return     { ...state, authorized: 'Please login' }
+            return     { ...state, authorized: 'Anonim' }
 
         default:
             return state;

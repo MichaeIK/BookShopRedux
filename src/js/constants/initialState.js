@@ -9,8 +9,8 @@ export default ({
 
 	books : [],
 	
-	// authorized: 'Please login', 
-	authorized: 'Michael', 
+	authorized: 'Anonim', 
+	
 
     users: [
     	{name: 'Michael', 
@@ -36,7 +36,15 @@ export default ({
 		wishList: [],
 		orderHistory: [],
 		viewHistory: []
-	}
+	},
+	{name: 'Anonim',
+	password: '',
+	email: '',
+	cart: [],
+	wishList: [],
+	orderHistory: [],
+	viewHistory: []
+}
 	],
     categories: ['.NET', 'Assembler', 'C/C++', 'C++Builder', 'Delphi', 'Java', 'Pascal', 
 	'Python', 'React', 'Redux', 'Visual C++', 'Windows', 'New!', 'temporary', 'search'],

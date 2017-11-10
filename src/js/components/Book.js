@@ -21,15 +21,15 @@ export default class Book extends React.Component {
         this.fetchData = fetchData.bind(this);
         this.state = {
             dropdown: false,
-            sortType: 'popularity'   
+            sortType: 'popularity'
         }
     }
 
-    handleWish (item, event) {
+    handleWish(item, event) {
         console.log(event.target);
         event.stopPropagation();
         console.log('book from hanlde Wish', item)
-        
+
         this.props.addToWishlist(item)
         // this.context.val_fun(`You add "${this.props.book.volumeInfo.title}" to your wish list in account`);
         // this.context.notify();
@@ -68,13 +68,24 @@ export default class Book extends React.Component {
         let priceB = b.saleInfo.retailPrice ? Math.round(b.saleInfo.retailPrice.amount) : 0;
         let starsA = a.volumeInfo.averageRating ? a.volumeInfo.averageRating : 0;
         let starsB = b.volumeInfo.averageRating ? b.volumeInfo.averageRating : 0;
+        let idA = a.id;
+        let idB = b.id;
         switch (this.state.sortType) {
             case 'upPrice':
-                return priceB - priceA;
+                if (priceA == priceB) {
+                    return (idA > idB) ? -1 : 1;
+                } else
+                    return priceB - priceA;
             case 'downPrice':
-                return priceA - priceB;
+                if (priceA == priceB) {
+                    return (idA > idB) ? -1 : 1;
+                } else
+                    return priceA - priceB;
             case 'popularity':
-                return starsB - starsA;
+                if (starsA == starsB) {
+                    return (idA > idB) ? -1 : 1;
+                } else
+                    return starsB - starsA;
             default: return 0;
         }
 
@@ -108,7 +119,7 @@ export default class Book extends React.Component {
                             </ul>
                         </div>
 
-                        {books[cat].sort(this.sortBooks).map((item, index) => 
+                        {books[cat].sort(this.sortBooks).map((item, index) =>
                             this.props.renderBooks(item, index))}
 
                         <button onClick={this.showMore} type="button" className="col-sm-12 btn btn-default btn-lg">
