@@ -103,7 +103,7 @@ export default class Header extends React.Component {
         return (
             <div className="header">
                 <div className="col-md-2 col-sm-12">
-                    <div className="logo" style={logo} onClick={this.handleonClickLogo}></div>
+                    <img className="logo" src={'../../assets/img/books.svg'} onClick={this.handleonClickLogo} />
                 </div>
                 <div className="col-md-8 col-sm-12 search">
                   <h2>Dream Team Book Store</h2>
