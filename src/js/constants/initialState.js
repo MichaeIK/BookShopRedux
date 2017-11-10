@@ -15,7 +15,7 @@ export default ({
     users: [
     	{name: 'Michael', 
 		password: '123',
-		email: 'Michael@com',
+		email: 'Michael@com', 
 		cart: [],
 		wishList: [],
 		orderHistory: [],
