@@ -50,18 +50,39 @@
 		.menuUser{
 			display: none;
 			position: absolute;
-			top: 81px;
+			top: 105px;
 			left: -42px;
 			width: 140px;
 			z-index: 5;
+
+			.list-user {
+				color: transparent;
+				background: transparent;
+			}
 		}
 		.pUserName {
 			margin: 5px 0 0 -10px;
 			width: 100px;
+			position: relative;
+			text-align: left;
+			text-decoration: underline;
+			}
+
+		#user-hover {
+			position: absolute;
+			top: 85px;
+			left: -12px;
+			width: 65px;
+			height: 35px;
 		}
-		.pUserName:hover + .menuUser {
+		
+		/*.pUserName:hover + .menuUser {
+    		display: block;
+		}*/
+		#user-hover:hover + .menuUser {
     		display: block;
 		}
+		
 		.menuUser:hover {
 			display: block;
 		}
