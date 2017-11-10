@@ -7,6 +7,8 @@
 
 export default ({
 
+	sideMenu : 0,
+
 	books : [],
 	
 	authorized: 'Anonim', 

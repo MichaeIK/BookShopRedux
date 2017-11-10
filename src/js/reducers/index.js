@@ -6,6 +6,7 @@ import users from './users';
 import authorization from './authorization';
 import activeCategory from './activeCategory';
 import slider from './slider'
+import sideMenu from './sideMenu'
 
 // Reducer - это обработчик события, мы можем создавать под определенные логически cвязаные
 // действия свой редьюсер, например в случае с нашим репозиторием, я создал
@@ -21,7 +22,8 @@ const reducers = combineReducers({
     users,
     authorization, 
     activeCategory,
-    slider
+    slider,
+    sideMenu
 });
 
 export default reducers;

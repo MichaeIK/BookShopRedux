@@ -6,6 +6,7 @@ import { changeActiveCategory } from '../actions';
 
 const mapStateToProps = (state) => {
     return ({
+        sideMenu: state.sideMenu,
         categories: state.categories,
         category: state.activeCategory.active,
         data: state.data,
@@ -60,19 +61,26 @@ export default class Categories extends React.Component {
     render() {
         window.onscroll = (e) => {
             // console.dir(document)
-            // console.log(document.clientHeight)
-            if (this.refs.bounding.getBoundingClientRect().top <= 0) {
-                this.refs.menue.style.position = 'fixed';
-                this.refs.menue.style.top = '50px';
-            } else {
-                this.refs.menue.style.position = 'relative';
-                this.refs.menue.style.top = '';
+            // console.log(this.refs.bounding.getBoundingClientRect().top + this.refs.menu.clientHeight)
+            if (this.refs.bounding.getBoundingClientRect().top <= 0){
+                this.refs.menu.style.position = 'fixed';
+                this.refs.menu.style.top = '50px';
 
+                if (window.scrollY + this.refs.menu.clientHeight > this.props.sideMenu){
+                    // console.log('this', this.props.sideMenu - this.refs.bounding.offsetTop - this.refs.menu.clientHeight)
+                    this.refs.menu.style.position = 'relative';
+                    this.refs.menu.style.top = `${this.props.sideMenu - this.refs.bounding.offsetTop - this.refs.menu.clientHeight - 400}px`;
+                    // this.refs.menu.style.top = `${this.props.sideMenu - this.refs.bounding.offsetTop - this.refs.menu.clientHeight}px`;
+                } 
+
+            } else {
+                this.refs.menu.style.position = 'relative';
+                this.refs.menu.style.top = '';
             }
         }
             return (
                 <div ref="bounding">
-                    <ul className="menue" ref="menue">
+                    <ul className="menu" ref="menu">
                         {this.props.categories.map((item, i) => {
                             return <li className="categoryMenu" key={i}
                                 onClick={this.handleChangeCategory.bind(null, item)}>{item}</li>

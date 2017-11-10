@@ -18,6 +18,7 @@ export const CHANGE_QUANTITY = "CHANGE_QUANTITY";
 
 export const AUTHORIZED = "AUTHORIZED";
 export const LOGUOT = "LOGUOT";
+export const SIDE_MENU = "SIDE_MENU";
 
 export const CHANGE_ACTIVE_CATEGORY = "CHANGE_ACTIVE_CATEGORY";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";

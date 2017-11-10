@@ -16,6 +16,7 @@ export const delFromCart = (payload) => ({type: types.DEL_FROM_CART, payload});
 export const addToWishlist = (payload) => ({type: types.ADD_TO_WISHLIST, payload});
 export const addToOrderHistory = (payload) => ({type: types.ADD_TO_ORDER_HISTORY, payload});
 export const changeQuantity = (payload, book) => ({type: types.CHANGE_QUANTITY, payload, book});
+export const sideMenu = (payload) => ({type: types.SIDE_MENU, payload});
 
 
 export const authorized = (payload) => ({type: types.AUTHORIZED, payload});

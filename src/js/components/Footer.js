@@ -1,10 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { sideMenu } from '../actions';
 
+const mapDispatchToProps = (dispatch)=> {
+  return bindActionCreators({ sideMenu }, dispatch);
+}
+
+@connect (null, mapDispatchToProps)
 export default class Footer extends React.Component {
 
-  // componentDidMount() {
-  //   console.log('sdf',this.refs.footer.offsetTop)
-  // }
+  componentDidMount() {
+    setTimeout (() => {
+      // console.log('footer', this.refs.footer.offsetTop)
+      this.props.sideMenu(this.refs.footer.offsetTop)
+    }, 1000)
+    
+  }
 
     render() {
         return (
