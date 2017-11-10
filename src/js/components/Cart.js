@@ -70,10 +70,13 @@ export default class Cart extends React.Component {
         
         return (
                 <div className="row goods-line" key={index}>
-                    <div className="col-md-8 col-sm-12">    
+                    <div className="col-md-7 col-sm-12">    
                         <h4>{index}</h4>
                         <img className="card-img-top" src={src} />
                         <h4>{item.book.volumeInfo.title}</h4>
+                    </div>
+                    <div className="col-md-1 col-sm-12 price">
+                        <h4>{(Math.round(item.book.saleInfo.listPrice.amount):0)} UAH</h4>
                     </div>
                     <div className="col-md-1 col-sm-12 quantity">
                         <button className="btn" onClick={this.props.changeQuantity.bind(null, '+', item)}>+</button>
