@@ -87,11 +87,14 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickUser =()=>{
+    if (this.props.User == 'Please login') {
       if (this.state.visibleReg == true){
         this.setState({visibleLogin: false})
+        // this.refs.userMenuHover   ---------Michael block menu for Please login
       } else {
         this.setState({visibleLogin: !this.state.visibleLogin})
       }
+    }
       
 	}
 
@@ -119,7 +122,7 @@ export default class Header extends React.Component {
              		<div className="logo" style={logo} onClick={this.handleonClickLogo}></div>
              	</div>
               	<div className="col-md-8 col-sm-12 search">
-                  <h2>Dream Team Book Shop</h2>
+                  <h2>Dream Team Book Store</h2>
               		<input type ="text" ref="search" onKeyPress={this.handleInputChange} placeholder="Search..." />
               	</div>
               	<div className="col-md-1 col-sm-12 accoundBlock">
@@ -131,10 +134,10 @@ export default class Header extends React.Component {
                   <div className="account" onClick={this.handleOnClickUser} style={user}></div>
                   {this.state.visibleLogin? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> :null}
               		<div className="accountStatus"></div>
-                  <p className="pUserName">{this.props.User}</p>
+                  <p className="pUserName" onClick={this.handleOnClickUser}>{this.props.User}</p>
+                  <div ref="userMenuHover"id="user-hover"></div>
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
-
                   {initialState.userMenu.map((item,i) =>  
                     <li key={i} 
                      onClick={() => this.props.history.push(`/account/${item}`)}>
