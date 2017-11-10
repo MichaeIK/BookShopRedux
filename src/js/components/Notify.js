@@ -6,7 +6,7 @@ export default class Notify extends Component {
         clearTimeout(this.timer);
     }
     componentDidMount() {
-        this.timer = setTimeout(this.context.notify, 4000);
+        this.timer = setTimeout(this.context.notify, 500);
     }
 
     static contextTypes = {

@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
  }
 
  const mapDispatchToProps = (dispatch)=> {
-	return bindActionCreators({delFromCart, changeQuantity, addToOrderHistory}, dispatch);
+    return bindActionCreators({delFromCart, changeQuantity, addToOrderHistory}, dispatch);
 }
 
 
@@ -76,13 +76,13 @@ export default class Cart extends React.Component {
                         <h4>{item.book.volumeInfo.title}</h4>
                     </div>
                     <div className="col-md-1 col-sm-12 quantity">
-                        <botton onClick={this.props.changeQuantity.bind(null, '+', item)}>+</botton>
+                        <button className="btn" onClick={this.props.changeQuantity.bind(null, '+', item)}>+</button>
                             <p>{ item.quantity }</p>
-                        <botton onClick={this.props.changeQuantity.bind(null, '-', item)}>-</botton>
+                        <button className="btn" onClick={this.props.changeQuantity.bind(null, '-', item)}>-</button>
                     </div>
                     <div className="col-md-1 col-sm-12 price">
                         <h4>
-                            {(item.book.saleInfo.listPrice ? Math.round(item.book.saleInfo.listPrice.amount):0)*item.quantity}{item.book.saleInfo.listPrice ? item.book.saleInfo.listPrice.currencyCode : 'UAH' }
+                            {(item.book.saleInfo.listPrice ? Math.round(item.book.saleInfo.listPrice.amount):0)*item.quantity}{item.book.saleInfo.listPrice ? item.book.saleInfo.listPrice.currencyCode : ' UAH' }
                         </h4>
                     </div>
                     
