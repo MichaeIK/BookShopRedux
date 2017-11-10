@@ -144,6 +144,7 @@ export default class Header extends React.Component {
                       {item}
                     </li>
                   )}
+                  <li onClick={this.handleLogout}>Exit</li>
                   </ul>
               	</div>
             </div>
