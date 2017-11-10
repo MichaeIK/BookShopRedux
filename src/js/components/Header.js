@@ -5,7 +5,7 @@ import Login from '../components/Login';
 import Registration from '../components/Registration';
 import initialState from '../constants/initialState';
 
-import { fetchBooks, changeActiveCategory, clearSearch, logout } from '../actions';
+import { fetchBooks, changeActiveCategory, clearSearch } from '../actions';
 
 import { bindActionCreators } from 'redux';
 import fetchData from '../functions/fetchData';
@@ -13,7 +13,7 @@ import fetchData from '../functions/fetchData';
 import PropTypes from 'prop-types';
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch, logout }, dispatch);
+  return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch }, dispatch);
 }
 
 const logo = {
@@ -33,7 +33,8 @@ const user = {
 
 const mapStateToProps = (state) => {
   return ({User: state.users.authorized, 
-          users: state.users.users})
+          users: state.users.users,
+          user: state.users.users.filter((item) => item.name === state.users.authorized)[0] })
 
 }
 
@@ -69,11 +70,6 @@ export default class Header extends React.Component {
 	}
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.User == 'Please login'){
-      cartEmptyCart = {
-        backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
-      }
-    }
     nextProps.users.map((item) => {
       if(item.name === nextProps.User){
         if (item.cart.length > 0){
@@ -91,11 +87,14 @@ export default class Header extends React.Component {
   }
 
 	handleOnClickUser =()=>{
+    if (this.props.User == 'Please login') {
       if (this.state.visibleReg == true){
         this.setState({visibleLogin: false})
+        // this.refs.userMenuHover   ---------Michael block menu for Please login
       } else {
         this.setState({visibleLogin: !this.state.visibleLogin})
       }
+    }
       
 	}
 
@@ -113,10 +112,6 @@ export default class Header extends React.Component {
   closeReg = () => {
     this.setState({ visibleReg: !this.state.visibleReg });
   }
-  handleLogout = () => {
-    this.props.logout()
-    this.props.history.push(`/`)
-  }
 
 
 
@@ -127,27 +122,28 @@ export default class Header extends React.Component {
              		<div className="logo" style={logo} onClick={this.handleonClickLogo}></div>
              	</div>
               	<div className="col-md-8 col-sm-12 search">
-                  <h2>Dream Team Book Shop</h2>
+                  <h2>Dream Team Book Store</h2>
               		<input type ="text" ref="search" onKeyPress={this.handleInputChange} placeholder="Search..." />
               	</div>
               	<div className="col-md-1 col-sm-12 accoundBlock">
                   <div className="cart" onClick={this.handleOnClickCart} style={cartEmptyCart}>
+                  
                   </div>
                 </div>
                 <div className="col-md-1 col-sm-12 accoundBlock">
                   <div className="account" onClick={this.handleOnClickUser} style={user}></div>
                   {this.state.visibleLogin? <Login closeLogin={this.closeLogin} closeReg={this.closeReg} /> :null}
               		<div className="accountStatus"></div>
-                  <p className="pUserName">{this.props.User}</p>
+                  <p className="pUserName" onClick={this.handleOnClickUser}>{this.props.User}</p>
+                  <div ref="userMenuHover"id="user-hover"></div>
                   {this.state.visibleReg? <Registration closeReg={this.closeReg} /> :null}
                   <ul className="menuUser">
-
                   {initialState.userMenu.map((item,i) =>  
                     <li key={i} 
                      onClick={() => this.props.history.push(`/account/${item}`)}>
                       {item}
-                    </li> )}
-                    <li onClick={this.handleLogout}>Exit</li>
+                    </li>
+                  )}
                   </ul>
               	</div>
             </div>
