@@ -13,10 +13,9 @@ export default class Checkout extends React.Component {
                 <div style={clap} className="image"></div>
                 <h1>Your order is accepted.<br/>
                 Additional information will be sent to your email.</h1><br/>
-                <div className='buttom'>
-                    <button onClick={() => (this.props.history.push(`/`))}>Book Store</button>                
-                    <button onClick={() => (this.props.history.push(`/account/Cart`))}>Back to cart</button>
-                </div>
+                
+                <button onClick={() => (this.props.history.push(`/`))}>Book Store</button>                
+                
             </div>
                 
         )
