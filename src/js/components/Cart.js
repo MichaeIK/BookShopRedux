@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import {delFromCart, changeQuantity, addToOrderHistory} from '../actions';
 import Checkout from './Checkout'
 import { withRouter } from 'react-router-dom';
+import { PATH, ENV_HREF } from '../config';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -37,7 +38,7 @@ export default class Cart extends React.Component {
         this.props.delFromCart(id_book)
     }
     handleCheckout = () => {
-        this.props.history.push(`/account/checkout`)
+        this.props.history.push(`${ENV_HREF}account/checkout`)
         let summ = this.sum()
         this.props.addToOrderHistory({books: this.props.user.cart, sum: summ})
         this.props.user.cart.map((item,i) => (this.props.delFromCart(item.book.id)))
@@ -60,10 +61,10 @@ export default class Cart extends React.Component {
     renderBuys(item,index) {
         let src = item.book.volumeInfo.imageLinks && item.book.volumeInfo.imageLinks.smallThumbnail ?
         item.book.volumeInfo.imageLinks.smallThumbnail :
-        '../../assets/img/book_default.jpg';
+        `${PATH}book_default.jpg`;
 
         const url = {backgroundImage: `url(${item.book.volumeInfo.imageLinks.smallThumbnail})`};
-        const trash = '../../assets/img/if_icon-ios7-trash-outline_211835.png';
+        const trash = `${PATH}if_icon-ios7-trash-outline_211835.png`;
         // <div style={url} className='col-md-3 col-sm-12 book-image'></div>
         
         

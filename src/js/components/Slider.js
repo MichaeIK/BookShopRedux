@@ -67,6 +67,7 @@
 
 import React, {PureComponent, Children} from 'react';
 import Particles from 'react-particles-js';
+import { PATH, ENV_HREF } from '../config';
 
 export default class Slider extends PureComponent {
     constructor(props) {

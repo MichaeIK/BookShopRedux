@@ -1,7 +1,9 @@
 const GLOBAL_CONFIG = {
     ORIGIN: "http://localhost:9090",
-    ENV_HREF: "/",
-    // PATH: './../../public/assets/img/',
+    // ENV_HREF: "/",
+    ENV_HREF: "/BookShopDeploy/",
+    // PATH: '../../assets/img/',
+    PATH: '/BookShopDeploy/public/assets/img/',
     TEST: "123321"
 };
 

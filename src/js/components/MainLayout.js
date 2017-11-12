@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { PATH } from '../config';
 import Favicon from 'react-favicon';
+import { PATH, ENV_HREF } from '../config';
 // import pict from ''
 // console.log(PATH)
 // const x = `.${PATH}heart.png`;
@@ -18,10 +18,10 @@ export default class MainLayout extends React.Component {
 
     render() {
         // console.log(`${PATH}heart.png`)
-        let url = 'assets/img/logo.png';
+        let url = `${PATH}logo.png`;
         return (
             <div className="container-fluid">
-                <Favicon url={[url]}/>
+                <Favicon url={url}/>
                 <div className="row">
                     <Header />
                 </div>

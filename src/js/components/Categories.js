@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { changeActiveCategory } from '../actions';
+import { PATH, ENV_HREF } from '../config';
 
 const mapStateToProps = (state) => {
     return ({
@@ -38,7 +39,7 @@ export default class Categories extends React.Component {
             this.context.changeCategory("category", cat);
         } else {
             this.props.changeActiveCategory(cat);
-            this.props.history.push(`/category/${cat}`);
+            this.props.history.push(`${ENV_HREF}category/${cat}`);
         }
 
         // this.props._push(cat);

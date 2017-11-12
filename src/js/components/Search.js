@@ -3,6 +3,7 @@ import Book from '../components/Book'
 import { withRouter } from 'react-router-dom';
 import { fetchBooks, changeActiveCategory } from '../actions';
 import { connect } from 'react-redux';
+import { PATH, ENV_HREF } from '../config';
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ fetchBooks, changeActiveCategory }, dispatch);
@@ -37,12 +38,12 @@ export default class Search extends React.Component {
         console.log('Change category?', cat, this.props);
         this.props.changeActiveCategory(cat);
         this.props.fetch(cat);
-        this.props.history.push(`/category/${cat}`);
+        this.props.history.push(`${ENV_HREF}category/${cat}`);
     }
 
 
     render() {
-    	console.log('i am search')
+    	// console.log('i am search')
         return (
             <div className="row">
             <div className='col-md-3 col-sm-12'><Categories _push={this.handleChangeCategory} fetch={this.fetchData}/></div>

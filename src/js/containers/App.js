@@ -83,6 +83,7 @@ export default class App extends React.Component {
     }    
 
     render() {
+        console.log(ENV_HREF);
         return (
             <MainLayout>
                 {this.state.notify ? <Notify /> : null}

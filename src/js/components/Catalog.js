@@ -4,6 +4,7 @@ import Book from './Book';
 import Slider from './Slider';
 import { fetchBooks, changeActiveCategory } from '../actions';
 import { connect } from 'react-redux';
+import { PATH, ENV_HREF } from '../config';
 
 import { bindActionCreators } from 'redux';
 // import {fetchData} from '../functions/fetchData';
@@ -28,7 +29,7 @@ export default class Catalog extends React.Component {
                 <div className="row">
                     <div className='col-md-12 col-sm-12 left-part-wrapper'>
                         <Slider>
-                            <img src='../../assets/img/Books-banner.png'/>
+                            <img src={`${PATH}Books-banner.png`}/>
                         </Slider>
                     </div>
                 </div>

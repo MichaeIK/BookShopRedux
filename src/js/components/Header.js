@@ -8,20 +8,21 @@ import { fetchBooks, changeActiveCategory, clearSearch, logout } from '../action
 import { bindActionCreators } from 'redux';
 import fetchData from '../functions/fetchData';
 import PropTypes from 'prop-types';
+import { PATH, ENV_HREF } from '../config';
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchBooks, changeActiveCategory, clearSearch, logout }, dispatch);
 }
 const logo = {
-  backgroundImage: 'url(../../assets/img/logo.png)'
+  backgroundImage: `url(${PATH}logo.png)`
 }
 let cartEmptyCart = {
-  backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+  backgroundImage: `url(${PATH}shopping_cart_empty.png)`
 }
 const cartWithGoods = {
-  backgroundImage: 'url(../../assets/img/shopping_cart.png)'
+  backgroundImage: `url(${PATH}shopping_cart.png)`
 }
 const user = {
-  backgroundImage: 'url(../../assets/img/user.png)'
+  backgroundImage: `url(${PATH}/user.png)`
 }
 const mapStateToProps = (state) => {
   return ({User: state.users.authorized, 
@@ -49,23 +50,23 @@ export default class Header extends React.Component {
       changeCategory: PropTypes.func.isRequired
   }
     handleOnClickCart =()=>{
-    this.props.history.push(`/account/Cart`);
+    this.props.history.push(`${ENV_HREF}account/Cart`);
     }
   componentWillReceiveProps(nextProps) {
     if(nextProps.User == 'Please login'){
       cartEmptyCart = {
-        backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+        backgroundImage: `url(${PATH}shopping_cart_empty.png)`
       }
     }
     nextProps.users.map((item) => {
       if(item.name === nextProps.User){
         if (item.cart.length > 0){
           cartEmptyCart = {
-            backgroundImage: 'url(../../assets/img/shopping_cart.png)' 
+            backgroundImage: `url(${PATH}shopping_cart.png)` 
           }
         } else {
             cartEmptyCart = {
-                backgroundImage: 'url(../../assets/img/shopping_cart_empty.png)'
+                backgroundImage: `url(${PATH}shopping_cart_empty.png)`
             }
           }
         }
@@ -86,7 +87,7 @@ export default class Header extends React.Component {
   handleonClickLogo = () => {
     // this.fetchData('books for developers');
     this.props.changeActiveCategory('React');
-    this.props.history.push(`/`);
+    this.props.history.push(`${ENV_HREF}`);
     // this.forceUpdate();
   }
   closeLogin = () => {
@@ -97,13 +98,13 @@ export default class Header extends React.Component {
   }
   handleLogout = () => {
     this.props.logout()
-    this.props.history.push(`/`)
+    this.props.history.push(`${ENV_HREF}`)
   }
     render() {
         return (
             <div className="header">
                 <div className="col-md-2 col-sm-12">
-                    <img className="logo" src={'../../assets/img/books.svg'} onClick={this.handleonClickLogo} />
+                    <img className="logo" src={`${PATH}books.svg`} onClick={this.handleonClickLogo} />
                 </div>
                 <div className="col-md-8 col-sm-12 search">
                   <h2>Dream Team Book Store</h2>
