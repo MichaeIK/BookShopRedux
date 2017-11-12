@@ -45,6 +45,14 @@ export default class Header extends React.Component {
       this.context.changeCategory("search", this.refs.search.value, true);
       this.refs.search.value = '';
     }
+    if (this.refs.search.value != ''){
+      this.refs.search.style.transition = '2s'
+      this.refs.search.style.marginLeft = '25%'
+      this.refs.search.style.width = '50%' 
+    } else {
+      this.refs.search.style.marginLeft = '35%'
+      this.refs.search.style.width = ''
+    }
   }
   static contextTypes = {
       changeCategory: PropTypes.func.isRequired
