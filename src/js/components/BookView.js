@@ -8,6 +8,7 @@ import { addToWishlist, addToHistory, addToCart, fetchBooks, changeActiveCategor
 
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
+import { PATH, ENV_HREF } from '../config';
 
 const mapStateToProps = (state, ownProps) => {
 
@@ -63,8 +64,8 @@ export default class BookView extends React.Component {
     render() {
         let book = this.props.book;
         const url = { backgroundImage: `url(${this.props.book.volumeInfo.imageLinks.thumbnail})` }
-        const star = { backgroundImage: 'url(../../assets/img/icons8-star-filled.png)' }
-        const heart = { backgroundImage: 'url(../../assets/img/icons8-heart.png)' }
+        // const star = { backgroundImage: 'url(../../assets/img/icons8-star-filled.png)' }
+        // const heart = { backgroundImage: 'url(../../assets/img/icons8-heart.png)' }
         let author = book.volumeInfo.authors[0];
 
         let isInWishList = false;

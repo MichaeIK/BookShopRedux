@@ -6,9 +6,10 @@ import fetchData from '../functions/fetchData';
 
 import { withRouter } from 'react-router';
 import Slider from './Slider';
-import { ORIGIN, ENV_HREF } from '../config';
+
 
 import LoaderHOC from './HOC/LoaderHOC';
+import { PATH, ENV_HREF } from '../config';
 
 @withRouter
 @LoaderHOC

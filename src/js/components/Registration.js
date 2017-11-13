@@ -2,6 +2,7 @@ import React from 'react';
 import { addUser } from '../actions'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { PATH, ENV_HREF } from '../config';
 
 const mapDispatchToProps = (dispatch)=> {
 	return bindActionCreators({addUser}, dispatch);

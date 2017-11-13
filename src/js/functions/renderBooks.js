@@ -1,10 +1,11 @@
 import React from 'react';
+import { PATH } from '../config';
 
 export function renderBooks(item, index) {
     // console.log('item.volumeInfo.imageLinks.smallThumbnail', item.volumeInfo.imageLinks.smallThumbnail);
     let src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail ?
         item.volumeInfo.imageLinks.smallThumbnail :
-        '../../assets/img/book_default.jpg';
+        `${PATH}book_default.jpg`;
 
     let price = item.saleInfo.listPrice ?
         `${Math.round(item.saleInfo.listPrice.amount)} UAH` :

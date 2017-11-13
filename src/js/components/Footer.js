@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { sideMenu } from '../actions';
+import { PATH, ENV_HREF } from '../config';
 
 const mapDispatchToProps = (dispatch)=> {
   return bindActionCreators({ sideMenu }, dispatch);
@@ -37,10 +38,10 @@ export default class Footer extends React.Component {
             	</div>
             	<div className="col-md-2 col-sm-12"></div>
               	<div className="col-lg-2 col-sm-12 social">
-              		<a href="http://www.facebook.com"><img src="../../assets/img/fb.png" title="facebook" /></a>
-              		<a href="https://www.instagram.com/"><img src="../../assets/img/ig.png" title="instagram" /></a>
-              		<a href="https://plus.google.com"><img src="../../assets/img/g+.png" title="google+" /></a>
-              		<a href="https://twitter.com"><img src="../../assets/img/tw.png" title="twitter" /></a>
+              		<a href="http://www.facebook.com"><img src={`${PATH}fb.png`} title="facebook" /></a>
+              		<a href="https://www.instagram.com/"><img src={`${PATH}ig.png`} title="instagram" /></a>
+              		<a href="https://plus.google.com"><img src={`${PATH}g+.png`} title="google+" /></a>
+              		<a href="https://twitter.com"><img src={`${PATH}tw.png`} title="twitter" /></a>
               </div>
             </div>
         )

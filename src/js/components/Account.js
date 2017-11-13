@@ -8,6 +8,7 @@ import OrderHistory from './OrderHistory'
 import ViewHistory from './ViewHistory';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
+import { PATH, ENV_HREF } from '../config';
 
 const mapDispatchToProps =(dispatch)=> {
     return bindActionCreators ({ logout }, dispatch)
@@ -36,16 +37,16 @@ export default class Account extends React.Component {
 		
         if (menuAcc == 'Cart' && this.state.Cart == false){
 			this.setState({Cart: true, WishList: false, OrderHistory: false, ViewHistory: false})
-			this.props.history.push(`/account/${menuAcc}`)
+			this.props.history.push(`${ENV_HREF}account/${menuAcc}`)
         } if (menuAcc == 'Wish list' && this.state.WishList == false){
 			this.setState({Cart: false, WishList: true, OrderHistory: false, ViewHistory: false})
-			this.props.history.push(`/account/${menuAcc}`)
+			this.props.history.push(`${ENV_HREF}account/${menuAcc}`)
         } if (menuAcc == 'Order history' && this.state.OrderHistory == false){
 			this.setState({Cart: false, WishList: false, OrderHistory: true, ViewHistory: false})
-			this.props.history.push(`/account/${menuAcc}`)
+			this.props.history.push(`${ENV_HREF}account/${menuAcc}`)
         } if (menuAcc == 'View history' && this.state.ViewHistory == false){
 			this.setState({Cart: false, WishList: false, OrderHistory: false, ViewHistory: true})
-			this.props.history.push(`/account/${menuAcc}`)
+			this.props.history.push(`${ENV_HREF}account/${menuAcc}`)
         }
 	}
 	
@@ -58,7 +59,7 @@ export default class Account extends React.Component {
 
     handleLogout = () => {
         this.props.logout()
-        this.props.history.push(`/`)
+        this.props.history.push(`${ENV_HREF}`)
     }
 
     render() {
