@@ -15,7 +15,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { addCategoriesToBookArray, changeActiveCategory, fetchBooks } from '../actions';
 import { withRouter } from 'react-router-dom';
-import { ENV_HREF } from '../config';
+import { ENV_HREF, PATH } from '../config';
 
 import PropTypes from 'prop-types'
 import Notify from '../components/Notify';
@@ -45,7 +45,7 @@ export default class App extends React.Component {
         console.log("! >>>>>> ", category, data, stop_fetch)
         stop_fetch ? this.fetchData(category, data) : this.fetchData(data);
         this.props.changeActiveCategory(data);        
-        this.props.history.push(`/${category}/${data}`);
+        this.props.history.push(`${ENV_HREF}${category}/${data}`);
     }
 
     componentWillMount() {

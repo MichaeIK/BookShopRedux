@@ -22,7 +22,7 @@ const cartWithGoods = {
   backgroundImage: `url(${PATH}shopping_cart.png)`
 }
 const user = {
-  backgroundImage: `url(${PATH}/user.png)`
+  backgroundImage: `url(${PATH}User.png)`
 }
 const mapStateToProps = (state) => {
   return ({User: state.users.authorized, 
@@ -132,7 +132,7 @@ export default class Header extends React.Component {
                   <ul className="menuUser">
                   {initialState.userMenu.map((item,i) =>  
                     <li key={i} 
-                     onClick={() => this.props.history.push(`/account/${item}`)}>
+                     onClick={() => this.props.history.push(`${ENV_HREF}account/${item}`)}>
                       {item}
                     </li> )}
                     <li onClick={this.handleLogout}>Exit</li>

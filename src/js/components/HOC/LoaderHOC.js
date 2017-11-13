@@ -3,6 +3,7 @@ import "./LoaderHOC.scss";
 import fetchData from '../../functions/fetchData';
 import { renderBooks } from '../../functions/renderBooks';
 import { renderStars } from '../../functions/renderStars';
+import { PATH, ENV_HREF } from '../../config';
 
 import PropTypes from 'prop-types';
 
@@ -40,7 +41,7 @@ export default function LoaderHOC(WrappedComponent) {
 
         handleClick = (id, item) => {
             this.props.addToHistory(item);
-            this.props.history.push(`/book/${id}`);
+            this.props.history.push(`${ENV_HREF}book/${id}`);
         }
 
         handleBuy = (item) => {
@@ -64,8 +65,8 @@ export default function LoaderHOC(WrappedComponent) {
             let tempCategory = this.props.data.find((item, i) => Object.keys(item)[0] === "React");
             tempCategory = tempCategory[Object.keys(tempCategory)[0]]
 
-            if (this.props.match.url === "/" && tempCategory.length === 0) this.fetchData("React");
-            if (this.props.match.url !== "/" && tempCategory.length === 0) {
+            if (this.props.match.url === `${ENV_HREF}` && tempCategory.length === 0) this.fetchData("React");
+            if (this.props.match.url !== `${ENV_HREF}` && tempCategory.length === 0) {
                 this.props.changeActiveCategory(this.props.match.params.category);
                 this.fetchData(this.props.match.params.category);
             }
