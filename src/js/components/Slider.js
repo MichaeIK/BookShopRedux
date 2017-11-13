@@ -109,11 +109,9 @@ export default class Slider extends PureComponent {
 
     render() {
         return (
-            <div className="slider-container">
-                <div className="slider-content">
+                <div className="slider">
                     {Children.toArray(this.props.children)[this.state.currentIndex]}
                 </div>
-            </div>
         )
     }
 } 

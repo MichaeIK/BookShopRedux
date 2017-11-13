@@ -46,11 +46,11 @@ export default class Header extends React.Component {
       this.refs.search.value = '';
     }
     if (this.refs.search.value != ''){
-      this.refs.search.style.transition = '2s'
+      this.refs.search.style.transition = '1s'
       this.refs.search.style.marginLeft = '25%'
-      this.refs.search.style.width = '50%' 
+      this.refs.search.style.width = '40%' 
     } else {
-      this.refs.search.style.marginLeft = '35%'
+      this.refs.search.style.marginLeft = '37%'
       this.refs.search.style.width = ''
     }
   }
