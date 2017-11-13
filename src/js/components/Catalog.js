@@ -27,9 +27,13 @@ export default class Catalog extends React.Component {
         return (
             <div className="row">
                 <div className="row">
-                    <div className='col-md-12 col-sm-12 left-part-wrapper'>
+                    <div className='col-md-3 com-sn-12'></div>
+                    <div className='col-md-9 com-sn-12'>
                         <Slider>
-                            <img src={`${PATH}Books-banner.png`}/>
+                            <img src={`${PATH}slider5.png`}/>
+                            <img src={`${PATH}slider7.png`}/>
+                            <img src={`${PATH}slider4.png`}/>
+                            <img src={`${PATH}slider6.png`}/>
                         </Slider>
                     </div>
                 </div>

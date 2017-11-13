@@ -1,4 +1,4 @@
-.link{
+/*.link{
   display:inline-block;
 }
 .footer-slider-wrapper {
@@ -25,14 +25,14 @@
 img{
 	display: inline-block;
 	width: 100%;
-	height: 150px;
+	height: 150px;*/
 /*  margin-right: 10px;*/
-}
+/*}*/
 /*.btn-wrapper{
   position: absolute;
 }*/
 
-.arrowLeft{
+/*.arrowLeft{
   left: 0;
 
 }
@@ -41,18 +41,16 @@ img{
 }
 .arrow{
   position: absolute;
-  background-color: white;
-  /*height: 100%;*/
+  background-color: white;*/
+  /*height: 100%;
   /*width: 40px;*/
-  z-index: 2;
+  /*z-index: 2;*/
+/*}*/
+
+
+.slider {
+  height: 350px;
+  width: 750px;
+  margin: 0 auto;
 }
 
-
-
-/*.left-part-wrapper {
-    .slide {
-        height: 300px;
-        width: 80%;
-		margin: 15px 10% 15px 10%;
-    }
-}*/
