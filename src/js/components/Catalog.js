@@ -26,7 +26,7 @@ export default class Catalog extends React.Component {
 
         return (
             <div className="row">
-                <div className="row">
+                <div className="row slider-container">
                     <div className='col-md-3 com-sn-12'></div>
                     <div className='col-md-9 com-sn-12'>
                         <Slider>

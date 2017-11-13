@@ -47,10 +47,16 @@ img{
   /*z-index: 2;*/
 /*}*/
 
-
-.slider {
-  height: 350px;
-  width: 750px;
-  margin: 0 auto;
+.slider-container {
+  padding-top: 15px;
+  .slider {
+    height: 350px;
+    width: 750px;
+    margin: 0 auto;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 

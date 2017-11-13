@@ -92,7 +92,7 @@ export default class Slider extends PureComponent {
                 currentIndex: self.state.currentIndex < Children.count(this.props.children)-1
                     ? self.state.currentIndex+1
                     : 0})
-        }, 3000)
+        }, 4000)
     }
 
     componentDidMount() {
